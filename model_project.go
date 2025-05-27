@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.8.1
+API version: 2.9.1
 Contact: hello@eliona.io
 */
 
@@ -24,6 +24,8 @@ type Project struct {
 	Id NullableString `json:"id,omitempty"`
 	// The title of the project
 	Title NullableString `json:"title,omitempty"`
+	// List of users with a project role
+	Users []ProjectUser `json:"users,omitempty"`
 }
 
 // NewProject instantiates a new Project object
@@ -129,6 +131,39 @@ func (o *Project) UnsetTitle() {
 	o.Title.Unset()
 }
 
+// GetUsers returns the Users field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Project) GetUsers() []ProjectUser {
+	if o == nil {
+		var ret []ProjectUser
+		return ret
+	}
+	return o.Users
+}
+
+// GetUsersOk returns a tuple with the Users field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Project) GetUsersOk() ([]ProjectUser, bool) {
+	if o == nil || IsNil(o.Users) {
+		return nil, false
+	}
+	return o.Users, true
+}
+
+// HasUsers returns a boolean if a field has been set.
+func (o *Project) HasUsers() bool {
+	if o != nil && !IsNil(o.Users) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsers gets a reference to the given []ProjectUser and assigns it to the Users field.
+func (o *Project) SetUsers(v []ProjectUser) {
+	o.Users = v
+}
+
 func (o Project) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -144,6 +179,9 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Title.IsSet() {
 		toSerialize["title"] = o.Title.Get()
+	}
+	if o.Users != nil {
+		toSerialize["users"] = o.Users
 	}
 	return toSerialize, nil
 }

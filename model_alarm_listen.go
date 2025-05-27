@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.8.1
+API version: 2.9.1
 Contact: hello@eliona.io
 */
 
@@ -50,9 +50,10 @@ type AlarmListen struct {
 	// User who acknowledged the alarm
 	AcknowledgeUserId NullableString `json:"acknowledgeUserId,omitempty"`
 	// Message.yaml texts for alarm
-	Message   map[string]interface{} `json:"message"`
-	AssetInfo NullableAsset          `json:"assetInfo,omitempty"`
-	RuleInfo  NullableAlarmRule      `json:"ruleInfo,omitempty"`
+	Message             map[string]interface{} `json:"message"`
+	AcknowledgeUserInfo NullableUser           `json:"acknowledgeUserInfo,omitempty"`
+	AssetInfo           NullableAsset          `json:"assetInfo,omitempty"`
+	RuleInfo            NullableAlarmRule      `json:"ruleInfo,omitempty"`
 	// The status code expecting when actually perform the operation. Some values are - 200: updated (ok)  - 201: created - 204: deleted (no content) - 304: unchanged (not modified) - 400: problem (bad request) - 404: not found - 409: duplicated (conflict) - 422: unprocessable
 	StatusCode *int32 `json:"statusCode,omitempty"`
 }
@@ -646,6 +647,49 @@ func (o *AlarmListen) SetMessage(v map[string]interface{}) {
 	o.Message = v
 }
 
+// GetAcknowledgeUserInfo returns the AcknowledgeUserInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AlarmListen) GetAcknowledgeUserInfo() User {
+	if o == nil || IsNil(o.AcknowledgeUserInfo.Get()) {
+		var ret User
+		return ret
+	}
+	return *o.AcknowledgeUserInfo.Get()
+}
+
+// GetAcknowledgeUserInfoOk returns a tuple with the AcknowledgeUserInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AlarmListen) GetAcknowledgeUserInfoOk() (*User, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AcknowledgeUserInfo.Get(), o.AcknowledgeUserInfo.IsSet()
+}
+
+// HasAcknowledgeUserInfo returns a boolean if a field has been set.
+func (o *AlarmListen) HasAcknowledgeUserInfo() bool {
+	if o != nil && o.AcknowledgeUserInfo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAcknowledgeUserInfo gets a reference to the given NullableUser and assigns it to the AcknowledgeUserInfo field.
+func (o *AlarmListen) SetAcknowledgeUserInfo(v User) {
+	o.AcknowledgeUserInfo.Set(&v)
+}
+
+// SetAcknowledgeUserInfoNil sets the value for AcknowledgeUserInfo to be an explicit nil
+func (o *AlarmListen) SetAcknowledgeUserInfoNil() {
+	o.AcknowledgeUserInfo.Set(nil)
+}
+
+// UnsetAcknowledgeUserInfo ensures that no value is present for AcknowledgeUserInfo, not even an explicit nil
+func (o *AlarmListen) UnsetAcknowledgeUserInfo() {
+	o.AcknowledgeUserInfo.Unset()
+}
+
 // GetAssetInfo returns the AssetInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AlarmListen) GetAssetInfo() Asset {
 	if o == nil || IsNil(o.AssetInfo.Get()) {
@@ -812,6 +856,9 @@ func (o AlarmListen) ToMap() (map[string]interface{}, error) {
 		toSerialize["acknowledgeUserId"] = o.AcknowledgeUserId.Get()
 	}
 	toSerialize["message"] = o.Message
+	if o.AcknowledgeUserInfo.IsSet() {
+		toSerialize["acknowledgeUserInfo"] = o.AcknowledgeUserInfo.Get()
+	}
 	if o.AssetInfo.IsSet() {
 		toSerialize["assetInfo"] = o.AssetInfo.Get()
 	}

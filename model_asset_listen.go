@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.8.1
+API version: 2.9.1
 Contact: hello@eliona.io
 */
 
@@ -60,7 +60,8 @@ type AssetListen struct {
 	// The identifier specified by the identifiedBy parameter classifies this asset as a locational child
 	ParentLocationalIdentifier NullableString `json:"parentLocationalIdentifier,omitempty"`
 	// List of associated tags
-	Tags []string `json:"tags,omitempty"`
+	Tags              []string       `json:"tags,omitempty"`
+	AllowedInactivity NullableString `json:"allowedInactivity,omitempty"`
 	// List of children for this asset.
 	ChildrenInfo []Asset `json:"childrenInfo,omitempty"`
 	// A list of files attached to the asset
@@ -818,6 +819,49 @@ func (o *AssetListen) SetTags(v []string) {
 	o.Tags = v
 }
 
+// GetAllowedInactivity returns the AllowedInactivity field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AssetListen) GetAllowedInactivity() string {
+	if o == nil || IsNil(o.AllowedInactivity.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.AllowedInactivity.Get()
+}
+
+// GetAllowedInactivityOk returns a tuple with the AllowedInactivity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AssetListen) GetAllowedInactivityOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AllowedInactivity.Get(), o.AllowedInactivity.IsSet()
+}
+
+// HasAllowedInactivity returns a boolean if a field has been set.
+func (o *AssetListen) HasAllowedInactivity() bool {
+	if o != nil && o.AllowedInactivity.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedInactivity gets a reference to the given NullableString and assigns it to the AllowedInactivity field.
+func (o *AssetListen) SetAllowedInactivity(v string) {
+	o.AllowedInactivity.Set(&v)
+}
+
+// SetAllowedInactivityNil sets the value for AllowedInactivity to be an explicit nil
+func (o *AssetListen) SetAllowedInactivityNil() {
+	o.AllowedInactivity.Set(nil)
+}
+
+// UnsetAllowedInactivity ensures that no value is present for AllowedInactivity, not even an explicit nil
+func (o *AssetListen) UnsetAllowedInactivity() {
+	o.AllowedInactivity.Unset()
+}
+
 // GetChildrenInfo returns the ChildrenInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetListen) GetChildrenInfo() []Asset {
 	if o == nil {
@@ -976,6 +1020,9 @@ func (o AssetListen) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
+	}
+	if o.AllowedInactivity.IsSet() {
+		toSerialize["allowedInactivity"] = o.AllowedInactivity.Get()
 	}
 	if o.ChildrenInfo != nil {
 		toSerialize["childrenInfo"] = o.ChildrenInfo

@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **AcknowledgeText** | Pointer to **NullableString** | Text of acknowledgement | [optional] [readonly] 
 **AcknowledgeUserId** | Pointer to **NullableString** | User who acknowledged the alarm | [optional] [readonly] 
 **Message** | **map[string]interface{}** | Message.yaml texts for alarm | 
+**AcknowledgeUserInfo** | Pointer to [**NullableUser**](User.md) |  | [optional] 
 **AssetInfo** | Pointer to [**NullableAsset**](Asset.md) |  | [optional] 
 **RuleInfo** | Pointer to [**NullableAlarmRule**](AlarmRule.md) |  | [optional] 
 **StatusCode** | Pointer to **int32** | The status code expecting when actually perform the operation. Some values are - 200: updated (ok)  - 201: created - 204: deleted (no content) - 304: unchanged (not modified) - 400: problem (bad request) - 404: not found - 409: duplicated (conflict) - 422: unprocessable  | [optional] 
@@ -501,6 +502,41 @@ and a boolean to check if the value has been set.
 SetMessage sets Message field to given value.
 
 
+### GetAcknowledgeUserInfo
+
+`func (o *AlarmListen) GetAcknowledgeUserInfo() User`
+
+GetAcknowledgeUserInfo returns the AcknowledgeUserInfo field if non-nil, zero value otherwise.
+
+### GetAcknowledgeUserInfoOk
+
+`func (o *AlarmListen) GetAcknowledgeUserInfoOk() (*User, bool)`
+
+GetAcknowledgeUserInfoOk returns a tuple with the AcknowledgeUserInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAcknowledgeUserInfo
+
+`func (o *AlarmListen) SetAcknowledgeUserInfo(v User)`
+
+SetAcknowledgeUserInfo sets AcknowledgeUserInfo field to given value.
+
+### HasAcknowledgeUserInfo
+
+`func (o *AlarmListen) HasAcknowledgeUserInfo() bool`
+
+HasAcknowledgeUserInfo returns a boolean if a field has been set.
+
+### SetAcknowledgeUserInfoNil
+
+`func (o *AlarmListen) SetAcknowledgeUserInfoNil(b bool)`
+
+ SetAcknowledgeUserInfoNil sets the value for AcknowledgeUserInfo to be an explicit nil
+
+### UnsetAcknowledgeUserInfo
+`func (o *AlarmListen) UnsetAcknowledgeUserInfo()`
+
+UnsetAcknowledgeUserInfo ensures that no value is present for AcknowledgeUserInfo, not even an explicit nil
 ### GetAssetInfo
 
 `func (o *AlarmListen) GetAssetInfo() Asset`

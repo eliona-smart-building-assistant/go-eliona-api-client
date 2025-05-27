@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.8.1
+API version: 2.9.1
 Contact: hello@eliona.io
 */
 
@@ -27,6 +27,13 @@ type ApiGetProjectByIdRequest struct {
 	ctx        context.Context
 	ApiService *ProjectsAPIService
 	projectId  string
+	expansions *[]string
+}
+
+// List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;.
+func (r ApiGetProjectByIdRequest) Expansions(expansions []string) ApiGetProjectByIdRequest {
+	r.expansions = &expansions
+	return r
 }
 
 func (r ApiGetProjectByIdRequest) Execute() (*Project, *http.Response, error) {
@@ -68,6 +75,127 @@ func (a *ProjectsAPIService) GetProjectByIdExecute(r ApiGetProjectByIdRequest) (
 
 	localVarPath := localBasePath + "/projects/{project-id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"project-id"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.expansions != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetProjectRoleByNameRequest struct {
+	ctx        context.Context
+	ApiService *ProjectsAPIService
+	roleName   string
+}
+
+func (r ApiGetProjectRoleByNameRequest) Execute() (*ProjectRole, *http.Response, error) {
+	return r.ApiService.GetProjectRoleByNameExecute(r)
+}
+
+/*
+GetProjectRoleByName Information about a project role
+
+Gets information about a specific project role.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param roleName The name of the role
+	@return ApiGetProjectRoleByNameRequest
+*/
+func (a *ProjectsAPIService) GetProjectRoleByName(ctx context.Context, roleName string) ApiGetProjectRoleByNameRequest {
+	return ApiGetProjectRoleByNameRequest{
+		ApiService: a,
+		ctx:        ctx,
+		roleName:   roleName,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ProjectRole
+func (a *ProjectsAPIService) GetProjectRoleByNameExecute(r ApiGetProjectRoleByNameRequest) (*ProjectRole, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ProjectRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.GetProjectRoleByName")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/project-roles/{role-name}"
+	localVarPath = strings.Replace(localVarPath, "{"+"role-name"+"}", url.PathEscape(parameterValueToString(r.roleName, "roleName")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -141,9 +269,130 @@ func (a *ProjectsAPIService) GetProjectByIdExecute(r ApiGetProjectByIdRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetProjectRolesRequest struct {
+	ctx        context.Context
+	ApiService *ProjectsAPIService
+}
+
+func (r ApiGetProjectRolesRequest) Execute() ([]ProjectRole, *http.Response, error) {
+	return r.ApiService.GetProjectRolesExecute(r)
+}
+
+/*
+GetProjectRoles Information about project roles
+
+Retrieves a list of roles that can be assigned to users within projects
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetProjectRolesRequest
+*/
+func (a *ProjectsAPIService) GetProjectRoles(ctx context.Context) ApiGetProjectRolesRequest {
+	return ApiGetProjectRolesRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return []ProjectRole
+func (a *ProjectsAPIService) GetProjectRolesExecute(r ApiGetProjectRolesRequest) ([]ProjectRole, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ProjectRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.GetProjectRoles")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/project-roles"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "application/x-ndjson"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetProjectsRequest struct {
 	ctx        context.Context
 	ApiService *ProjectsAPIService
+	expansions *[]string
+}
+
+// List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;.
+func (r ApiGetProjectsRequest) Expansions(expansions []string) ApiGetProjectsRequest {
+	r.expansions = &expansions
+	return r
 }
 
 func (r ApiGetProjectsRequest) Execute() ([]Project, *http.Response, error) {
@@ -187,6 +436,9 @@ func (a *ProjectsAPIService) GetProjectsExecute(r ApiGetProjectsRequest) ([]Proj
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.expansions != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -259,10 +511,17 @@ type ApiPutProjectRequest struct {
 	ctx        context.Context
 	ApiService *ProjectsAPIService
 	project    *Project
+	expansions *[]string
 }
 
 func (r ApiPutProjectRequest) Project(project Project) ApiPutProjectRequest {
 	r.project = &project
+	return r
+}
+
+// List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;.
+func (r ApiPutProjectRequest) Expansions(expansions []string) ApiPutProjectRequest {
+	r.expansions = &expansions
 	return r
 }
 
@@ -310,6 +569,9 @@ func (a *ProjectsAPIService) PutProjectExecute(r ApiPutProjectRequest) (*Project
 		return localVarReturnValue, nil, reportError("project is required and must be specified")
 	}
 
+	if r.expansions != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -329,6 +591,245 @@ func (a *ProjectsAPIService) PutProjectExecute(r ApiPutProjectRequest) (*Project
 	}
 	// body params
 	localVarPostBody = r.project
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPutProjectRoleRequest struct {
+	ctx         context.Context
+	ApiService  *ProjectsAPIService
+	projectRole *ProjectRole
+}
+
+func (r ApiPutProjectRoleRequest) ProjectRole(projectRole ProjectRole) ApiPutProjectRoleRequest {
+	r.projectRole = &projectRole
+	return r
+}
+
+func (r ApiPutProjectRoleRequest) Execute() (*ProjectRole, *http.Response, error) {
+	return r.ApiService.PutProjectRoleExecute(r)
+}
+
+/*
+PutProjectRole Create or update a project role
+
+Creates a new project role if none exists, or updates an existing one by its name
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPutProjectRoleRequest
+*/
+func (a *ProjectsAPIService) PutProjectRole(ctx context.Context) ApiPutProjectRoleRequest {
+	return ApiPutProjectRoleRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ProjectRole
+func (a *ProjectsAPIService) PutProjectRoleExecute(r ApiPutProjectRoleRequest) (*ProjectRole, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ProjectRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.PutProjectRole")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/project-roles"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.projectRole == nil {
+		return localVarReturnValue, nil, reportError("projectRole is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.projectRole
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiStreamProjectRolesRequest struct {
+	ctx        context.Context
+	ApiService *ProjectsAPIService
+}
+
+func (r ApiStreamProjectRolesRequest) Execute() (*ProjectRole, *http.Response, error) {
+	return r.ApiService.StreamProjectRolesExecute(r)
+}
+
+/*
+StreamProjectRoles Information about project roles as stream
+
+Retrieves a list of roles that can be assigned to users within projects
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiStreamProjectRolesRequest
+*/
+func (a *ProjectsAPIService) StreamProjectRoles(ctx context.Context) ApiStreamProjectRolesRequest {
+	return ApiStreamProjectRolesRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ProjectRole
+func (a *ProjectsAPIService) StreamProjectRolesExecute(r ApiStreamProjectRolesRequest) (*ProjectRole, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ProjectRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.StreamProjectRoles")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/project-roles-stream"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/x-ndjson"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

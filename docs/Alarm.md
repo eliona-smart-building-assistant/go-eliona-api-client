@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **AcknowledgeText** | Pointer to **NullableString** | Text of acknowledgement | [optional] [readonly] 
 **AcknowledgeUserId** | Pointer to **NullableString** | User who acknowledged the alarm | [optional] [readonly] 
 **Message** | **map[string]interface{}** | Message.yaml texts for alarm | 
+**AcknowledgeUserInfo** | Pointer to [**NullableUser**](User.md) |  | [optional] 
 **AssetInfo** | Pointer to [**NullableAsset**](Asset.md) |  | [optional] 
 **RuleInfo** | Pointer to [**NullableAlarmRule**](AlarmRule.md) |  | [optional] 
 
@@ -500,6 +501,41 @@ and a boolean to check if the value has been set.
 SetMessage sets Message field to given value.
 
 
+### GetAcknowledgeUserInfo
+
+`func (o *Alarm) GetAcknowledgeUserInfo() User`
+
+GetAcknowledgeUserInfo returns the AcknowledgeUserInfo field if non-nil, zero value otherwise.
+
+### GetAcknowledgeUserInfoOk
+
+`func (o *Alarm) GetAcknowledgeUserInfoOk() (*User, bool)`
+
+GetAcknowledgeUserInfoOk returns a tuple with the AcknowledgeUserInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAcknowledgeUserInfo
+
+`func (o *Alarm) SetAcknowledgeUserInfo(v User)`
+
+SetAcknowledgeUserInfo sets AcknowledgeUserInfo field to given value.
+
+### HasAcknowledgeUserInfo
+
+`func (o *Alarm) HasAcknowledgeUserInfo() bool`
+
+HasAcknowledgeUserInfo returns a boolean if a field has been set.
+
+### SetAcknowledgeUserInfoNil
+
+`func (o *Alarm) SetAcknowledgeUserInfoNil(b bool)`
+
+ SetAcknowledgeUserInfoNil sets the value for AcknowledgeUserInfo to be an explicit nil
+
+### UnsetAcknowledgeUserInfo
+`func (o *Alarm) UnsetAcknowledgeUserInfo()`
+
+UnsetAcknowledgeUserInfo ensures that no value is present for AcknowledgeUserInfo, not even an explicit nil
 ### GetAssetInfo
 
 `func (o *Alarm) GetAssetInfo() Asset`

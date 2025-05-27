@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.8.1
+API version: 2.9.1
 Contact: hello@eliona.io
 */
 
@@ -261,7 +261,28 @@ type ApiGetAlarmHistoryByIdRequest struct {
 	ctx         context.Context
 	ApiService  *AlarmsAPIService
 	alarmRuleId int32
+	fromDate    *string
+	toDate      *string
+	tags        *[]string
 	expansions  *[]string
+}
+
+// Filter by lower date time (RFC3339) limit inclusive
+func (r ApiGetAlarmHistoryByIdRequest) FromDate(fromDate string) ApiGetAlarmHistoryByIdRequest {
+	r.fromDate = &fromDate
+	return r
+}
+
+// Filter by upper date time (RFC3339) limit exclusive
+func (r ApiGetAlarmHistoryByIdRequest) ToDate(toDate string) ApiGetAlarmHistoryByIdRequest {
+	r.toDate = &toDate
+	return r
+}
+
+// A list of defined tags. Result must include all of these tags, not just some.
+func (r ApiGetAlarmHistoryByIdRequest) Tags(tags []string) ApiGetAlarmHistoryByIdRequest {
+	r.tags = &tags
+	return r
 }
 
 // List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;.
@@ -314,6 +335,15 @@ func (a *AlarmsAPIService) GetAlarmHistoryByIdExecute(r ApiGetAlarmHistoryByIdRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.fromDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
+	}
+	if r.toDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+	}
+	if r.tags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
 	}
@@ -389,12 +419,33 @@ type ApiGetAlarmsRequest struct {
 	ctx        context.Context
 	ApiService *AlarmsAPIService
 	projectId  *string
+	fromDate   *string
+	toDate     *string
+	tags       *[]string
 	expansions *[]string
 }
 
 // Filter for a specific project
 func (r ApiGetAlarmsRequest) ProjectId(projectId string) ApiGetAlarmsRequest {
 	r.projectId = &projectId
+	return r
+}
+
+// Filter by lower date time (RFC3339) limit inclusive
+func (r ApiGetAlarmsRequest) FromDate(fromDate string) ApiGetAlarmsRequest {
+	r.fromDate = &fromDate
+	return r
+}
+
+// Filter by upper date time (RFC3339) limit exclusive
+func (r ApiGetAlarmsRequest) ToDate(toDate string) ApiGetAlarmsRequest {
+	r.toDate = &toDate
+	return r
+}
+
+// A list of defined tags. Result must include all of these tags, not just some.
+func (r ApiGetAlarmsRequest) Tags(tags []string) ApiGetAlarmsRequest {
+	r.tags = &tags
 	return r
 }
 
@@ -447,6 +498,15 @@ func (a *AlarmsAPIService) GetAlarmsExecute(r ApiGetAlarmsRequest) ([]Alarm, *ht
 
 	if r.projectId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
+	}
+	if r.fromDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
+	}
+	if r.toDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+	}
+	if r.tags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
 	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
@@ -523,12 +583,33 @@ type ApiGetAlarmsHistoryRequest struct {
 	ctx        context.Context
 	ApiService *AlarmsAPIService
 	projectId  *string
+	fromDate   *string
+	toDate     *string
+	tags       *[]string
 	expansions *[]string
 }
 
 // Filter for a specific project
 func (r ApiGetAlarmsHistoryRequest) ProjectId(projectId string) ApiGetAlarmsHistoryRequest {
 	r.projectId = &projectId
+	return r
+}
+
+// Filter by lower date time (RFC3339) limit inclusive
+func (r ApiGetAlarmsHistoryRequest) FromDate(fromDate string) ApiGetAlarmsHistoryRequest {
+	r.fromDate = &fromDate
+	return r
+}
+
+// Filter by upper date time (RFC3339) limit exclusive
+func (r ApiGetAlarmsHistoryRequest) ToDate(toDate string) ApiGetAlarmsHistoryRequest {
+	r.toDate = &toDate
+	return r
+}
+
+// A list of defined tags. Result must include all of these tags, not just some.
+func (r ApiGetAlarmsHistoryRequest) Tags(tags []string) ApiGetAlarmsHistoryRequest {
+	r.tags = &tags
 	return r
 }
 
@@ -581,6 +662,15 @@ func (a *AlarmsAPIService) GetAlarmsHistoryExecute(r ApiGetAlarmsHistoryRequest)
 
 	if r.projectId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
+	}
+	if r.fromDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
+	}
+	if r.toDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+	}
+	if r.tags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
 	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
@@ -657,12 +747,33 @@ type ApiGetHighestAlarmsRequest struct {
 	ctx        context.Context
 	ApiService *AlarmsAPIService
 	projectId  *string
+	fromDate   *string
+	toDate     *string
+	tags       *[]string
 	expansions *[]string
 }
 
 // Filter for a specific project
 func (r ApiGetHighestAlarmsRequest) ProjectId(projectId string) ApiGetHighestAlarmsRequest {
 	r.projectId = &projectId
+	return r
+}
+
+// Filter by lower date time (RFC3339) limit inclusive
+func (r ApiGetHighestAlarmsRequest) FromDate(fromDate string) ApiGetHighestAlarmsRequest {
+	r.fromDate = &fromDate
+	return r
+}
+
+// Filter by upper date time (RFC3339) limit exclusive
+func (r ApiGetHighestAlarmsRequest) ToDate(toDate string) ApiGetHighestAlarmsRequest {
+	r.toDate = &toDate
+	return r
+}
+
+// A list of defined tags. Result must include all of these tags, not just some.
+func (r ApiGetHighestAlarmsRequest) Tags(tags []string) ApiGetHighestAlarmsRequest {
+	r.tags = &tags
 	return r
 }
 
@@ -715,6 +826,15 @@ func (a *AlarmsAPIService) GetHighestAlarmsExecute(r ApiGetHighestAlarmsRequest)
 
 	if r.projectId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
+	}
+	if r.fromDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
+	}
+	if r.toDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+	}
+	if r.tags != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
 	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
@@ -790,6 +910,13 @@ func (a *AlarmsAPIService) GetHighestAlarmsExecute(r ApiGetHighestAlarmsRequest)
 type ApiListenAlarmRequest struct {
 	ctx        context.Context
 	ApiService *AlarmsAPIService
+	expansions *[]string
+}
+
+// List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;.
+func (r ApiListenAlarmRequest) Expansions(expansions []string) ApiListenAlarmRequest {
+	r.expansions = &expansions
+	return r
 }
 
 func (r ApiListenAlarmRequest) Execute() (*AlarmListen, *http.Response, error) {
@@ -833,6 +960,9 @@ func (a *AlarmsAPIService) ListenAlarmExecute(r ApiListenAlarmRequest) (*AlarmLi
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.expansions != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

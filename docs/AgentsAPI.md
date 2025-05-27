@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 
 ## GetAgentDeviceById
 
-> []AgentDevice GetAgentDeviceById(ctx, agentClass, agentDeviceId).Execute()
+> []IosysAgentDevice GetAgentDeviceById(ctx, agentClass, agentDeviceId).Execute()
 
 Information about agent device
 
@@ -127,7 +127,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.GetAgentDeviceById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAgentDeviceById`: []AgentDevice
+	// response from `GetAgentDeviceById`: []IosysAgentDevice
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.GetAgentDeviceById`: %v\n", resp)
 }
 ```
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]AgentDevice**](AgentDevice.md)
+[**[]IosysAgentDevice**](IosysAgentDevice.md)
 
 ### Authorization
 
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 
 ## GetAgentDeviceMappingById
 
-> []AgentDeviceMapping GetAgentDeviceMappingById(ctx, agentClass, agentDeviceMappingId).Execute()
+> []IosysAgentDeviceMapping GetAgentDeviceMappingById(ctx, agentClass, agentDeviceMappingId).Execute()
 
 Information about agent device mapping
 
@@ -200,7 +200,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.GetAgentDeviceMappingById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAgentDeviceMappingById`: []AgentDeviceMapping
+	// response from `GetAgentDeviceMappingById`: []IosysAgentDeviceMapping
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.GetAgentDeviceMappingById`: %v\n", resp)
 }
 ```
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]AgentDeviceMapping**](AgentDeviceMapping.md)
+[**[]IosysAgentDeviceMapping**](IosysAgentDeviceMapping.md)
 
 ### Authorization
 
@@ -244,7 +244,7 @@ Name | Type | Description  | Notes
 
 ## GetAgentDeviceMappingsByDeviceId
 
-> []AgentDeviceMapping GetAgentDeviceMappingsByDeviceId(ctx, agentClass, agentDeviceId).Execute()
+> []IosysAgentDeviceMapping GetAgentDeviceMappingsByDeviceId(ctx, agentClass, agentDeviceId).Execute()
 
 Information about agent device mappings
 
@@ -273,7 +273,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.GetAgentDeviceMappingsByDeviceId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAgentDeviceMappingsByDeviceId`: []AgentDeviceMapping
+	// response from `GetAgentDeviceMappingsByDeviceId`: []IosysAgentDeviceMapping
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.GetAgentDeviceMappingsByDeviceId`: %v\n", resp)
 }
 ```
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]AgentDeviceMapping**](AgentDeviceMapping.md)
+[**[]IosysAgentDeviceMapping**](IosysAgentDeviceMapping.md)
 
 ### Authorization
 
@@ -317,7 +317,7 @@ Name | Type | Description  | Notes
 
 ## GetAgentDevicesByAgentId
 
-> []AgentDevice GetAgentDevicesByAgentId(ctx, agentClass, agentId).Execute()
+> []IosysAgentDevice GetAgentDevicesByAgentId(ctx, agentClass, agentId).Execute()
 
 Information about agent devices
 
@@ -346,7 +346,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.GetAgentDevicesByAgentId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAgentDevicesByAgentId`: []AgentDevice
+	// response from `GetAgentDevicesByAgentId`: []IosysAgentDevice
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.GetAgentDevicesByAgentId`: %v\n", resp)
 }
 ```
@@ -372,7 +372,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]AgentDevice**](AgentDevice.md)
+[**[]IosysAgentDevice**](IosysAgentDevice.md)
 
 ### Authorization
 
@@ -593,7 +593,7 @@ Name | Type | Description  | Notes
 
 ## PostAgentDeviceByAgentId
 
-> AgentDevice PostAgentDeviceByAgentId(ctx, agentClass, agentId).AgentDevice(agentDevice).Execute()
+> IosysAgentDevice PostAgentDeviceByAgentId(ctx, agentClass, agentId).Body(body).Execute()
 
 Create an agent device
 
@@ -614,16 +614,16 @@ import (
 func main() {
 	agentClass := "iosys" // string | The class of an agent
 	agentId := int32(4711) // int32 | The id of the agent
-	agentDevice := *openapiclient.NewAgentDevice() // AgentDevice | 
+	body := IosysAgentDevice(987) // IosysAgentDevice | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.PostAgentDeviceByAgentId(context.Background(), agentClass, agentId).AgentDevice(agentDevice).Execute()
+	resp, r, err := apiClient.AgentsAPI.PostAgentDeviceByAgentId(context.Background(), agentClass, agentId).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.PostAgentDeviceByAgentId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PostAgentDeviceByAgentId`: AgentDevice
+	// response from `PostAgentDeviceByAgentId`: IosysAgentDevice
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.PostAgentDeviceByAgentId`: %v\n", resp)
 }
 ```
@@ -646,11 +646,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **agentDevice** | [**AgentDevice**](AgentDevice.md) |  | 
+ **body** | **IosysAgentDevice** |  | 
 
 ### Return type
 
-[**AgentDevice**](AgentDevice.md)
+[**IosysAgentDevice**](IosysAgentDevice.md)
 
 ### Authorization
 
@@ -668,7 +668,7 @@ Name | Type | Description  | Notes
 
 ## PostAgentDeviceMappingByDeviceId
 
-> AgentDeviceMapping PostAgentDeviceMappingByDeviceId(ctx, agentClass, agentDeviceId).AgentDeviceMapping(agentDeviceMapping).Execute()
+> IosysAgentDeviceMapping PostAgentDeviceMappingByDeviceId(ctx, agentClass, agentDeviceId).Body(body).Execute()
 
 Create an agent device mapping
 
@@ -689,16 +689,16 @@ import (
 func main() {
 	agentClass := "iosys" // string | The class of an agent
 	agentDeviceId := int32(4711) // int32 | The id of the device
-	agentDeviceMapping := *openapiclient.NewAgentDeviceMapping(openapiclient.DataSubtype("input"), "temperature") // AgentDeviceMapping | 
+	body := IosysAgentDeviceMapping(987) // IosysAgentDeviceMapping | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.PostAgentDeviceMappingByDeviceId(context.Background(), agentClass, agentDeviceId).AgentDeviceMapping(agentDeviceMapping).Execute()
+	resp, r, err := apiClient.AgentsAPI.PostAgentDeviceMappingByDeviceId(context.Background(), agentClass, agentDeviceId).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.PostAgentDeviceMappingByDeviceId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PostAgentDeviceMappingByDeviceId`: AgentDeviceMapping
+	// response from `PostAgentDeviceMappingByDeviceId`: IosysAgentDeviceMapping
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.PostAgentDeviceMappingByDeviceId`: %v\n", resp)
 }
 ```
@@ -721,11 +721,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **agentDeviceMapping** | [**AgentDeviceMapping**](AgentDeviceMapping.md) |  | 
+ **body** | **IosysAgentDeviceMapping** |  | 
 
 ### Return type
 
-[**AgentDeviceMapping**](AgentDeviceMapping.md)
+[**IosysAgentDeviceMapping**](IosysAgentDeviceMapping.md)
 
 ### Authorization
 
@@ -890,7 +890,7 @@ Name | Type | Description  | Notes
 
 ## PutAgentDeviceByAgentId
 
-> AgentDevice PutAgentDeviceByAgentId(ctx, agentClass, agentId).AgentDevice(agentDevice).Execute()
+> IosysAgentDevice PutAgentDeviceByAgentId(ctx, agentClass, agentId).Body(body).Execute()
 
 Create or update an agent device
 
@@ -911,16 +911,16 @@ import (
 func main() {
 	agentClass := "iosys" // string | The class of an agent
 	agentId := int32(4711) // int32 | The id of the agent
-	agentDevice := *openapiclient.NewAgentDevice() // AgentDevice | 
+	body := IosysAgentDevice(987) // IosysAgentDevice | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.PutAgentDeviceByAgentId(context.Background(), agentClass, agentId).AgentDevice(agentDevice).Execute()
+	resp, r, err := apiClient.AgentsAPI.PutAgentDeviceByAgentId(context.Background(), agentClass, agentId).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.PutAgentDeviceByAgentId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PutAgentDeviceByAgentId`: AgentDevice
+	// response from `PutAgentDeviceByAgentId`: IosysAgentDevice
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.PutAgentDeviceByAgentId`: %v\n", resp)
 }
 ```
@@ -943,11 +943,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **agentDevice** | [**AgentDevice**](AgentDevice.md) |  | 
+ **body** | **IosysAgentDevice** |  | 
 
 ### Return type
 
-[**AgentDevice**](AgentDevice.md)
+[**IosysAgentDevice**](IosysAgentDevice.md)
 
 ### Authorization
 
@@ -965,7 +965,7 @@ Name | Type | Description  | Notes
 
 ## PutAgentDeviceById
 
-> AgentDevice PutAgentDeviceById(ctx, agentClass, agentDeviceId).AgentDevice(agentDevice).Execute()
+> IosysAgentDevice PutAgentDeviceById(ctx, agentClass, agentDeviceId).Body(body).Execute()
 
 Update an agent device
 
@@ -986,16 +986,16 @@ import (
 func main() {
 	agentClass := "iosys" // string | The class of an agent
 	agentDeviceId := int32(4711) // int32 | The id of the device
-	agentDevice := *openapiclient.NewAgentDevice() // AgentDevice | 
+	body := IosysAgentDevice(987) // IosysAgentDevice | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.PutAgentDeviceById(context.Background(), agentClass, agentDeviceId).AgentDevice(agentDevice).Execute()
+	resp, r, err := apiClient.AgentsAPI.PutAgentDeviceById(context.Background(), agentClass, agentDeviceId).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.PutAgentDeviceById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PutAgentDeviceById`: AgentDevice
+	// response from `PutAgentDeviceById`: IosysAgentDevice
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.PutAgentDeviceById`: %v\n", resp)
 }
 ```
@@ -1018,11 +1018,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **agentDevice** | [**AgentDevice**](AgentDevice.md) |  | 
+ **body** | **IosysAgentDevice** |  | 
 
 ### Return type
 
-[**AgentDevice**](AgentDevice.md)
+[**IosysAgentDevice**](IosysAgentDevice.md)
 
 ### Authorization
 
@@ -1040,7 +1040,7 @@ Name | Type | Description  | Notes
 
 ## PutAgentDeviceMappingByDeviceId
 
-> AgentDeviceMapping PutAgentDeviceMappingByDeviceId(ctx, agentClass, agentDeviceId).AgentDeviceMapping(agentDeviceMapping).Execute()
+> IosysAgentDeviceMapping PutAgentDeviceMappingByDeviceId(ctx, agentClass, agentDeviceId).Body(body).Execute()
 
 Create or update an agent device mapping
 
@@ -1061,16 +1061,16 @@ import (
 func main() {
 	agentClass := "iosys" // string | The class of an agent
 	agentDeviceId := int32(4711) // int32 | The id of the device
-	agentDeviceMapping := *openapiclient.NewAgentDeviceMapping(openapiclient.DataSubtype("input"), "temperature") // AgentDeviceMapping | 
+	body := IosysAgentDeviceMapping(987) // IosysAgentDeviceMapping | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.PutAgentDeviceMappingByDeviceId(context.Background(), agentClass, agentDeviceId).AgentDeviceMapping(agentDeviceMapping).Execute()
+	resp, r, err := apiClient.AgentsAPI.PutAgentDeviceMappingByDeviceId(context.Background(), agentClass, agentDeviceId).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.PutAgentDeviceMappingByDeviceId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PutAgentDeviceMappingByDeviceId`: AgentDeviceMapping
+	// response from `PutAgentDeviceMappingByDeviceId`: IosysAgentDeviceMapping
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.PutAgentDeviceMappingByDeviceId`: %v\n", resp)
 }
 ```
@@ -1093,11 +1093,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **agentDeviceMapping** | [**AgentDeviceMapping**](AgentDeviceMapping.md) |  | 
+ **body** | **IosysAgentDeviceMapping** |  | 
 
 ### Return type
 
-[**AgentDeviceMapping**](AgentDeviceMapping.md)
+[**IosysAgentDeviceMapping**](IosysAgentDeviceMapping.md)
 
 ### Authorization
 
@@ -1115,7 +1115,7 @@ Name | Type | Description  | Notes
 
 ## PutAgentDeviceMappingById
 
-> AgentDeviceMapping PutAgentDeviceMappingById(ctx, agentClass, agentDeviceMappingId).AgentDeviceMapping(agentDeviceMapping).Execute()
+> IosysAgentDeviceMapping PutAgentDeviceMappingById(ctx, agentClass, agentDeviceMappingId).Body(body).Execute()
 
 Update an agent device mapping
 
@@ -1136,16 +1136,16 @@ import (
 func main() {
 	agentClass := "iosys" // string | The class of an agent
 	agentDeviceMappingId := int32(4711) // int32 | The id of the device mapping
-	agentDeviceMapping := *openapiclient.NewAgentDeviceMapping(openapiclient.DataSubtype("input"), "temperature") // AgentDeviceMapping | 
+	body := IosysAgentDeviceMapping(987) // IosysAgentDeviceMapping | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AgentsAPI.PutAgentDeviceMappingById(context.Background(), agentClass, agentDeviceMappingId).AgentDeviceMapping(agentDeviceMapping).Execute()
+	resp, r, err := apiClient.AgentsAPI.PutAgentDeviceMappingById(context.Background(), agentClass, agentDeviceMappingId).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AgentsAPI.PutAgentDeviceMappingById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PutAgentDeviceMappingById`: AgentDeviceMapping
+	// response from `PutAgentDeviceMappingById`: IosysAgentDeviceMapping
 	fmt.Fprintf(os.Stdout, "Response from `AgentsAPI.PutAgentDeviceMappingById`: %v\n", resp)
 }
 ```
@@ -1168,11 +1168,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **agentDeviceMapping** | [**AgentDeviceMapping**](AgentDeviceMapping.md) |  | 
+ **body** | **IosysAgentDeviceMapping** |  | 
 
 ### Return type
 
-[**AgentDeviceMapping**](AgentDeviceMapping.md)
+[**IosysAgentDeviceMapping**](IosysAgentDeviceMapping.md)
 
 ### Authorization
 

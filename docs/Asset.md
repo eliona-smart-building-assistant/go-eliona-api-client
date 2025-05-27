@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **ParentFunctionalIdentifier** | Pointer to **NullableString** | The identifier specified by the identifiedBy parameter classifies this asset as a functional child. | [optional] 
 **ParentLocationalIdentifier** | Pointer to **NullableString** | The identifier specified by the identifiedBy parameter classifies this asset as a locational child | [optional] 
 **Tags** | Pointer to **[]string** | List of associated tags | [optional] 
+**AllowedInactivity** | Pointer to **NullableString** |  | [optional] 
 **ChildrenInfo** | Pointer to [**[]Asset**](Asset.md) | List of children for this asset. | [optional] [readonly] 
 **Attachments** | Pointer to [**[]Attachment**](Attachment.md) | A list of files attached to the asset | [optional] 
 
@@ -665,6 +666,41 @@ HasTags returns a boolean if a field has been set.
 `func (o *Asset) UnsetTags()`
 
 UnsetTags ensures that no value is present for Tags, not even an explicit nil
+### GetAllowedInactivity
+
+`func (o *Asset) GetAllowedInactivity() string`
+
+GetAllowedInactivity returns the AllowedInactivity field if non-nil, zero value otherwise.
+
+### GetAllowedInactivityOk
+
+`func (o *Asset) GetAllowedInactivityOk() (*string, bool)`
+
+GetAllowedInactivityOk returns a tuple with the AllowedInactivity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedInactivity
+
+`func (o *Asset) SetAllowedInactivity(v string)`
+
+SetAllowedInactivity sets AllowedInactivity field to given value.
+
+### HasAllowedInactivity
+
+`func (o *Asset) HasAllowedInactivity() bool`
+
+HasAllowedInactivity returns a boolean if a field has been set.
+
+### SetAllowedInactivityNil
+
+`func (o *Asset) SetAllowedInactivityNil(b bool)`
+
+ SetAllowedInactivityNil sets the value for AllowedInactivity to be an explicit nil
+
+### UnsetAllowedInactivity
+`func (o *Asset) UnsetAllowedInactivity()`
+
+UnsetAllowedInactivity ensures that no value is present for AllowedInactivity, not even an explicit nil
 ### GetChildrenInfo
 
 `func (o *Asset) GetChildrenInfo() []Asset`

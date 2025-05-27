@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.8.1
+API version: 2.9.1
 Contact: hello@eliona.io
 */
 
@@ -22,13 +22,11 @@ type AgentClass string
 // List of AgentClass
 const (
 	AGENT_CLASS_IOSYS AgentClass = "iosys"
-	AGENT_CLASS_MBUS  AgentClass = "mbus"
 )
 
 // All allowed values of AgentClass enum
 var AllowedAgentClassEnumValues = []AgentClass{
 	"iosys",
-	"mbus",
 }
 
 func (v *AgentClass) UnmarshalJSON(src []byte) error {

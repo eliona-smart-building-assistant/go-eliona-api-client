@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**ListenData**](DataAPI.md#ListenData) | **Get** /data-listener | WebSocket connection for asset data changes
 [**PutBulkData**](DataAPI.md#PutBulkData) | **Put** /data-bulk | Create or update multiple asset data
 [**PutData**](DataAPI.md#PutData) | **Put** /data | Create or update asset data
+[**PutDataTrend**](DataAPI.md#PutDataTrend) | **Put** /data-trend | Create or update historical data
 
 
 
@@ -496,7 +497,7 @@ import (
 )
 
 func main() {
-	data := []openapiclient.Data{*openapiclient.NewData(int32(4711), openapiclient.DataSubtype("input"), map[string]interface{}({}))} // []Data | 
+	data := []openapiclient.Data{*openapiclient.NewData(int32(4711), openapiclient.DataSubtype("input"), map[string]interface{}({"temperature":42}))} // []Data | 
 	directMode := "true" // string | Executes the operation directly without using other services. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -562,7 +563,7 @@ import (
 )
 
 func main() {
-	data := *openapiclient.NewData(int32(4711), openapiclient.DataSubtype("input"), map[string]interface{}({})) // Data | 
+	data := *openapiclient.NewData(int32(4711), openapiclient.DataSubtype("input"), map[string]interface{}({"temperature":42})) // Data | 
 	directMode := "true" // string | Executes the operation directly without using other services. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -601,6 +602,72 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PutDataTrend
+
+> Data PutDataTrend(ctx).Data(data).Execute()
+
+Create or update historical data
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
+)
+
+func main() {
+	data := *openapiclient.NewData(int32(4711), openapiclient.DataSubtype("input"), map[string]interface{}({"temperature":42})) // Data | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DataAPI.PutDataTrend(context.Background()).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DataAPI.PutDataTrend``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PutDataTrend`: Data
+	fmt.Fprintf(os.Stdout, "Response from `DataAPI.PutDataTrend`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPutDataTrendRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**Data**](Data.md) |  | 
+
+### Return type
+
+[**Data**](Data.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

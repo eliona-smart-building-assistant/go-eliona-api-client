@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## GetAlarmHistoryById
 
-> []Alarm GetAlarmHistoryById(ctx, alarmRuleId).Expansions(expansions).Execute()
+> []Alarm GetAlarmHistoryById(ctx, alarmRuleId).FromDate(fromDate).ToDate(toDate).Tags(tags).Expansions(expansions).Execute()
 
 Information about alarm history
 
@@ -178,11 +178,14 @@ import (
 
 func main() {
 	alarmRuleId := int32(4711) // int32 | The id of the alarm rule
+	fromDate := "2020-01-01T09:00:00.000Z" // string | Filter by lower date time (RFC3339) limit inclusive (optional)
+	toDate := "2021-12-31T23:00:00.000Z" // string | Filter by upper date time (RFC3339) limit exclusive (optional)
+	tags := []string{"Inner_example"} // []string | A list of defined tags. Result must include all of these tags, not just some. (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AlarmsAPI.GetAlarmHistoryById(context.Background(), alarmRuleId).Expansions(expansions).Execute()
+	resp, r, err := apiClient.AlarmsAPI.GetAlarmHistoryById(context.Background(), alarmRuleId).FromDate(fromDate).ToDate(toDate).Tags(tags).Expansions(expansions).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AlarmsAPI.GetAlarmHistoryById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -208,6 +211,9 @@ Other parameters are passed through a pointer to a apiGetAlarmHistoryByIdRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **fromDate** | **string** | Filter by lower date time (RFC3339) limit inclusive | 
+ **toDate** | **string** | Filter by upper date time (RFC3339) limit exclusive | 
+ **tags** | **[]string** | A list of defined tags. Result must include all of these tags, not just some. | 
  **expansions** | **[]string** | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;. | 
 
 ### Return type
@@ -230,7 +236,7 @@ Name | Type | Description  | Notes
 
 ## GetAlarms
 
-> []Alarm GetAlarms(ctx).ProjectId(projectId).Expansions(expansions).Execute()
+> []Alarm GetAlarms(ctx).ProjectId(projectId).FromDate(fromDate).ToDate(toDate).Tags(tags).Expansions(expansions).Execute()
 
 Information about alarms
 
@@ -250,11 +256,14 @@ import (
 
 func main() {
 	projectId := "projectId_example" // string | Filter for a specific project (optional)
+	fromDate := "2020-01-01T09:00:00.000Z" // string | Filter by lower date time (RFC3339) limit inclusive (optional)
+	toDate := "2021-12-31T23:00:00.000Z" // string | Filter by upper date time (RFC3339) limit exclusive (optional)
+	tags := []string{"Inner_example"} // []string | A list of defined tags. Result must include all of these tags, not just some. (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AlarmsAPI.GetAlarms(context.Background()).ProjectId(projectId).Expansions(expansions).Execute()
+	resp, r, err := apiClient.AlarmsAPI.GetAlarms(context.Background()).ProjectId(projectId).FromDate(fromDate).ToDate(toDate).Tags(tags).Expansions(expansions).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AlarmsAPI.GetAlarms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -276,6 +285,9 @@ Other parameters are passed through a pointer to a apiGetAlarmsRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **projectId** | **string** | Filter for a specific project | 
+ **fromDate** | **string** | Filter by lower date time (RFC3339) limit inclusive | 
+ **toDate** | **string** | Filter by upper date time (RFC3339) limit exclusive | 
+ **tags** | **[]string** | A list of defined tags. Result must include all of these tags, not just some. | 
  **expansions** | **[]string** | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;. | 
 
 ### Return type
@@ -298,7 +310,7 @@ Name | Type | Description  | Notes
 
 ## GetAlarmsHistory
 
-> []Alarm GetAlarmsHistory(ctx).ProjectId(projectId).Expansions(expansions).Execute()
+> []Alarm GetAlarmsHistory(ctx).ProjectId(projectId).FromDate(fromDate).ToDate(toDate).Tags(tags).Expansions(expansions).Execute()
 
 Information about alarms history
 
@@ -318,11 +330,14 @@ import (
 
 func main() {
 	projectId := "projectId_example" // string | Filter for a specific project (optional)
+	fromDate := "2020-01-01T09:00:00.000Z" // string | Filter by lower date time (RFC3339) limit inclusive (optional)
+	toDate := "2021-12-31T23:00:00.000Z" // string | Filter by upper date time (RFC3339) limit exclusive (optional)
+	tags := []string{"Inner_example"} // []string | A list of defined tags. Result must include all of these tags, not just some. (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AlarmsAPI.GetAlarmsHistory(context.Background()).ProjectId(projectId).Expansions(expansions).Execute()
+	resp, r, err := apiClient.AlarmsAPI.GetAlarmsHistory(context.Background()).ProjectId(projectId).FromDate(fromDate).ToDate(toDate).Tags(tags).Expansions(expansions).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AlarmsAPI.GetAlarmsHistory``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -344,6 +359,9 @@ Other parameters are passed through a pointer to a apiGetAlarmsHistoryRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **projectId** | **string** | Filter for a specific project | 
+ **fromDate** | **string** | Filter by lower date time (RFC3339) limit inclusive | 
+ **toDate** | **string** | Filter by upper date time (RFC3339) limit exclusive | 
+ **tags** | **[]string** | A list of defined tags. Result must include all of these tags, not just some. | 
  **expansions** | **[]string** | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;. | 
 
 ### Return type
@@ -366,7 +384,7 @@ Name | Type | Description  | Notes
 
 ## GetHighestAlarms
 
-> []Alarm GetHighestAlarms(ctx).ProjectId(projectId).Expansions(expansions).Execute()
+> []Alarm GetHighestAlarms(ctx).ProjectId(projectId).FromDate(fromDate).ToDate(toDate).Tags(tags).Expansions(expansions).Execute()
 
 Information about most prioritized alarms
 
@@ -386,11 +404,14 @@ import (
 
 func main() {
 	projectId := "projectId_example" // string | Filter for a specific project (optional)
+	fromDate := "2020-01-01T09:00:00.000Z" // string | Filter by lower date time (RFC3339) limit inclusive (optional)
+	toDate := "2021-12-31T23:00:00.000Z" // string | Filter by upper date time (RFC3339) limit exclusive (optional)
+	tags := []string{"Inner_example"} // []string | A list of defined tags. Result must include all of these tags, not just some. (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AlarmsAPI.GetHighestAlarms(context.Background()).ProjectId(projectId).Expansions(expansions).Execute()
+	resp, r, err := apiClient.AlarmsAPI.GetHighestAlarms(context.Background()).ProjectId(projectId).FromDate(fromDate).ToDate(toDate).Tags(tags).Expansions(expansions).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AlarmsAPI.GetHighestAlarms``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -412,6 +433,9 @@ Other parameters are passed through a pointer to a apiGetHighestAlarmsRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **projectId** | **string** | Filter for a specific project | 
+ **fromDate** | **string** | Filter by lower date time (RFC3339) limit inclusive | 
+ **toDate** | **string** | Filter by upper date time (RFC3339) limit exclusive | 
+ **tags** | **[]string** | A list of defined tags. Result must include all of these tags, not just some. | 
  **expansions** | **[]string** | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;. | 
 
 ### Return type
@@ -434,7 +458,7 @@ Name | Type | Description  | Notes
 
 ## ListenAlarm
 
-> AlarmListen ListenAlarm(ctx).Execute()
+> AlarmListen ListenAlarm(ctx).Expansions(expansions).Execute()
 
 WebSocket connection for alarm changes
 
@@ -453,10 +477,11 @@ import (
 )
 
 func main() {
+	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AlarmsAPI.ListenAlarm(context.Background()).Execute()
+	resp, r, err := apiClient.AlarmsAPI.ListenAlarm(context.Background()).Expansions(expansions).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AlarmsAPI.ListenAlarm``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -468,12 +493,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListenAlarmRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **expansions** | **[]string** | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;. | 
 
 ### Return type
 

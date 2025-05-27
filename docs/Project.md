@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **NullableString** | The internal ID of the project | [optional] [readonly] 
 **Title** | Pointer to **NullableString** | The title of the project | [optional] 
+**Users** | Pointer to [**[]ProjectUser**](ProjectUser.md) | List of users with a project role | [optional] 
 
 ## Methods
 
@@ -96,6 +97,41 @@ HasTitle returns a boolean if a field has been set.
 `func (o *Project) UnsetTitle()`
 
 UnsetTitle ensures that no value is present for Title, not even an explicit nil
+### GetUsers
+
+`func (o *Project) GetUsers() []ProjectUser`
+
+GetUsers returns the Users field if non-nil, zero value otherwise.
+
+### GetUsersOk
+
+`func (o *Project) GetUsersOk() (*[]ProjectUser, bool)`
+
+GetUsersOk returns a tuple with the Users field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsers
+
+`func (o *Project) SetUsers(v []ProjectUser)`
+
+SetUsers sets Users field to given value.
+
+### HasUsers
+
+`func (o *Project) HasUsers() bool`
+
+HasUsers returns a boolean if a field has been set.
+
+### SetUsersNil
+
+`func (o *Project) SetUsersNil(b bool)`
+
+ SetUsersNil sets the value for Users to be an explicit nil
+
+### UnsetUsers
+`func (o *Project) UnsetUsers()`
+
+UnsetUsers ensures that no value is present for Users, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

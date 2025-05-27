@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.8.1
+API version: 2.9.1
 Contact: hello@eliona.io
 */
 
@@ -77,7 +77,7 @@ func NewAssetTypeAttribute(name string, subtype DataSubtype) *AssetTypeAttribute
 	this := AssetTypeAttribute{}
 	this.Name = name
 	this.Subtype = subtype
-	var enable bool = true
+	var enable bool = false
 	this.Enable = &enable
 	var viewer bool = false
 	this.Viewer = *NewNullableBool(&viewer)
@@ -93,7 +93,7 @@ func NewAssetTypeAttributeWithDefaults() *AssetTypeAttribute {
 	this := AssetTypeAttribute{}
 	var subtype DataSubtype = SUBTYPE_INPUT
 	this.Subtype = subtype
-	var enable bool = true
+	var enable bool = false
 	this.Enable = &enable
 	var viewer bool = false
 	this.Viewer = *NewNullableBool(&viewer)

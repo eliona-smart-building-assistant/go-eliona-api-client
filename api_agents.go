@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.8.1
+API version: 2.9.1
 Contact: hello@eliona.io
 */
 
@@ -152,7 +152,7 @@ type ApiGetAgentDeviceByIdRequest struct {
 	agentDeviceId int32
 }
 
-func (r ApiGetAgentDeviceByIdRequest) Execute() ([]AgentDevice, *http.Response, error) {
+func (r ApiGetAgentDeviceByIdRequest) Execute() ([]IosysAgentDevice, *http.Response, error) {
 	return r.ApiService.GetAgentDeviceByIdExecute(r)
 }
 
@@ -177,13 +177,13 @@ func (a *AgentsAPIService) GetAgentDeviceById(ctx context.Context, agentClass st
 
 // Execute executes the request
 //
-//	@return []AgentDevice
-func (a *AgentsAPIService) GetAgentDeviceByIdExecute(r ApiGetAgentDeviceByIdRequest) ([]AgentDevice, *http.Response, error) {
+//	@return []IosysAgentDevice
+func (a *AgentsAPIService) GetAgentDeviceByIdExecute(r ApiGetAgentDeviceByIdRequest) ([]IosysAgentDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []AgentDevice
+		localVarReturnValue []IosysAgentDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.GetAgentDeviceById")
@@ -274,7 +274,7 @@ type ApiGetAgentDeviceMappingByIdRequest struct {
 	agentDeviceMappingId int32
 }
 
-func (r ApiGetAgentDeviceMappingByIdRequest) Execute() ([]AgentDeviceMapping, *http.Response, error) {
+func (r ApiGetAgentDeviceMappingByIdRequest) Execute() ([]IosysAgentDeviceMapping, *http.Response, error) {
 	return r.ApiService.GetAgentDeviceMappingByIdExecute(r)
 }
 
@@ -299,13 +299,13 @@ func (a *AgentsAPIService) GetAgentDeviceMappingById(ctx context.Context, agentC
 
 // Execute executes the request
 //
-//	@return []AgentDeviceMapping
-func (a *AgentsAPIService) GetAgentDeviceMappingByIdExecute(r ApiGetAgentDeviceMappingByIdRequest) ([]AgentDeviceMapping, *http.Response, error) {
+//	@return []IosysAgentDeviceMapping
+func (a *AgentsAPIService) GetAgentDeviceMappingByIdExecute(r ApiGetAgentDeviceMappingByIdRequest) ([]IosysAgentDeviceMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []AgentDeviceMapping
+		localVarReturnValue []IosysAgentDeviceMapping
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.GetAgentDeviceMappingById")
@@ -396,7 +396,7 @@ type ApiGetAgentDeviceMappingsByDeviceIdRequest struct {
 	agentDeviceId int32
 }
 
-func (r ApiGetAgentDeviceMappingsByDeviceIdRequest) Execute() ([]AgentDeviceMapping, *http.Response, error) {
+func (r ApiGetAgentDeviceMappingsByDeviceIdRequest) Execute() ([]IosysAgentDeviceMapping, *http.Response, error) {
 	return r.ApiService.GetAgentDeviceMappingsByDeviceIdExecute(r)
 }
 
@@ -421,13 +421,13 @@ func (a *AgentsAPIService) GetAgentDeviceMappingsByDeviceId(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return []AgentDeviceMapping
-func (a *AgentsAPIService) GetAgentDeviceMappingsByDeviceIdExecute(r ApiGetAgentDeviceMappingsByDeviceIdRequest) ([]AgentDeviceMapping, *http.Response, error) {
+//	@return []IosysAgentDeviceMapping
+func (a *AgentsAPIService) GetAgentDeviceMappingsByDeviceIdExecute(r ApiGetAgentDeviceMappingsByDeviceIdRequest) ([]IosysAgentDeviceMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []AgentDeviceMapping
+		localVarReturnValue []IosysAgentDeviceMapping
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.GetAgentDeviceMappingsByDeviceId")
@@ -518,7 +518,7 @@ type ApiGetAgentDevicesByAgentIdRequest struct {
 	agentId    int32
 }
 
-func (r ApiGetAgentDevicesByAgentIdRequest) Execute() ([]AgentDevice, *http.Response, error) {
+func (r ApiGetAgentDevicesByAgentIdRequest) Execute() ([]IosysAgentDevice, *http.Response, error) {
 	return r.ApiService.GetAgentDevicesByAgentIdExecute(r)
 }
 
@@ -543,13 +543,13 @@ func (a *AgentsAPIService) GetAgentDevicesByAgentId(ctx context.Context, agentCl
 
 // Execute executes the request
 //
-//	@return []AgentDevice
-func (a *AgentsAPIService) GetAgentDevicesByAgentIdExecute(r ApiGetAgentDevicesByAgentIdRequest) ([]AgentDevice, *http.Response, error) {
+//	@return []IosysAgentDevice
+func (a *AgentsAPIService) GetAgentDevicesByAgentIdExecute(r ApiGetAgentDevicesByAgentIdRequest) ([]IosysAgentDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []AgentDevice
+		localVarReturnValue []IosysAgentDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.GetAgentDevicesByAgentId")
@@ -995,19 +995,19 @@ func (a *AgentsAPIService) PostAgentByClassExecute(r ApiPostAgentByClassRequest)
 }
 
 type ApiPostAgentDeviceByAgentIdRequest struct {
-	ctx         context.Context
-	ApiService  *AgentsAPIService
-	agentClass  string
-	agentId     int32
-	agentDevice *AgentDevice
+	ctx        context.Context
+	ApiService *AgentsAPIService
+	agentClass string
+	agentId    int32
+	body       *IosysAgentDevice
 }
 
-func (r ApiPostAgentDeviceByAgentIdRequest) AgentDevice(agentDevice AgentDevice) ApiPostAgentDeviceByAgentIdRequest {
-	r.agentDevice = &agentDevice
+func (r ApiPostAgentDeviceByAgentIdRequest) Body(body IosysAgentDevice) ApiPostAgentDeviceByAgentIdRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiPostAgentDeviceByAgentIdRequest) Execute() (*AgentDevice, *http.Response, error) {
+func (r ApiPostAgentDeviceByAgentIdRequest) Execute() (*IosysAgentDevice, *http.Response, error) {
 	return r.ApiService.PostAgentDeviceByAgentIdExecute(r)
 }
 
@@ -1032,13 +1032,13 @@ func (a *AgentsAPIService) PostAgentDeviceByAgentId(ctx context.Context, agentCl
 
 // Execute executes the request
 //
-//	@return AgentDevice
-func (a *AgentsAPIService) PostAgentDeviceByAgentIdExecute(r ApiPostAgentDeviceByAgentIdRequest) (*AgentDevice, *http.Response, error) {
+//	@return IosysAgentDevice
+func (a *AgentsAPIService) PostAgentDeviceByAgentIdExecute(r ApiPostAgentDeviceByAgentIdRequest) (*IosysAgentDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *AgentDevice
+		localVarReturnValue *IosysAgentDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.PostAgentDeviceByAgentId")
@@ -1053,8 +1053,8 @@ func (a *AgentsAPIService) PostAgentDeviceByAgentIdExecute(r ApiPostAgentDeviceB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.agentDevice == nil {
-		return localVarReturnValue, nil, reportError("agentDevice is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1075,7 +1075,7 @@ func (a *AgentsAPIService) PostAgentDeviceByAgentIdExecute(r ApiPostAgentDeviceB
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.agentDevice
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1128,19 +1128,19 @@ func (a *AgentsAPIService) PostAgentDeviceByAgentIdExecute(r ApiPostAgentDeviceB
 }
 
 type ApiPostAgentDeviceMappingByDeviceIdRequest struct {
-	ctx                context.Context
-	ApiService         *AgentsAPIService
-	agentClass         string
-	agentDeviceId      int32
-	agentDeviceMapping *AgentDeviceMapping
+	ctx           context.Context
+	ApiService    *AgentsAPIService
+	agentClass    string
+	agentDeviceId int32
+	body          *IosysAgentDeviceMapping
 }
 
-func (r ApiPostAgentDeviceMappingByDeviceIdRequest) AgentDeviceMapping(agentDeviceMapping AgentDeviceMapping) ApiPostAgentDeviceMappingByDeviceIdRequest {
-	r.agentDeviceMapping = &agentDeviceMapping
+func (r ApiPostAgentDeviceMappingByDeviceIdRequest) Body(body IosysAgentDeviceMapping) ApiPostAgentDeviceMappingByDeviceIdRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiPostAgentDeviceMappingByDeviceIdRequest) Execute() (*AgentDeviceMapping, *http.Response, error) {
+func (r ApiPostAgentDeviceMappingByDeviceIdRequest) Execute() (*IosysAgentDeviceMapping, *http.Response, error) {
 	return r.ApiService.PostAgentDeviceMappingByDeviceIdExecute(r)
 }
 
@@ -1165,13 +1165,13 @@ func (a *AgentsAPIService) PostAgentDeviceMappingByDeviceId(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return AgentDeviceMapping
-func (a *AgentsAPIService) PostAgentDeviceMappingByDeviceIdExecute(r ApiPostAgentDeviceMappingByDeviceIdRequest) (*AgentDeviceMapping, *http.Response, error) {
+//	@return IosysAgentDeviceMapping
+func (a *AgentsAPIService) PostAgentDeviceMappingByDeviceIdExecute(r ApiPostAgentDeviceMappingByDeviceIdRequest) (*IosysAgentDeviceMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *AgentDeviceMapping
+		localVarReturnValue *IosysAgentDeviceMapping
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.PostAgentDeviceMappingByDeviceId")
@@ -1186,8 +1186,8 @@ func (a *AgentsAPIService) PostAgentDeviceMappingByDeviceIdExecute(r ApiPostAgen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.agentDeviceMapping == nil {
-		return localVarReturnValue, nil, reportError("agentDeviceMapping is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1208,7 +1208,7 @@ func (a *AgentsAPIService) PostAgentDeviceMappingByDeviceIdExecute(r ApiPostAgen
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.agentDeviceMapping
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1527,19 +1527,19 @@ func (a *AgentsAPIService) PutAgentByClassAndIdExecute(r ApiPutAgentByClassAndId
 }
 
 type ApiPutAgentDeviceByAgentIdRequest struct {
-	ctx         context.Context
-	ApiService  *AgentsAPIService
-	agentClass  string
-	agentId     int32
-	agentDevice *AgentDevice
+	ctx        context.Context
+	ApiService *AgentsAPIService
+	agentClass string
+	agentId    int32
+	body       *IosysAgentDevice
 }
 
-func (r ApiPutAgentDeviceByAgentIdRequest) AgentDevice(agentDevice AgentDevice) ApiPutAgentDeviceByAgentIdRequest {
-	r.agentDevice = &agentDevice
+func (r ApiPutAgentDeviceByAgentIdRequest) Body(body IosysAgentDevice) ApiPutAgentDeviceByAgentIdRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiPutAgentDeviceByAgentIdRequest) Execute() (*AgentDevice, *http.Response, error) {
+func (r ApiPutAgentDeviceByAgentIdRequest) Execute() (*IosysAgentDevice, *http.Response, error) {
 	return r.ApiService.PutAgentDeviceByAgentIdExecute(r)
 }
 
@@ -1566,15 +1566,15 @@ func (a *AgentsAPIService) PutAgentDeviceByAgentId(ctx context.Context, agentCla
 
 // Execute executes the request
 //
-//	@return AgentDevice
+//	@return IosysAgentDevice
 //
 // Deprecated
-func (a *AgentsAPIService) PutAgentDeviceByAgentIdExecute(r ApiPutAgentDeviceByAgentIdRequest) (*AgentDevice, *http.Response, error) {
+func (a *AgentsAPIService) PutAgentDeviceByAgentIdExecute(r ApiPutAgentDeviceByAgentIdRequest) (*IosysAgentDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *AgentDevice
+		localVarReturnValue *IosysAgentDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.PutAgentDeviceByAgentId")
@@ -1589,8 +1589,8 @@ func (a *AgentsAPIService) PutAgentDeviceByAgentIdExecute(r ApiPutAgentDeviceByA
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.agentDevice == nil {
-		return localVarReturnValue, nil, reportError("agentDevice is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1611,7 +1611,7 @@ func (a *AgentsAPIService) PutAgentDeviceByAgentIdExecute(r ApiPutAgentDeviceByA
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.agentDevice
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1668,15 +1668,15 @@ type ApiPutAgentDeviceByIdRequest struct {
 	ApiService    *AgentsAPIService
 	agentClass    string
 	agentDeviceId int32
-	agentDevice   *AgentDevice
+	body          *IosysAgentDevice
 }
 
-func (r ApiPutAgentDeviceByIdRequest) AgentDevice(agentDevice AgentDevice) ApiPutAgentDeviceByIdRequest {
-	r.agentDevice = &agentDevice
+func (r ApiPutAgentDeviceByIdRequest) Body(body IosysAgentDevice) ApiPutAgentDeviceByIdRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiPutAgentDeviceByIdRequest) Execute() (*AgentDevice, *http.Response, error) {
+func (r ApiPutAgentDeviceByIdRequest) Execute() (*IosysAgentDevice, *http.Response, error) {
 	return r.ApiService.PutAgentDeviceByIdExecute(r)
 }
 
@@ -1701,13 +1701,13 @@ func (a *AgentsAPIService) PutAgentDeviceById(ctx context.Context, agentClass st
 
 // Execute executes the request
 //
-//	@return AgentDevice
-func (a *AgentsAPIService) PutAgentDeviceByIdExecute(r ApiPutAgentDeviceByIdRequest) (*AgentDevice, *http.Response, error) {
+//	@return IosysAgentDevice
+func (a *AgentsAPIService) PutAgentDeviceByIdExecute(r ApiPutAgentDeviceByIdRequest) (*IosysAgentDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *AgentDevice
+		localVarReturnValue *IosysAgentDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.PutAgentDeviceById")
@@ -1722,8 +1722,8 @@ func (a *AgentsAPIService) PutAgentDeviceByIdExecute(r ApiPutAgentDeviceByIdRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.agentDevice == nil {
-		return localVarReturnValue, nil, reportError("agentDevice is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1744,7 +1744,7 @@ func (a *AgentsAPIService) PutAgentDeviceByIdExecute(r ApiPutAgentDeviceByIdRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.agentDevice
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1797,19 +1797,19 @@ func (a *AgentsAPIService) PutAgentDeviceByIdExecute(r ApiPutAgentDeviceByIdRequ
 }
 
 type ApiPutAgentDeviceMappingByDeviceIdRequest struct {
-	ctx                context.Context
-	ApiService         *AgentsAPIService
-	agentClass         string
-	agentDeviceId      int32
-	agentDeviceMapping *AgentDeviceMapping
+	ctx           context.Context
+	ApiService    *AgentsAPIService
+	agentClass    string
+	agentDeviceId int32
+	body          *IosysAgentDeviceMapping
 }
 
-func (r ApiPutAgentDeviceMappingByDeviceIdRequest) AgentDeviceMapping(agentDeviceMapping AgentDeviceMapping) ApiPutAgentDeviceMappingByDeviceIdRequest {
-	r.agentDeviceMapping = &agentDeviceMapping
+func (r ApiPutAgentDeviceMappingByDeviceIdRequest) Body(body IosysAgentDeviceMapping) ApiPutAgentDeviceMappingByDeviceIdRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiPutAgentDeviceMappingByDeviceIdRequest) Execute() (*AgentDeviceMapping, *http.Response, error) {
+func (r ApiPutAgentDeviceMappingByDeviceIdRequest) Execute() (*IosysAgentDeviceMapping, *http.Response, error) {
 	return r.ApiService.PutAgentDeviceMappingByDeviceIdExecute(r)
 }
 
@@ -1836,15 +1836,15 @@ func (a *AgentsAPIService) PutAgentDeviceMappingByDeviceId(ctx context.Context, 
 
 // Execute executes the request
 //
-//	@return AgentDeviceMapping
+//	@return IosysAgentDeviceMapping
 //
 // Deprecated
-func (a *AgentsAPIService) PutAgentDeviceMappingByDeviceIdExecute(r ApiPutAgentDeviceMappingByDeviceIdRequest) (*AgentDeviceMapping, *http.Response, error) {
+func (a *AgentsAPIService) PutAgentDeviceMappingByDeviceIdExecute(r ApiPutAgentDeviceMappingByDeviceIdRequest) (*IosysAgentDeviceMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *AgentDeviceMapping
+		localVarReturnValue *IosysAgentDeviceMapping
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.PutAgentDeviceMappingByDeviceId")
@@ -1859,8 +1859,8 @@ func (a *AgentsAPIService) PutAgentDeviceMappingByDeviceIdExecute(r ApiPutAgentD
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.agentDeviceMapping == nil {
-		return localVarReturnValue, nil, reportError("agentDeviceMapping is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1881,7 +1881,7 @@ func (a *AgentsAPIService) PutAgentDeviceMappingByDeviceIdExecute(r ApiPutAgentD
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.agentDeviceMapping
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1938,15 +1938,15 @@ type ApiPutAgentDeviceMappingByIdRequest struct {
 	ApiService           *AgentsAPIService
 	agentClass           string
 	agentDeviceMappingId int32
-	agentDeviceMapping   *AgentDeviceMapping
+	body                 *IosysAgentDeviceMapping
 }
 
-func (r ApiPutAgentDeviceMappingByIdRequest) AgentDeviceMapping(agentDeviceMapping AgentDeviceMapping) ApiPutAgentDeviceMappingByIdRequest {
-	r.agentDeviceMapping = &agentDeviceMapping
+func (r ApiPutAgentDeviceMappingByIdRequest) Body(body IosysAgentDeviceMapping) ApiPutAgentDeviceMappingByIdRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiPutAgentDeviceMappingByIdRequest) Execute() (*AgentDeviceMapping, *http.Response, error) {
+func (r ApiPutAgentDeviceMappingByIdRequest) Execute() (*IosysAgentDeviceMapping, *http.Response, error) {
 	return r.ApiService.PutAgentDeviceMappingByIdExecute(r)
 }
 
@@ -1971,13 +1971,13 @@ func (a *AgentsAPIService) PutAgentDeviceMappingById(ctx context.Context, agentC
 
 // Execute executes the request
 //
-//	@return AgentDeviceMapping
-func (a *AgentsAPIService) PutAgentDeviceMappingByIdExecute(r ApiPutAgentDeviceMappingByIdRequest) (*AgentDeviceMapping, *http.Response, error) {
+//	@return IosysAgentDeviceMapping
+func (a *AgentsAPIService) PutAgentDeviceMappingByIdExecute(r ApiPutAgentDeviceMappingByIdRequest) (*IosysAgentDeviceMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *AgentDeviceMapping
+		localVarReturnValue *IosysAgentDeviceMapping
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.PutAgentDeviceMappingById")
@@ -1992,8 +1992,8 @@ func (a *AgentsAPIService) PutAgentDeviceMappingByIdExecute(r ApiPutAgentDeviceM
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.agentDeviceMapping == nil {
-		return localVarReturnValue, nil, reportError("agentDeviceMapping is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2014,7 +2014,7 @@ func (a *AgentsAPIService) PutAgentDeviceMappingByIdExecute(r ApiPutAgentDeviceM
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.agentDeviceMapping
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
