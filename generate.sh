@@ -3,7 +3,7 @@ go install golang.org/x/tools/cmd/goimports@latest
 docker run --rm \
     --user $(id -u):$(id -g) \
      -v "${PWD}:/local" \
-    openapitools/openapi-generator-cli:v7.11.0 generate \
+    openapitools/openapi-generator-cli:v7.13.0 generate \
     -g go \
     --git-user-id eliona-smart-building-assistant \
     --git-repo-id go-eliona-api-client/v2 \
