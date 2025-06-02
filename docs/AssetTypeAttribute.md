@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **Map** | Pointer to **[]map[string]interface{}** | list of mapping between value and custom text | [optional] 
 **SourcePath** | Pointer to **[]string** | source path for attribute value | [optional] 
 **IsDigital** | Pointer to **NullableBool** | is attribute digital | [optional] 
+**CategoryName** | Pointer to **NullableString** | a reference to a asset type category | [optional] 
 
 ## Methods
 
@@ -766,6 +767,41 @@ HasIsDigital returns a boolean if a field has been set.
 `func (o *AssetTypeAttribute) UnsetIsDigital()`
 
 UnsetIsDigital ensures that no value is present for IsDigital, not even an explicit nil
+### GetCategoryName
+
+`func (o *AssetTypeAttribute) GetCategoryName() string`
+
+GetCategoryName returns the CategoryName field if non-nil, zero value otherwise.
+
+### GetCategoryNameOk
+
+`func (o *AssetTypeAttribute) GetCategoryNameOk() (*string, bool)`
+
+GetCategoryNameOk returns a tuple with the CategoryName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCategoryName
+
+`func (o *AssetTypeAttribute) SetCategoryName(v string)`
+
+SetCategoryName sets CategoryName field to given value.
+
+### HasCategoryName
+
+`func (o *AssetTypeAttribute) HasCategoryName() bool`
+
+HasCategoryName returns a boolean if a field has been set.
+
+### SetCategoryNameNil
+
+`func (o *AssetTypeAttribute) SetCategoryNameNil(b bool)`
+
+ SetCategoryNameNil sets the value for CategoryName to be an explicit nil
+
+### UnsetCategoryName
+`func (o *AssetTypeAttribute) UnsetCategoryName()`
+
+UnsetCategoryName ensures that no value is present for CategoryName, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -5,13 +5,16 @@ All URIs are relative to *https://name.eliona.io/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteAssetTypeByName**](AssetTypesAPI.md#DeleteAssetTypeByName) | **Delete** /asset-types/{asset-type-name} | Delete an asset type
+[**DeleteAssetTypeCategoryByName**](AssetTypesAPI.md#DeleteAssetTypeCategoryByName) | **Delete** /asset-type-categories/{asset-type-category-name} | Delete an asset type category
 [**GetAssetTypeByName**](AssetTypesAPI.md#GetAssetTypeByName) | **Get** /asset-types/{asset-type-name} | Information about an asset type
+[**GetAssetTypeCategories**](AssetTypesAPI.md#GetAssetTypeCategories) | **Get** /asset-type-categories | List of asset type categories
 [**GetAssetTypes**](AssetTypesAPI.md#GetAssetTypes) | **Get** /asset-types | List of asset types
 [**PostAssetType**](AssetTypesAPI.md#PostAssetType) | **Post** /asset-types | Create an asset type
 [**PostAssetTypeAttribute**](AssetTypesAPI.md#PostAssetTypeAttribute) | **Post** /asset-types/{asset-type-name}/attributes | Create asset type attribute
 [**PutAssetType**](AssetTypesAPI.md#PutAssetType) | **Put** /asset-types | Create or update an asset type
 [**PutAssetTypeAttribute**](AssetTypesAPI.md#PutAssetTypeAttribute) | **Put** /asset-types/{asset-type-name}/attributes | Create or update an asset type attribute
 [**PutAssetTypeByName**](AssetTypesAPI.md#PutAssetTypeByName) | **Put** /asset-types/{asset-type-name} | Update an asset type
+[**PutAssetTypeCategory**](AssetTypesAPI.md#PutAssetTypeCategory) | **Put** /asset-type-categories | Create or update an asset type categories
 
 
 
@@ -59,6 +62,74 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteAssetTypeByNameRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteAssetTypeCategoryByName
+
+> DeleteAssetTypeCategoryByName(ctx, assetTypeCategoryName).Execute()
+
+Delete an asset type category
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
+)
+
+func main() {
+	assetTypeCategoryName := "location" // string | The name of the asset type category
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.AssetTypesAPI.DeleteAssetTypeCategoryByName(context.Background(), assetTypeCategoryName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AssetTypesAPI.DeleteAssetTypeCategoryByName``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**assetTypeCategoryName** | **string** | The name of the asset type category | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteAssetTypeCategoryByNameRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -140,6 +211,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AssetType**](AssetType.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAssetTypeCategories
+
+> []AssetTypeCategory GetAssetTypeCategories(ctx).Execute()
+
+List of asset type categories
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AssetTypesAPI.GetAssetTypeCategories(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AssetTypesAPI.GetAssetTypeCategories``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAssetTypeCategories`: []AssetTypeCategory
+	fmt.Fprintf(os.Stdout, "Response from `AssetTypesAPI.GetAssetTypeCategories`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAssetTypeCategoriesRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]AssetTypeCategory**](AssetTypeCategory.md)
 
 ### Authorization
 
@@ -560,6 +692,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AssetType**](AssetType.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PutAssetTypeCategory
+
+> AssetTypeCategory PutAssetTypeCategory(ctx).AssetTypeCategory(assetTypeCategory).Execute()
+
+Create or update an asset type categories
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
+)
+
+func main() {
+	assetTypeCategory := *openapiclient.NewAssetTypeCategory("location") // AssetTypeCategory | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AssetTypesAPI.PutAssetTypeCategory(context.Background()).AssetTypeCategory(assetTypeCategory).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AssetTypesAPI.PutAssetTypeCategory``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PutAssetTypeCategory`: AssetTypeCategory
+	fmt.Fprintf(os.Stdout, "Response from `AssetTypesAPI.PutAssetTypeCategory`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPutAssetTypeCategoryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **assetTypeCategory** | [**AssetTypeCategory**](AssetTypeCategory.md) |  | 
+
+### Return type
+
+[**AssetTypeCategory**](AssetTypeCategory.md)
 
 ### Authorization
 

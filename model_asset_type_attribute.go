@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.1
+API version: 2.9.2
 Contact: hello@eliona.io
 */
 
@@ -65,6 +65,8 @@ type AssetTypeAttribute struct {
 	SourcePath []string `json:"sourcePath,omitempty"`
 	// is attribute digital
 	IsDigital NullableBool `json:"isDigital,omitempty"`
+	// a reference to a asset type category
+	CategoryName NullableString `json:"categoryName,omitempty"`
 }
 
 type _AssetTypeAttribute AssetTypeAttribute
@@ -974,6 +976,49 @@ func (o *AssetTypeAttribute) UnsetIsDigital() {
 	o.IsDigital.Unset()
 }
 
+// GetCategoryName returns the CategoryName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AssetTypeAttribute) GetCategoryName() string {
+	if o == nil || IsNil(o.CategoryName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.CategoryName.Get()
+}
+
+// GetCategoryNameOk returns a tuple with the CategoryName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AssetTypeAttribute) GetCategoryNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CategoryName.Get(), o.CategoryName.IsSet()
+}
+
+// HasCategoryName returns a boolean if a field has been set.
+func (o *AssetTypeAttribute) HasCategoryName() bool {
+	if o != nil && o.CategoryName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCategoryName gets a reference to the given NullableString and assigns it to the CategoryName field.
+func (o *AssetTypeAttribute) SetCategoryName(v string) {
+	o.CategoryName.Set(&v)
+}
+
+// SetCategoryNameNil sets the value for CategoryName to be an explicit nil
+func (o *AssetTypeAttribute) SetCategoryNameNil() {
+	o.CategoryName.Set(nil)
+}
+
+// UnsetCategoryName ensures that no value is present for CategoryName, not even an explicit nil
+func (o *AssetTypeAttribute) UnsetCategoryName() {
+	o.CategoryName.Unset()
+}
+
 func (o AssetTypeAttribute) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1045,6 +1090,9 @@ func (o AssetTypeAttribute) ToMap() (map[string]interface{}, error) {
 	}
 	if o.IsDigital.IsSet() {
 		toSerialize["isDigital"] = o.IsDigital.Get()
+	}
+	if o.CategoryName.IsSet() {
+		toSerialize["categoryName"] = o.CategoryName.Get()
 	}
 	return toSerialize, nil
 }
