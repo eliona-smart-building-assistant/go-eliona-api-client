@@ -10,7 +10,6 @@ Method | HTTP request | Description
 [**GetProjects**](ProjectsAPI.md#GetProjects) | **Get** /projects | Information about projects
 [**PutProject**](ProjectsAPI.md#PutProject) | **Put** /projects | Create or update a project
 [**PutProjectRole**](ProjectsAPI.md#PutProjectRole) | **Put** /project-roles | Create or update a project role
-[**StreamProjectRoles**](ProjectsAPI.md#StreamProjectRoles) | **Get** /project-roles-stream | Information about project roles as stream
 
 
 
@@ -276,7 +275,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/x-ndjson
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -411,67 +410,6 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## StreamProjectRoles
-
-> ProjectRole StreamProjectRoles(ctx).Execute()
-
-Information about project roles as stream
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
-)
-
-func main() {
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.StreamProjectRoles(context.Background()).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.StreamProjectRoles``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `StreamProjectRoles`: ProjectRole
-	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.StreamProjectRoles`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiStreamProjectRolesRequest struct via the builder pattern
-
-
-### Return type
-
-[**ProjectRole**](ProjectRole.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/x-ndjson
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

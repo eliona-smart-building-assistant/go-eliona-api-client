@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.3
+API version: 2.9.4
 Contact: hello@eliona.io
 */
 
@@ -323,7 +323,7 @@ func (a *WidgetsTypesAPIService) GetWidgetTypesExecute(r ApiGetWidgetTypesReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "application/x-ndjson"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
