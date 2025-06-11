@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.2
+API version: 2.9.3
 Contact: hello@eliona.io
 */
 
@@ -376,8 +376,8 @@ type ApiGetDataTrendAggregatedByIdRequest struct {
 	fromDate          *string
 	toDate            *string
 	sumMethod         *string
-	offset            *int32
-	size              *int32
+	offset            *int64
+	size              *int64
 }
 
 // Type of asset data
@@ -417,13 +417,13 @@ func (r ApiGetDataTrendAggregatedByIdRequest) SumMethod(sumMethod string) ApiGet
 }
 
 // Specifies the starting point for pagination by indicating the number of items to skip.
-func (r ApiGetDataTrendAggregatedByIdRequest) Offset(offset int32) ApiGetDataTrendAggregatedByIdRequest {
+func (r ApiGetDataTrendAggregatedByIdRequest) Offset(offset int64) ApiGetDataTrendAggregatedByIdRequest {
 	r.offset = &offset
 	return r
 }
 
 // Specifies the number of items per page for pagination.
-func (r ApiGetDataTrendAggregatedByIdRequest) Size(size int32) ApiGetDataTrendAggregatedByIdRequest {
+func (r ApiGetDataTrendAggregatedByIdRequest) Size(size int64) ApiGetDataTrendAggregatedByIdRequest {
 	r.size = &size
 	return r
 }
@@ -577,8 +577,8 @@ type ApiGetDataTrendByIdRequest struct {
 	attributeName *string
 	fromDate      *string
 	toDate        *string
-	offset        *int32
-	size          *int32
+	offset        *int64
+	size          *int64
 }
 
 // Type of asset data
@@ -606,13 +606,13 @@ func (r ApiGetDataTrendByIdRequest) ToDate(toDate string) ApiGetDataTrendByIdReq
 }
 
 // Specifies the starting point for pagination by indicating the number of items to skip.
-func (r ApiGetDataTrendByIdRequest) Offset(offset int32) ApiGetDataTrendByIdRequest {
+func (r ApiGetDataTrendByIdRequest) Offset(offset int64) ApiGetDataTrendByIdRequest {
 	r.offset = &offset
 	return r
 }
 
 // Specifies the number of items per page for pagination.
-func (r ApiGetDataTrendByIdRequest) Size(size int32) ApiGetDataTrendByIdRequest {
+func (r ApiGetDataTrendByIdRequest) Size(size int64) ApiGetDataTrendByIdRequest {
 	r.size = &size
 	return r
 }

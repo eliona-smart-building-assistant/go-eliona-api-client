@@ -194,8 +194,8 @@ func main() {
 	fromDate := "2020-01-01T09:00:00.000Z" // string | Lower date time (RFC3339) limit inclusive
 	toDate := "2021-12-31T23:00:00.000Z" // string | Upper date time (RFC3339) limit inclusive
 	sumMethod := "sum" // string | Method for summarize data (optional)
-	offset := int32(3) // int32 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
-	size := int32(10) // int32 | Specifies the number of items per page for pagination.  (optional)
+	offset := int64(3) // int64 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
+	size := int64(10) // int64 | Specifies the number of items per page for pagination.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -231,8 +231,8 @@ Name | Type | Description  | Notes
  **fromDate** | **string** | Lower date time (RFC3339) limit inclusive | 
  **toDate** | **string** | Upper date time (RFC3339) limit inclusive | 
  **sumMethod** | **string** | Method for summarize data | 
- **offset** | **int32** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
- **size** | **int32** | Specifies the number of items per page for pagination.  | 
+ **offset** | **int64** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
+ **size** | **int64** | Specifies the number of items per page for pagination.  | 
 
 ### Return type
 
@@ -278,8 +278,8 @@ func main() {
 	attributeName := "temperature" // string | Data attribute name
 	fromDate := "2020-01-01T09:00:00.000Z" // string | Lower date time (RFC3339) limit inclusive
 	toDate := "2021-12-31T23:00:00.000Z" // string | Upper date time (RFC3339) limit inclusive
-	offset := int32(3) // int32 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
-	size := int32(10) // int32 | Specifies the number of items per page for pagination.  (optional)
+	offset := int64(3) // int64 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
+	size := int64(10) // int64 | Specifies the number of items per page for pagination.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -313,8 +313,8 @@ Name | Type | Description  | Notes
  **attributeName** | **string** | Data attribute name | 
  **fromDate** | **string** | Lower date time (RFC3339) limit inclusive | 
  **toDate** | **string** | Upper date time (RFC3339) limit inclusive | 
- **offset** | **int32** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
- **size** | **int32** | Specifies the number of items per page for pagination.  | 
+ **offset** | **int64** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
+ **size** | **int64** | Specifies the number of items per page for pagination.  | 
 
 ### Return type
 

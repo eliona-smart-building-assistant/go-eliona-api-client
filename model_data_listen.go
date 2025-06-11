@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.2
+API version: 2.9.3
 Contact: hello@eliona.io
 */
 
@@ -31,6 +31,7 @@ type DataListen struct {
 	// Asset payload
 	Data map[string]interface{} `json:"data"`
 	// The name of the corresponding asset type
+	// Deprecated
 	AssetTypeName NullableString `json:"assetTypeName,omitempty"`
 	// freely assignable by the client to identify self-created data
 	ClientReference NullableString `json:"clientReference,omitempty"`
@@ -178,6 +179,7 @@ func (o *DataListen) SetData(v map[string]interface{}) {
 }
 
 // GetAssetTypeName returns the AssetTypeName field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *DataListen) GetAssetTypeName() string {
 	if o == nil || IsNil(o.AssetTypeName.Get()) {
 		var ret string
@@ -189,6 +191,7 @@ func (o *DataListen) GetAssetTypeName() string {
 // GetAssetTypeNameOk returns a tuple with the AssetTypeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *DataListen) GetAssetTypeNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -206,6 +209,7 @@ func (o *DataListen) HasAssetTypeName() bool {
 }
 
 // SetAssetTypeName gets a reference to the given NullableString and assigns it to the AssetTypeName field.
+// Deprecated
 func (o *DataListen) SetAssetTypeName(v string) {
 	o.AssetTypeName.Set(&v)
 }
