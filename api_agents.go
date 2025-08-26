@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.4
+API version: 2.9.5
 Contact: hello@eliona.io
 */
 
@@ -636,6 +636,20 @@ func (a *AgentsAPIService) GetAgentDevicesByAgentIdExecute(r ApiGetAgentDevicesB
 type ApiGetAgentsRequest struct {
 	ctx        context.Context
 	ApiService *AgentsAPIService
+	offset     *int64
+	size       *int64
+}
+
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetAgentsRequest) Offset(offset int64) ApiGetAgentsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetAgentsRequest) Size(size int64) ApiGetAgentsRequest {
+	r.size = &size
+	return r
 }
 
 func (r ApiGetAgentsRequest) Execute() ([]Agent, *http.Response, error) {
@@ -679,6 +693,12 @@ func (a *AgentsAPIService) GetAgentsExecute(r ApiGetAgentsRequest) ([]Agent, *ht
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

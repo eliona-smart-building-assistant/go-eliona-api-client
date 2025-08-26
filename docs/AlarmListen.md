@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RuleId** | **int32** | The id of the corresponding rule | [readonly] 
+**RuleId** | **int32** | The id of the corresponding rule | 
 **AssetId** | Pointer to **NullableInt32** | ID of the corresponding asset | [optional] [readonly] 
 **Subtype** | Pointer to **NullableString** | Type of asset data | [optional] [readonly] 
 **Attribute** | Pointer to **NullableString** | Name of the attribute of the asset type | [optional] [readonly] 

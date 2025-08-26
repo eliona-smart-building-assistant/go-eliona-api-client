@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## GetCalculationRules
 
-> []CalculationRule GetCalculationRules(ctx).CalculationRuleIds(calculationRuleIds).Execute()
+> []CalculationRule GetCalculationRules(ctx).CalculationRuleIds(calculationRuleIds).Offset(offset).Size(size).Execute()
 
 Information about calculation rules
 
@@ -172,10 +172,12 @@ import (
 
 func main() {
 	calculationRuleIds := []int32{int32(123)} // []int32 | List of calculation rule ids for filtering (optional)
+	offset := int64(3) // int64 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
+	size := int64(10) // int64 | Specifies the number of items per page for pagination.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CalculationRulesAPI.GetCalculationRules(context.Background()).CalculationRuleIds(calculationRuleIds).Execute()
+	resp, r, err := apiClient.CalculationRulesAPI.GetCalculationRules(context.Background()).CalculationRuleIds(calculationRuleIds).Offset(offset).Size(size).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CalculationRulesAPI.GetCalculationRules``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -197,6 +199,8 @@ Other parameters are passed through a pointer to a apiGetCalculationRulesRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **calculationRuleIds** | **[]int32** | List of calculation rule ids for filtering | 
+ **offset** | **int64** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
+ **size** | **int64** | Specifies the number of items per page for pagination.  | 
 
 ### Return type
 

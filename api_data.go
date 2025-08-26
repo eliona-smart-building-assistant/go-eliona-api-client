@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.4
+API version: 2.9.5
 Contact: hello@eliona.io
 */
 
@@ -30,6 +30,8 @@ type ApiGetDataRequest struct {
 	parentAssetId *int32
 	dataSubtype   *string
 	assetTypeName *string
+	offset        *int64
+	size          *int64
 }
 
 // Filter for a specific asset id
@@ -53,6 +55,18 @@ func (r ApiGetDataRequest) DataSubtype(dataSubtype string) ApiGetDataRequest {
 // Filter the name of the asset type
 func (r ApiGetDataRequest) AssetTypeName(assetTypeName string) ApiGetDataRequest {
 	r.assetTypeName = &assetTypeName
+	return r
+}
+
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetDataRequest) Offset(offset int64) ApiGetDataRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetDataRequest) Size(size int64) ApiGetDataRequest {
+	r.size = &size
 	return r
 }
 
@@ -108,6 +122,12 @@ func (a *DataAPIService) GetDataExecute(r ApiGetDataRequest) ([]Data, *http.Resp
 	}
 	if r.assetTypeName != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "assetTypeName", r.assetTypeName, "form", "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -511,7 +531,7 @@ func (a *DataAPIService) GetDataTrendAggregatedByIdExecute(r ApiGetDataTrendAggr
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/x-ndjson"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -581,7 +601,7 @@ type ApiGetDataTrendByIdRequest struct {
 	size          *int64
 }
 
-// Type of asset data
+// Filter for a specific type of asset data
 func (r ApiGetDataTrendByIdRequest) DataSubtype(dataSubtype string) ApiGetDataTrendByIdRequest {
 	r.dataSubtype = &dataSubtype
 	return r
@@ -593,13 +613,13 @@ func (r ApiGetDataTrendByIdRequest) AttributeName(attributeName string) ApiGetDa
 	return r
 }
 
-// Lower date time (RFC3339) limit inclusive
+// Filter by lower date time (RFC3339) limit inclusive
 func (r ApiGetDataTrendByIdRequest) FromDate(fromDate string) ApiGetDataTrendByIdRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
-// Upper date time (RFC3339) limit inclusive
+// Filter by upper date time (RFC3339) limit exclusive
 func (r ApiGetDataTrendByIdRequest) ToDate(toDate string) ApiGetDataTrendByIdRequest {
 	r.toDate = &toDate
 	return r
@@ -660,23 +680,19 @@ func (a *DataAPIService) GetDataTrendByIdExecute(r ApiGetDataTrendByIdRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.dataSubtype == nil {
-		return localVarReturnValue, nil, reportError("dataSubtype is required and must be specified")
-	}
-	if r.attributeName == nil {
-		return localVarReturnValue, nil, reportError("attributeName is required and must be specified")
-	}
-	if r.fromDate == nil {
-		return localVarReturnValue, nil, reportError("fromDate is required and must be specified")
-	}
-	if r.toDate == nil {
-		return localVarReturnValue, nil, reportError("toDate is required and must be specified")
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "dataSubtype", r.dataSubtype, "form", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "attributeName", r.attributeName, "form", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+	if r.dataSubtype != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dataSubtype", r.dataSubtype, "form", "")
+	}
+	if r.attributeName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "attributeName", r.attributeName, "form", "")
+	}
+	if r.fromDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
+	}
+	if r.toDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
@@ -693,7 +709,7 @@ func (a *DataAPIService) GetDataTrendByIdExecute(r ApiGetDataTrendByIdRequest) (
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "application/x-ndjson"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -862,7 +878,7 @@ func (a *DataAPIService) GetDataTrendsExecute(r ApiGetDataTrendsRequest) ([]Data
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/x-ndjson"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

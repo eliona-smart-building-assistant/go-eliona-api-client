@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.4
+API version: 2.9.5
 Contact: hello@eliona.io
 */
 
@@ -251,11 +251,25 @@ type ApiGetCalculationRulesRequest struct {
 	ctx                context.Context
 	ApiService         *CalculationRulesAPIService
 	calculationRuleIds *[]int32
+	offset             *int64
+	size               *int64
 }
 
 // List of calculation rule ids for filtering
 func (r ApiGetCalculationRulesRequest) CalculationRuleIds(calculationRuleIds []int32) ApiGetCalculationRulesRequest {
 	r.calculationRuleIds = &calculationRuleIds
+	return r
+}
+
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetCalculationRulesRequest) Offset(offset int64) ApiGetCalculationRulesRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetCalculationRulesRequest) Size(size int64) ApiGetCalculationRulesRequest {
+	r.size = &size
 	return r
 }
 
@@ -302,6 +316,12 @@ func (a *CalculationRulesAPIService) GetCalculationRulesExecute(r ApiGetCalculat
 
 	if r.calculationRuleIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "calculationRuleIds", r.calculationRuleIds, "form", "csv")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

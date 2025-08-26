@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## GetNodes
 
-> []Node GetNodes(ctx).Execute()
+> []Node GetNodes(ctx).Offset(offset).Size(size).Execute()
 
 Information about nodes
 
@@ -103,10 +103,12 @@ import (
 )
 
 func main() {
+	offset := int64(3) // int64 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
+	size := int64(10) // int64 | Specifies the number of items per page for pagination.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NodesAPI.GetNodes(context.Background()).Execute()
+	resp, r, err := apiClient.NodesAPI.GetNodes(context.Background()).Offset(offset).Size(size).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NodesAPI.GetNodes``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -118,12 +120,17 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetNodesRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int64** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
+ **size** | **int64** | Specifies the number of items per page for pagination.  | 
 
 ### Return type
 

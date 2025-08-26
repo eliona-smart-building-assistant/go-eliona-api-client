@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.4
+API version: 2.9.5
 Contact: hello@eliona.io
 */
 
@@ -262,6 +262,8 @@ type ApiGetAlarmRulesRequest struct {
 	ApiService   *AlarmRulesAPIService
 	alarmRuleIds *[]int32
 	assetId      *int32
+	offset       *int64
+	size         *int64
 	expansions   *[]string
 }
 
@@ -274,6 +276,18 @@ func (r ApiGetAlarmRulesRequest) AlarmRuleIds(alarmRuleIds []int32) ApiGetAlarmR
 // Filter for a specific asset id
 func (r ApiGetAlarmRulesRequest) AssetId(assetId int32) ApiGetAlarmRulesRequest {
 	r.assetId = &assetId
+	return r
+}
+
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetAlarmRulesRequest) Offset(offset int64) ApiGetAlarmRulesRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetAlarmRulesRequest) Size(size int64) ApiGetAlarmRulesRequest {
+	r.size = &size
 	return r
 }
 
@@ -329,6 +343,12 @@ func (a *AlarmRulesAPIService) GetAlarmRulesExecute(r ApiGetAlarmRulesRequest) (
 	}
 	if r.assetId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "assetId", r.assetId, "form", "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")

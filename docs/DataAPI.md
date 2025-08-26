@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## GetData
 
-> []Data GetData(ctx).AssetId(assetId).ParentAssetId(parentAssetId).DataSubtype(dataSubtype).AssetTypeName(assetTypeName).Execute()
+> []Data GetData(ctx).AssetId(assetId).ParentAssetId(parentAssetId).DataSubtype(dataSubtype).AssetTypeName(assetTypeName).Offset(offset).Size(size).Execute()
 
 Gets all data
 
@@ -41,10 +41,12 @@ func main() {
 	parentAssetId := int32(4711) // int32 | Filter for a specific parent asset id (optional)
 	dataSubtype := "input" // string | Filter for a specific type of asset data (optional)
 	assetTypeName := "weather_location" // string | Filter the name of the asset type (optional)
+	offset := int64(3) // int64 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
+	size := int64(10) // int64 | Specifies the number of items per page for pagination.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DataAPI.GetData(context.Background()).AssetId(assetId).ParentAssetId(parentAssetId).DataSubtype(dataSubtype).AssetTypeName(assetTypeName).Execute()
+	resp, r, err := apiClient.DataAPI.GetData(context.Background()).AssetId(assetId).ParentAssetId(parentAssetId).DataSubtype(dataSubtype).AssetTypeName(assetTypeName).Offset(offset).Size(size).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DataAPI.GetData``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -69,6 +71,8 @@ Name | Type | Description  | Notes
  **parentAssetId** | **int32** | Filter for a specific parent asset id | 
  **dataSubtype** | **string** | Filter for a specific type of asset data | 
  **assetTypeName** | **string** | Filter the name of the asset type | 
+ **offset** | **int64** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
+ **size** | **int64** | Specifies the number of items per page for pagination.  | 
 
 ### Return type
 
@@ -245,7 +249,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/x-ndjson
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -274,10 +278,10 @@ import (
 
 func main() {
 	assetId := int32(4711) // int32 | The id of the asset
-	dataSubtype := "input" // string | Type of asset data
-	attributeName := "temperature" // string | Data attribute name
-	fromDate := "2020-01-01T09:00:00.000Z" // string | Lower date time (RFC3339) limit inclusive
-	toDate := "2021-12-31T23:00:00.000Z" // string | Upper date time (RFC3339) limit inclusive
+	dataSubtype := "input" // string | Filter for a specific type of asset data (optional)
+	attributeName := "temperature" // string | Data attribute name (optional)
+	fromDate := "2020-01-01T09:00:00.000Z" // string | Filter by lower date time (RFC3339) limit inclusive (optional)
+	toDate := "2021-12-31T23:00:00.000Z" // string | Filter by upper date time (RFC3339) limit exclusive (optional)
 	offset := int64(3) // int64 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
 	size := int64(10) // int64 | Specifies the number of items per page for pagination.  (optional)
 
@@ -309,10 +313,10 @@ Other parameters are passed through a pointer to a apiGetDataTrendByIdRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **dataSubtype** | **string** | Type of asset data | 
+ **dataSubtype** | **string** | Filter for a specific type of asset data | 
  **attributeName** | **string** | Data attribute name | 
- **fromDate** | **string** | Lower date time (RFC3339) limit inclusive | 
- **toDate** | **string** | Upper date time (RFC3339) limit inclusive | 
+ **fromDate** | **string** | Filter by lower date time (RFC3339) limit inclusive | 
+ **toDate** | **string** | Filter by upper date time (RFC3339) limit exclusive | 
  **offset** | **int64** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
  **size** | **int64** | Specifies the number of items per page for pagination.  | 
 
@@ -327,7 +331,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/x-ndjson
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -401,7 +405,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/x-ndjson
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

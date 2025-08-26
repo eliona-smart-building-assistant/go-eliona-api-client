@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## GetDashboards
 
-> []Dashboard GetDashboards(ctx).Expansions(expansions).Execute()
+> []Dashboard GetDashboards(ctx).Offset(offset).Size(size).Expansions(expansions).Execute()
 
 Information about dashboards
 
@@ -103,11 +103,13 @@ import (
 )
 
 func main() {
+	offset := int64(3) // int64 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
+	size := int64(10) // int64 | Specifies the number of items per page for pagination.  (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DashboardsAPI.GetDashboards(context.Background()).Expansions(expansions).Execute()
+	resp, r, err := apiClient.DashboardsAPI.GetDashboards(context.Background()).Offset(offset).Size(size).Expansions(expansions).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DashboardsAPI.GetDashboards``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -128,6 +130,8 @@ Other parameters are passed through a pointer to a apiGetDashboardsRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **offset** | **int64** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
+ **size** | **int64** | Specifies the number of items per page for pagination.  | 
  **expansions** | **[]string** | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;. | 
 
 ### Return type

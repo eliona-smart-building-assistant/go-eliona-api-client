@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.4
+API version: 2.9.5
 Contact: hello@eliona.io
 */
 
@@ -840,6 +840,8 @@ type ApiGetAssetsRequest struct {
 	ApiService    *AssetsAPIService
 	assetTypeName *string
 	projectId     *string
+	offset        *int64
+	size          *int64
 	expansions    *[]string
 }
 
@@ -852,6 +854,18 @@ func (r ApiGetAssetsRequest) AssetTypeName(assetTypeName string) ApiGetAssetsReq
 // Filter for a specific project
 func (r ApiGetAssetsRequest) ProjectId(projectId string) ApiGetAssetsRequest {
 	r.projectId = &projectId
+	return r
+}
+
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetAssetsRequest) Offset(offset int64) ApiGetAssetsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetAssetsRequest) Size(size int64) ApiGetAssetsRequest {
+	r.size = &size
 	return r
 }
 
@@ -907,6 +921,12 @@ func (a *AssetsAPIService) GetAssetsExecute(r ApiGetAssetsRequest) ([]Asset, *ht
 	}
 	if r.projectId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
@@ -982,9 +1002,23 @@ func (a *AssetsAPIService) GetAssetsExecute(r ApiGetAssetsRequest) ([]Asset, *ht
 type ApiGetAttributeDisplayRequest struct {
 	ctx        context.Context
 	ApiService *AssetsAPIService
+	offset     *int64
+	size       *int64
 }
 
-func (r ApiGetAttributeDisplayRequest) Execute() (*AttributeDisplay, *http.Response, error) {
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetAttributeDisplayRequest) Offset(offset int64) ApiGetAttributeDisplayRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetAttributeDisplayRequest) Size(size int64) ApiGetAttributeDisplayRequest {
+	r.size = &size
+	return r
+}
+
+func (r ApiGetAttributeDisplayRequest) Execute() ([]AttributeDisplay, *http.Response, error) {
 	return r.ApiService.GetAttributeDisplayExecute(r)
 }
 
@@ -1005,13 +1039,13 @@ func (a *AssetsAPIService) GetAttributeDisplay(ctx context.Context) ApiGetAttrib
 
 // Execute executes the request
 //
-//	@return AttributeDisplay
-func (a *AssetsAPIService) GetAttributeDisplayExecute(r ApiGetAttributeDisplayRequest) (*AttributeDisplay, *http.Response, error) {
+//	@return []AttributeDisplay
+func (a *AssetsAPIService) GetAttributeDisplayExecute(r ApiGetAttributeDisplayRequest) ([]AttributeDisplay, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *AttributeDisplay
+		localVarReturnValue []AttributeDisplay
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.GetAttributeDisplay")
@@ -1025,6 +1059,12 @@ func (a *AssetsAPIService) GetAttributeDisplayExecute(r ApiGetAttributeDisplayRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

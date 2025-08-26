@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.4
+API version: 2.9.5
 Contact: hello@eliona.io
 */
 
@@ -422,6 +422,8 @@ type ApiGetAlarmsRequest struct {
 	fromDate   *string
 	toDate     *string
 	tags       *[]string
+	offset     *int64
+	size       *int64
 	expansions *[]string
 }
 
@@ -446,6 +448,18 @@ func (r ApiGetAlarmsRequest) ToDate(toDate string) ApiGetAlarmsRequest {
 // A list of defined tags. Result must include all of these tags, not just some.
 func (r ApiGetAlarmsRequest) Tags(tags []string) ApiGetAlarmsRequest {
 	r.tags = &tags
+	return r
+}
+
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetAlarmsRequest) Offset(offset int64) ApiGetAlarmsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetAlarmsRequest) Size(size int64) ApiGetAlarmsRequest {
+	r.size = &size
 	return r
 }
 
@@ -507,6 +521,12 @@ func (a *AlarmsAPIService) GetAlarmsExecute(r ApiGetAlarmsRequest) ([]Alarm, *ht
 	}
 	if r.tags != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
@@ -586,6 +606,8 @@ type ApiGetAlarmsHistoryRequest struct {
 	fromDate   *string
 	toDate     *string
 	tags       *[]string
+	offset     *int64
+	size       *int64
 	expansions *[]string
 }
 
@@ -610,6 +632,18 @@ func (r ApiGetAlarmsHistoryRequest) ToDate(toDate string) ApiGetAlarmsHistoryReq
 // A list of defined tags. Result must include all of these tags, not just some.
 func (r ApiGetAlarmsHistoryRequest) Tags(tags []string) ApiGetAlarmsHistoryRequest {
 	r.tags = &tags
+	return r
+}
+
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetAlarmsHistoryRequest) Offset(offset int64) ApiGetAlarmsHistoryRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetAlarmsHistoryRequest) Size(size int64) ApiGetAlarmsHistoryRequest {
+	r.size = &size
 	return r
 }
 
@@ -671,6 +705,12 @@ func (a *AlarmsAPIService) GetAlarmsHistoryExecute(r ApiGetAlarmsHistoryRequest)
 	}
 	if r.tags != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
@@ -750,6 +790,8 @@ type ApiGetHighestAlarmsRequest struct {
 	fromDate   *string
 	toDate     *string
 	tags       *[]string
+	offset     *int64
+	size       *int64
 	expansions *[]string
 }
 
@@ -774,6 +816,18 @@ func (r ApiGetHighestAlarmsRequest) ToDate(toDate string) ApiGetHighestAlarmsReq
 // A list of defined tags. Result must include all of these tags, not just some.
 func (r ApiGetHighestAlarmsRequest) Tags(tags []string) ApiGetHighestAlarmsRequest {
 	r.tags = &tags
+	return r
+}
+
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetHighestAlarmsRequest) Offset(offset int64) ApiGetHighestAlarmsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetHighestAlarmsRequest) Size(size int64) ApiGetHighestAlarmsRequest {
+	r.size = &size
 	return r
 }
 
@@ -835,6 +889,12 @@ func (a *AlarmsAPIService) GetHighestAlarmsExecute(r ApiGetHighestAlarmsRequest)
 	}
 	if r.tags != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")

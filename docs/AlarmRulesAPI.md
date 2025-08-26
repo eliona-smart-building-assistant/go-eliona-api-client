@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## GetAlarmRules
 
-> []AlarmRule GetAlarmRules(ctx).AlarmRuleIds(alarmRuleIds).AssetId(assetId).Expansions(expansions).Execute()
+> []AlarmRule GetAlarmRules(ctx).AlarmRuleIds(alarmRuleIds).AssetId(assetId).Offset(offset).Size(size).Expansions(expansions).Execute()
 
 Information about alarm rules
 
@@ -176,11 +176,13 @@ import (
 func main() {
 	alarmRuleIds := []int32{int32(123)} // []int32 | List of alarm rule ids for filtering (optional)
 	assetId := int32(4711) // int32 | Filter for a specific asset id (optional)
+	offset := int64(3) // int64 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
+	size := int64(10) // int64 | Specifies the number of items per page for pagination.  (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AlarmRulesAPI.GetAlarmRules(context.Background()).AlarmRuleIds(alarmRuleIds).AssetId(assetId).Expansions(expansions).Execute()
+	resp, r, err := apiClient.AlarmRulesAPI.GetAlarmRules(context.Background()).AlarmRuleIds(alarmRuleIds).AssetId(assetId).Offset(offset).Size(size).Expansions(expansions).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AlarmRulesAPI.GetAlarmRules``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -203,6 +205,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **alarmRuleIds** | **[]int32** | List of alarm rule ids for filtering | 
  **assetId** | **int32** | Filter for a specific asset id | 
+ **offset** | **int64** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
+ **size** | **int64** | Specifies the number of items per page for pagination.  | 
  **expansions** | **[]string** | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;. | 
 
 ### Return type

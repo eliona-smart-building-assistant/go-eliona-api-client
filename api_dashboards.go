@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.4
+API version: 2.9.5
 Contact: hello@eliona.io
 */
 
@@ -154,7 +154,21 @@ func (a *DashboardsAPIService) GetDashboardByIdExecute(r ApiGetDashboardByIdRequ
 type ApiGetDashboardsRequest struct {
 	ctx        context.Context
 	ApiService *DashboardsAPIService
+	offset     *int64
+	size       *int64
 	expansions *[]string
+}
+
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetDashboardsRequest) Offset(offset int64) ApiGetDashboardsRequest {
+	r.offset = &offset
+	return r
+}
+
+// Specifies the number of items per page for pagination.
+func (r ApiGetDashboardsRequest) Size(size int64) ApiGetDashboardsRequest {
+	r.size = &size
+	return r
 }
 
 // List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;.
@@ -204,6 +218,12 @@ func (a *DashboardsAPIService) GetDashboardsExecute(r ApiGetDashboardsRequest) (
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	}
 	if r.expansions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
 	}
