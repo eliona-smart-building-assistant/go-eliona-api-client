@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.5
+API version: 2.9.6
 Contact: hello@eliona.io
 */
 
@@ -55,7 +55,7 @@ type _DataTrendAggregated DataTrendAggregated
 func NewDataTrendAggregated(assetId int32) *DataTrendAggregated {
 	this := DataTrendAggregated{}
 	this.AssetId = assetId
-	var subtype DataSubtype = SUBTYPE_INPUT
+	var subtype DataSubtype = INPUT
 	this.Subtype = &subtype
 	return &this
 }
@@ -65,7 +65,7 @@ func NewDataTrendAggregated(assetId int32) *DataTrendAggregated {
 // but it doesn't guarantee that properties required by API are set
 func NewDataTrendAggregatedWithDefaults() *DataTrendAggregated {
 	this := DataTrendAggregated{}
-	var subtype DataSubtype = SUBTYPE_INPUT
+	var subtype DataSubtype = INPUT
 	this.Subtype = &subtype
 	return &this
 }

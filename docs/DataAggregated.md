@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AggregationId** | Pointer to **int32** | ID of the aggregation | [optional] 
 **AssetId** | **int32** | ID of the corresponding asset | 
-**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to SUBTYPE_INPUT]
+**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to INPUT]
 **Attribute** | Pointer to **string** | Name of the attribute which holds the data points | [optional] 
 **Raster** | **string** | Calculation intervals. | 
 **Timestamp** | Pointer to **NullableTime** | Timestamp of this aggregated data set. The timestamp when the timeslot based on raster starts. | [optional] 

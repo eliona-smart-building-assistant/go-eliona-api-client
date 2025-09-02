@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | **int32** | ID of the corresponding asset | 
-**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to SUBTYPE_INPUT]
+**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to INPUT]
 **Attribute** | **string** | Name of the attribute of the asset type | 
 **Unit** | Pointer to **NullableString** | Physical unit of numeric data | [optional] 
 **Precision** | Pointer to **NullableInt64** | Number of decimal places | [optional] 

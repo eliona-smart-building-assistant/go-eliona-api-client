@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.5
+API version: 2.9.6
 Contact: hello@eliona.io
 */
 
@@ -1083,6 +1083,7 @@ func (r ApiPutBulkDataRequest) Data(data []Data) ApiPutBulkDataRequest {
 }
 
 // Executes the operation directly without using other services.
+// Deprecated
 func (r ApiPutBulkDataRequest) DirectMode(directMode string) ApiPutBulkDataRequest {
 	r.directMode = &directMode
 	return r
@@ -1206,6 +1207,7 @@ func (r ApiPutDataRequest) Data(data Data) ApiPutDataRequest {
 }
 
 // Executes the operation directly without using other services.
+// Deprecated
 func (r ApiPutDataRequest) DirectMode(directMode string) ApiPutDataRequest {
 	r.directMode = &directMode
 	return r

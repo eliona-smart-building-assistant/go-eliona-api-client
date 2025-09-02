@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | **int32** | ID of the corresponding asset | 
-**Subtype** | Pointer to [**DataSubtype**](DataSubtype.md) |  | [optional] [default to SUBTYPE_INPUT]
+**Subtype** | Pointer to [**DataSubtype**](DataSubtype.md) |  | [optional] [default to INPUT]
 **Attribute** | Pointer to **string** | Name of the attribute which holds the data points | [optional] 
 **Timestamp** | Pointer to **NullableTime** | Timestamp of this aggregated data set. The timestamp when the timeslot based on raster starts. | [optional] 
 **Count** | Pointer to **NullableFloat64** | Count of data points in this aggregated data set | [optional] 

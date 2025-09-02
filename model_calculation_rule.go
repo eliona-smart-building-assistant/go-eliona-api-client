@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.5
+API version: 2.9.6
 Contact: hello@eliona.io
 */
 
@@ -58,7 +58,7 @@ func NewCalculationRule(assetId int32, subtype DataSubtype, attribute string) *C
 // but it doesn't guarantee that properties required by API are set
 func NewCalculationRuleWithDefaults() *CalculationRule {
 	this := CalculationRule{}
-	var subtype DataSubtype = SUBTYPE_INPUT
+	var subtype DataSubtype = INPUT
 	this.Subtype = subtype
 	return &this
 }

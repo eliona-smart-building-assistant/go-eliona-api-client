@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DeviceId** | Pointer to **NullableInt32** | The id of the device the mapping belongs to | [optional] [readonly] 
 **Enable** | Pointer to **bool** | Is the mapping enabled or not | [optional] [default to true]
 **AssetId** | Pointer to **NullableInt32** | ID of the corresponding asset | [optional] 
-**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to SUBTYPE_INPUT]
+**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to INPUT]
 **Attribute** | **string** | Name of the attribute to map | 
 
 ## Methods

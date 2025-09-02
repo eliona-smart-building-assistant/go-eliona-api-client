@@ -3,7 +3,7 @@ Eliona REST API
 
 The Eliona REST API enables unified access to the resources and data of an Eliona environment.
 
-API version: 2.9.5
+API version: 2.9.6
 Contact: hello@eliona.io
 */
 
@@ -21,11 +21,11 @@ type DataSubtype string
 
 // List of DataSubtype
 const (
-	SUBTYPE_INPUT    DataSubtype = "input"
-	SUBTYPE_INFO     DataSubtype = "info"
-	SUBTYPE_STATUS   DataSubtype = "status"
-	SUBTYPE_OUTPUT   DataSubtype = "output"
-	SUBTYPE_PROPERTY DataSubtype = "property"
+	INPUT    DataSubtype = "input"
+	INFO     DataSubtype = "info"
+	STATUS   DataSubtype = "status"
+	OUTPUT   DataSubtype = "output"
+	PROPERTY DataSubtype = "property"
 )
 
 // All allowed values of DataSubtype enum

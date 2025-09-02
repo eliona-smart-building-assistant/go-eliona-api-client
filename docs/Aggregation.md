@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **NullableInt32** | ID of the aggregation | [optional] [readonly] 
 **AssetId** | **int32** | ID of the corresponding asset | 
-**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to SUBTYPE_INPUT]
+**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to INPUT]
 **Attribute** | Pointer to **string** | Name of the attribute which holds the data points | [optional] 
 **Mode** | **string** | Calculation mode | 
 **Raster** | Pointer to **NullableString** | calculation interval | [optional] 

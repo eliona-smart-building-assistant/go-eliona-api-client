@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssetId** | **int32** | ID of the corresponding asset | 
-**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to SUBTYPE_INPUT]
+**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to INPUT]
 **Timestamp** | Pointer to **NullableTime** | Timestamp of the latest data change | [optional] 
 **Data** | **map[string]interface{}** | Asset payload | 
 **AssetTypeName** | Pointer to **NullableString** | The name of the corresponding asset type | [optional] [readonly] 

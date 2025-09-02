@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **NullableInt32** | The id of the rule | [optional] [readonly] 
 **AssetId** | **int32** | ID of the corresponding asset | 
-**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to SUBTYPE_INPUT]
+**Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to INPUT]
 **Attribute** | **string** | Name of the attribute of the asset type to be calculated | 
 **Virtual** | Pointer to **NullableBool** | Is the calculation attribute virtual or not | [optional] 
 **Formula** | Pointer to **NullableString** | calculation rule to calculate the value for the attribute | [optional] 
