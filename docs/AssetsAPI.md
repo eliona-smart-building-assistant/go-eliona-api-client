@@ -249,7 +249,7 @@ import (
 )
 
 func main() {
-	asset := []openapiclient.Asset{*openapiclient.NewAsset("99", "zurich_swiss", "AssetType_example")} // []Asset | 
+	asset := []openapiclient.Asset{*openapiclient.NewAsset("zurich_swiss", "AssetType_example")} // []Asset | 
 	identifyBy := "resourceId" // string | Serves the field name send in the request body as a unique identifier for the asset, essential for operations like updates or deletions. Please refer to the Asset schema definition for further information about this fields.  In cases where this parameter isn't defined, all field names are used in the order defined. So if there is no 'resourceId' present in the request body, the 'deviceId' is used and when there is also no deviceId present the 'id' field (assetId) is used.  (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
@@ -319,7 +319,7 @@ import (
 )
 
 func main() {
-	asset := []openapiclient.Asset{*openapiclient.NewAsset("99", "zurich_swiss", "AssetType_example")} // []Asset | 
+	asset := []openapiclient.Asset{*openapiclient.NewAsset("zurich_swiss", "AssetType_example")} // []Asset | 
 	identifyBy := "resourceId" // string | Serves the field name send in the request body as a unique identifier for the asset, essential for operations like updates or deletions. Please refer to the Asset schema definition for further information about this fields.  In cases where this parameter isn't defined, all field names are used in the order defined. So if there is no 'resourceId' present in the request body, the 'deviceId' is used and when there is also no deviceId present the 'id' field (assetId) is used.  (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
@@ -442,7 +442,7 @@ Name | Type | Description  | Notes
 
 ## GetAssets
 
-> []Asset GetAssets(ctx).AssetTypeName(assetTypeName).ProjectId(projectId).Offset(offset).Size(size).Expansions(expansions).Execute()
+> []Asset GetAssets(ctx).AssetTypeName(assetTypeName).SiteId(siteId).ProjectId(projectId).Offset(offset).Size(size).Expansions(expansions).Execute()
 
 Information about assets
 
@@ -462,14 +462,15 @@ import (
 
 func main() {
 	assetTypeName := "weather_location" // string | Filter the name of the asset type (optional)
-	projectId := "projectId_example" // string | Filter for a specific project (optional)
+	siteId := "69133767-7de1-4134-9130-5f5403e1ee98" // string | Filter for a specific site (optional)
+	projectId := "79d7f1a0-0ec1-4211-8626-21f79491650a" // string | Filter for a specific project. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID. (optional)
 	offset := int64(3) // int64 | Specifies the starting point for pagination by indicating the number of items to skip.  (optional)
 	size := int64(10) // int64 | Specifies the number of items per page for pagination.  (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AssetsAPI.GetAssets(context.Background()).AssetTypeName(assetTypeName).ProjectId(projectId).Offset(offset).Size(size).Expansions(expansions).Execute()
+	resp, r, err := apiClient.AssetsAPI.GetAssets(context.Background()).AssetTypeName(assetTypeName).SiteId(siteId).ProjectId(projectId).Offset(offset).Size(size).Expansions(expansions).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AssetsAPI.GetAssets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -491,7 +492,8 @@ Other parameters are passed through a pointer to a apiGetAssetsRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **assetTypeName** | **string** | Filter the name of the asset type | 
- **projectId** | **string** | Filter for a specific project | 
+ **siteId** | **string** | Filter for a specific site | 
+ **projectId** | **string** | Filter for a specific project. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID. | 
  **offset** | **int64** | Specifies the starting point for pagination by indicating the number of items to skip.  | 
  **size** | **int64** | Specifies the number of items per page for pagination.  | 
  **expansions** | **[]string** | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;. | 
@@ -669,7 +671,7 @@ import (
 )
 
 func main() {
-	asset := *openapiclient.NewAsset("99", "zurich_swiss", "AssetType_example") // Asset | 
+	asset := *openapiclient.NewAsset("zurich_swiss", "AssetType_example") // Asset | 
 	identifyBy := "resourceId" // string | Serves the field name send in the request body as a unique identifier for the asset, essential for operations like updates or deletions. Please refer to the Asset schema definition for further information about this fields.  In cases where this parameter isn't defined, all field names are used in the order defined. So if there is no 'resourceId' present in the request body, the 'deviceId' is used and when there is also no deviceId present the 'id' field (assetId) is used.  (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
@@ -739,7 +741,7 @@ import (
 )
 
 func main() {
-	asset := []openapiclient.Asset{*openapiclient.NewAsset("99", "zurich_swiss", "AssetType_example")} // []Asset | 
+	asset := []openapiclient.Asset{*openapiclient.NewAsset("zurich_swiss", "AssetType_example")} // []Asset | 
 	identifyBy := "resourceId" // string | Serves the field name send in the request body as a unique identifier for the asset, essential for operations like updates or deletions. Please refer to the Asset schema definition for further information about this fields.  In cases where this parameter isn't defined, all field names are used in the order defined. So if there is no 'resourceId' present in the request body, the 'deviceId' is used and when there is also no deviceId present the 'id' field (assetId) is used.  (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
@@ -809,7 +811,7 @@ import (
 )
 
 func main() {
-	asset := *openapiclient.NewAsset("99", "zurich_swiss", "AssetType_example") // Asset | 
+	asset := *openapiclient.NewAsset("zurich_swiss", "AssetType_example") // Asset | 
 	identifyBy := "resourceId" // string | Serves the field name send in the request body as a unique identifier for the asset, essential for operations like updates or deletions. Please refer to the Asset schema definition for further information about this fields.  In cases where this parameter isn't defined, all field names are used in the order defined. So if there is no 'resourceId' present in the request body, the 'deviceId' is used and when there is also no deviceId present the 'id' field (assetId) is used.  (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
@@ -880,7 +882,7 @@ import (
 
 func main() {
 	assetId := int32(4711) // int32 | The id of the asset
-	asset := *openapiclient.NewAsset("99", "zurich_swiss", "AssetType_example") // Asset | 
+	asset := *openapiclient.NewAsset("zurich_swiss", "AssetType_example") // Asset | 
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1019,7 +1021,7 @@ import (
 )
 
 func main() {
-	asset := []openapiclient.Asset{*openapiclient.NewAsset("99", "zurich_swiss", "AssetType_example")} // []Asset | 
+	asset := []openapiclient.Asset{*openapiclient.NewAsset("zurich_swiss", "AssetType_example")} // []Asset | 
 	identifyBy := "resourceId" // string | Serves the field name send in the request body as a unique identifier for the asset, essential for operations like updates or deletions. Please refer to the Asset schema definition for further information about this fields.  In cases where this parameter isn't defined, all field names are used in the order defined. So if there is no 'resourceId' present in the request body, the 'deviceId' is used and when there is also no deviceId present the 'id' field (assetId) is used.  (optional)
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 

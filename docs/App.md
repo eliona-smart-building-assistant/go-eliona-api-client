@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Name of the app | 
-**Active** | Pointer to **NullableBool** | Is the app active or inactive | [optional] 
 **Registered** | Pointer to **NullableBool** | Is the app already registered or not | [optional] 
+**Version** | Pointer to **NullableString** | The current installed version of the app | [optional] 
+**Active** | Pointer to **NullableBool** | Is the app active or inactive | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Delivers the apps metadata to handle it in the app store | [optional] 
-**Version** | Pointer to **NullableString** | the apps version | [optional] 
 
 ## Methods
 
@@ -49,41 +49,6 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetActive
-
-`func (o *App) GetActive() bool`
-
-GetActive returns the Active field if non-nil, zero value otherwise.
-
-### GetActiveOk
-
-`func (o *App) GetActiveOk() (*bool, bool)`
-
-GetActiveOk returns a tuple with the Active field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetActive
-
-`func (o *App) SetActive(v bool)`
-
-SetActive sets Active field to given value.
-
-### HasActive
-
-`func (o *App) HasActive() bool`
-
-HasActive returns a boolean if a field has been set.
-
-### SetActiveNil
-
-`func (o *App) SetActiveNil(b bool)`
-
- SetActiveNil sets the value for Active to be an explicit nil
-
-### UnsetActive
-`func (o *App) UnsetActive()`
-
-UnsetActive ensures that no value is present for Active, not even an explicit nil
 ### GetRegistered
 
 `func (o *App) GetRegistered() bool`
@@ -119,41 +84,6 @@ HasRegistered returns a boolean if a field has been set.
 `func (o *App) UnsetRegistered()`
 
 UnsetRegistered ensures that no value is present for Registered, not even an explicit nil
-### GetMetadata
-
-`func (o *App) GetMetadata() map[string]interface{}`
-
-GetMetadata returns the Metadata field if non-nil, zero value otherwise.
-
-### GetMetadataOk
-
-`func (o *App) GetMetadataOk() (*map[string]interface{}, bool)`
-
-GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMetadata
-
-`func (o *App) SetMetadata(v map[string]interface{})`
-
-SetMetadata sets Metadata field to given value.
-
-### HasMetadata
-
-`func (o *App) HasMetadata() bool`
-
-HasMetadata returns a boolean if a field has been set.
-
-### SetMetadataNil
-
-`func (o *App) SetMetadataNil(b bool)`
-
- SetMetadataNil sets the value for Metadata to be an explicit nil
-
-### UnsetMetadata
-`func (o *App) UnsetMetadata()`
-
-UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
 ### GetVersion
 
 `func (o *App) GetVersion() string`
@@ -189,6 +119,76 @@ HasVersion returns a boolean if a field has been set.
 `func (o *App) UnsetVersion()`
 
 UnsetVersion ensures that no value is present for Version, not even an explicit nil
+### GetActive
+
+`func (o *App) GetActive() bool`
+
+GetActive returns the Active field if non-nil, zero value otherwise.
+
+### GetActiveOk
+
+`func (o *App) GetActiveOk() (*bool, bool)`
+
+GetActiveOk returns a tuple with the Active field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActive
+
+`func (o *App) SetActive(v bool)`
+
+SetActive sets Active field to given value.
+
+### HasActive
+
+`func (o *App) HasActive() bool`
+
+HasActive returns a boolean if a field has been set.
+
+### SetActiveNil
+
+`func (o *App) SetActiveNil(b bool)`
+
+ SetActiveNil sets the value for Active to be an explicit nil
+
+### UnsetActive
+`func (o *App) UnsetActive()`
+
+UnsetActive ensures that no value is present for Active, not even an explicit nil
+### GetMetadata
+
+`func (o *App) GetMetadata() map[string]interface{}`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *App) GetMetadataOk() (*map[string]interface{}, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *App) SetMetadata(v map[string]interface{})`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *App) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
+
+### SetMetadataNil
+
+`func (o *App) SetMetadataNil(b bool)`
+
+ SetMetadataNil sets the value for Metadata to be an explicit nil
+
+### UnsetMetadata
+`func (o *App) UnsetMetadata()`
+
+UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

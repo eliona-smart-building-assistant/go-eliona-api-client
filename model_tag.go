@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -27,6 +27,7 @@ type Tag struct {
 	// Id of the color
 	ColorId NullableInt32 `json:"colorId,omitempty"`
 	// Is this a tag custom or not
+	// Deprecated
 	Custom NullableBool `json:"custom,omitempty"`
 }
 
@@ -122,6 +123,7 @@ func (o *Tag) UnsetColorId() {
 }
 
 // GetCustom returns the Custom field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *Tag) GetCustom() bool {
 	if o == nil || IsNil(o.Custom.Get()) {
 		var ret bool
@@ -133,6 +135,7 @@ func (o *Tag) GetCustom() bool {
 // GetCustomOk returns a tuple with the Custom field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *Tag) GetCustomOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
@@ -150,6 +153,7 @@ func (o *Tag) HasCustom() bool {
 }
 
 // SetCustom gets a reference to the given NullableBool and assigns it to the Custom field.
+// Deprecated
 func (o *Tag) SetCustom(v bool) {
 	o.Custom.Set(&v)
 }

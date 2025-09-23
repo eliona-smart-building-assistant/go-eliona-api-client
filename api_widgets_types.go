@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -590,145 +590,6 @@ func (a *WidgetsTypesAPIService) PutWidgetTypeExecute(r ApiPutWidgetTypeRequest)
 	}
 
 	localVarPath := localBasePath + "/widget-types"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.widgetType == nil {
-		return localVarReturnValue, nil, reportError("widgetType is required and must be specified")
-	}
-
-	if r.expansions != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "expansions", r.expansions, "form", "csv")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.widgetType
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiPutWidgetTypeByNameRequest struct {
-	ctx            context.Context
-	ApiService     *WidgetsTypesAPIService
-	widgetTypeName string
-	widgetType     *WidgetType
-	expansions     *[]string
-}
-
-func (r ApiPutWidgetTypeByNameRequest) WidgetType(widgetType WidgetType) ApiPutWidgetTypeByNameRequest {
-	r.widgetType = &widgetType
-	return r
-}
-
-// List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;.
-func (r ApiPutWidgetTypeByNameRequest) Expansions(expansions []string) ApiPutWidgetTypeByNameRequest {
-	r.expansions = &expansions
-	return r
-}
-
-func (r ApiPutWidgetTypeByNameRequest) Execute() (*WidgetType, *http.Response, error) {
-	return r.ApiService.PutWidgetTypeByNameExecute(r)
-}
-
-/*
-PutWidgetTypeByName Update a widget type
-
-Update a widget type.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param widgetTypeName The name of the widget type
-	@return ApiPutWidgetTypeByNameRequest
-*/
-func (a *WidgetsTypesAPIService) PutWidgetTypeByName(ctx context.Context, widgetTypeName string) ApiPutWidgetTypeByNameRequest {
-	return ApiPutWidgetTypeByNameRequest{
-		ApiService:     a,
-		ctx:            ctx,
-		widgetTypeName: widgetTypeName,
-	}
-}
-
-// Execute executes the request
-//
-//	@return WidgetType
-func (a *WidgetsTypesAPIService) PutWidgetTypeByNameExecute(r ApiPutWidgetTypeByNameRequest) (*WidgetType, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *WidgetType
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WidgetsTypesAPIService.PutWidgetTypeByName")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/widget-types/{widget-type-name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"widget-type-name"+"}", url.PathEscape(parameterValueToString(r.widgetTypeName, "widgetTypeName")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

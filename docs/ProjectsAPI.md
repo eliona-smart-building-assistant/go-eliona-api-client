@@ -34,7 +34,7 @@ import (
 )
 
 func main() {
-	projectId := "99" // string | The id of the project
+	projectId := "69133767-7de1-4134-9130-5f5403e1ee98" // string | The id of the project.  The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID.
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -55,7 +55,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**projectId** | **string** | The id of the project | 
+**projectId** | **string** | The id of the project.  The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID. | 
 
 ### Other Parameters
 
@@ -106,7 +106,7 @@ import (
 )
 
 func main() {
-	roleName := "readonly" // string | The name of the role
+	roleName := "System user" // string | The name of the role
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

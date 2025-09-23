@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -24,12 +24,16 @@ var _ MappedNullable = &User{}
 type User struct {
 	// The internal ID of user
 	Id NullableString `json:"id,omitempty"`
+	// Address of the user
+	Email string `json:"email"`
+	// The name of the user's role
+	RoleName string `json:"roleName"`
 	// The user's firstname
 	Firstname NullableString `json:"firstname,omitempty"`
 	// The user's lastname
 	Lastname NullableString `json:"lastname,omitempty"`
-	// Address of the user
-	Email string `json:"email"`
+	// The users initial password
+	Password NullableString `json:"password,omitempty"`
 }
 
 type _User User
@@ -38,9 +42,10 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(email string) *User {
+func NewUser(email string, roleName string) *User {
 	this := User{}
 	this.Email = email
+	this.RoleName = roleName
 	return &this
 }
 
@@ -93,6 +98,54 @@ func (o *User) SetIdNil() {
 // UnsetId ensures that no value is present for Id, not even an explicit nil
 func (o *User) UnsetId() {
 	o.Id.Unset()
+}
+
+// GetEmail returns the Email field value
+func (o *User) GetEmail() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Email
+}
+
+// GetEmailOk returns a tuple with the Email field value
+// and a boolean to check if the value has been set.
+func (o *User) GetEmailOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Email, true
+}
+
+// SetEmail sets field value
+func (o *User) SetEmail(v string) {
+	o.Email = v
+}
+
+// GetRoleName returns the RoleName field value
+func (o *User) GetRoleName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RoleName
+}
+
+// GetRoleNameOk returns a tuple with the RoleName field value
+// and a boolean to check if the value has been set.
+func (o *User) GetRoleNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RoleName, true
+}
+
+// SetRoleName sets field value
+func (o *User) SetRoleName(v string) {
+	o.RoleName = v
 }
 
 // GetFirstname returns the Firstname field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -181,28 +234,47 @@ func (o *User) UnsetLastname() {
 	o.Lastname.Unset()
 }
 
-// GetEmail returns the Email field value
-func (o *User) GetEmail() string {
-	if o == nil {
+// GetPassword returns the Password field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *User) GetPassword() string {
+	if o == nil || IsNil(o.Password.Get()) {
 		var ret string
 		return ret
 	}
-
-	return o.Email
+	return *o.Password.Get()
 }
 
-// GetEmailOk returns a tuple with the Email field value
+// GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *User) GetEmailOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *User) GetPasswordOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Email, true
+	return o.Password.Get(), o.Password.IsSet()
 }
 
-// SetEmail sets field value
-func (o *User) SetEmail(v string) {
-	o.Email = v
+// HasPassword returns a boolean if a field has been set.
+func (o *User) HasPassword() bool {
+	if o != nil && o.Password.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPassword gets a reference to the given NullableString and assigns it to the Password field.
+func (o *User) SetPassword(v string) {
+	o.Password.Set(&v)
+}
+
+// SetPasswordNil sets the value for Password to be an explicit nil
+func (o *User) SetPasswordNil() {
+	o.Password.Set(nil)
+}
+
+// UnsetPassword ensures that no value is present for Password, not even an explicit nil
+func (o *User) UnsetPassword() {
+	o.Password.Unset()
 }
 
 func (o User) MarshalJSON() ([]byte, error) {
@@ -218,13 +290,17 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	if o.Id.IsSet() {
 		toSerialize["id"] = o.Id.Get()
 	}
+	toSerialize["email"] = o.Email
+	toSerialize["roleName"] = o.RoleName
 	if o.Firstname.IsSet() {
 		toSerialize["firstname"] = o.Firstname.Get()
 	}
 	if o.Lastname.IsSet() {
 		toSerialize["lastname"] = o.Lastname.Get()
 	}
-	toSerialize["email"] = o.Email
+	if o.Password.IsSet() {
+		toSerialize["password"] = o.Password.Get()
+	}
 	return toSerialize, nil
 }
 
@@ -234,6 +310,7 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"email",
+		"roleName",
 	}
 
 	allProperties := make(map[string]interface{})

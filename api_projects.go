@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -46,8 +46,10 @@ GetProjectById Information about a project
 Gets information about a project.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param projectId The id of the project
+	@param projectId The id of the project.  The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID.
 	@return ApiGetProjectByIdRequest
+
+Deprecated
 */
 func (a *ProjectsAPIService) GetProjectById(ctx context.Context, projectId string) ApiGetProjectByIdRequest {
 	return ApiGetProjectByIdRequest{
@@ -60,6 +62,8 @@ func (a *ProjectsAPIService) GetProjectById(ctx context.Context, projectId strin
 // Execute executes the request
 //
 //	@return Project
+//
+// Deprecated
 func (a *ProjectsAPIService) GetProjectByIdExecute(r ApiGetProjectByIdRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -169,6 +173,8 @@ Gets information about a specific project role.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param roleName The name of the role
 	@return ApiGetProjectRoleByNameRequest
+
+Deprecated
 */
 func (a *ProjectsAPIService) GetProjectRoleByName(ctx context.Context, roleName string) ApiGetProjectRoleByNameRequest {
 	return ApiGetProjectRoleByNameRequest{
@@ -181,6 +187,8 @@ func (a *ProjectsAPIService) GetProjectRoleByName(ctx context.Context, roleName 
 // Execute executes the request
 //
 //	@return ProjectRole
+//
+// Deprecated
 func (a *ProjectsAPIService) GetProjectRoleByNameExecute(r ApiGetProjectRoleByNameRequest) (*ProjectRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -299,6 +307,8 @@ Retrieves a list of roles that can be assigned to users within projects
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetProjectRolesRequest
+
+Deprecated
 */
 func (a *ProjectsAPIService) GetProjectRoles(ctx context.Context) ApiGetProjectRolesRequest {
 	return ApiGetProjectRolesRequest{
@@ -310,6 +320,8 @@ func (a *ProjectsAPIService) GetProjectRoles(ctx context.Context) ApiGetProjectR
 // Execute executes the request
 //
 //	@return []ProjectRole
+//
+// Deprecated
 func (a *ProjectsAPIService) GetProjectRolesExecute(r ApiGetProjectRolesRequest) ([]ProjectRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -440,6 +452,8 @@ Gets a list of projects
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetProjectsRequest
+
+Deprecated
 */
 func (a *ProjectsAPIService) GetProjects(ctx context.Context) ApiGetProjectsRequest {
 	return ApiGetProjectsRequest{
@@ -451,6 +465,8 @@ func (a *ProjectsAPIService) GetProjects(ctx context.Context) ApiGetProjectsRequ
 // Execute executes the request
 //
 //	@return []Project
+//
+// Deprecated
 func (a *ProjectsAPIService) GetProjectsExecute(r ApiGetProjectsRequest) ([]Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -576,6 +592,8 @@ Creates a project if no project exists or update it if already exists. Uses the 
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiPutProjectRequest
+
+Deprecated
 */
 func (a *ProjectsAPIService) PutProject(ctx context.Context) ApiPutProjectRequest {
 	return ApiPutProjectRequest{
@@ -587,6 +605,8 @@ func (a *ProjectsAPIService) PutProject(ctx context.Context) ApiPutProjectReques
 // Execute executes the request
 //
 //	@return Project
+//
+// Deprecated
 func (a *ProjectsAPIService) PutProjectExecute(r ApiPutProjectRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -704,6 +724,8 @@ Creates a new project role if none exists, or updates an existing one by its nam
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiPutProjectRoleRequest
+
+Deprecated
 */
 func (a *ProjectsAPIService) PutProjectRole(ctx context.Context) ApiPutProjectRoleRequest {
 	return ApiPutProjectRoleRequest{
@@ -715,6 +737,8 @@ func (a *ProjectsAPIService) PutProjectRole(ctx context.Context) ApiPutProjectRo
 // Execute executes the request
 //
 //	@return ProjectRole
+//
+// Deprecated
 func (a *ProjectsAPIService) PutProjectRoleExecute(r ApiPutProjectRoleRequest) (*ProjectRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut

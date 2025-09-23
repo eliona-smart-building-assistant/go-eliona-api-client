@@ -5,8 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **User** | **string** | E-Mail address or internal ID of the Eliona user | 
-**ProjectId** | Pointer to **NullableString** | ID of the project the notification should appear | [optional] 
+**SiteId** | Pointer to **NullableString** | ID of the site the notification should appear | [optional] 
 **Message** | [**NullableTranslation**](Translation.md) |  | 
+**ProjectId** | Pointer to **NullableString** | ID of the project the notification should appear. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. For notifications this ID is no longer necessary. | [optional] 
 
 ## Methods
 
@@ -47,6 +48,71 @@ and a boolean to check if the value has been set.
 SetUser sets User field to given value.
 
 
+### GetSiteId
+
+`func (o *Notification) GetSiteId() string`
+
+GetSiteId returns the SiteId field if non-nil, zero value otherwise.
+
+### GetSiteIdOk
+
+`func (o *Notification) GetSiteIdOk() (*string, bool)`
+
+GetSiteIdOk returns a tuple with the SiteId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiteId
+
+`func (o *Notification) SetSiteId(v string)`
+
+SetSiteId sets SiteId field to given value.
+
+### HasSiteId
+
+`func (o *Notification) HasSiteId() bool`
+
+HasSiteId returns a boolean if a field has been set.
+
+### SetSiteIdNil
+
+`func (o *Notification) SetSiteIdNil(b bool)`
+
+ SetSiteIdNil sets the value for SiteId to be an explicit nil
+
+### UnsetSiteId
+`func (o *Notification) UnsetSiteId()`
+
+UnsetSiteId ensures that no value is present for SiteId, not even an explicit nil
+### GetMessage
+
+`func (o *Notification) GetMessage() Translation`
+
+GetMessage returns the Message field if non-nil, zero value otherwise.
+
+### GetMessageOk
+
+`func (o *Notification) GetMessageOk() (*Translation, bool)`
+
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMessage
+
+`func (o *Notification) SetMessage(v Translation)`
+
+SetMessage sets Message field to given value.
+
+
+### SetMessageNil
+
+`func (o *Notification) SetMessageNil(b bool)`
+
+ SetMessageNil sets the value for Message to be an explicit nil
+
+### UnsetMessage
+`func (o *Notification) UnsetMessage()`
+
+UnsetMessage ensures that no value is present for Message, not even an explicit nil
 ### GetProjectId
 
 `func (o *Notification) GetProjectId() string`
@@ -82,36 +148,6 @@ HasProjectId returns a boolean if a field has been set.
 `func (o *Notification) UnsetProjectId()`
 
 UnsetProjectId ensures that no value is present for ProjectId, not even an explicit nil
-### GetMessage
-
-`func (o *Notification) GetMessage() Translation`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *Notification) GetMessageOk() (*Translation, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *Notification) SetMessage(v Translation)`
-
-SetMessage sets Message field to given value.
-
-
-### SetMessageNil
-
-`func (o *Notification) SetMessageNil(b bool)`
-
- SetMessageNil sets the value for Message to be an explicit nil
-
-### UnsetMessage
-`func (o *Notification) UnsetMessage()`
-
-UnsetMessage ensures that no value is present for Message, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -24,9 +24,12 @@ var _ MappedNullable = &Notification{}
 type Notification struct {
 	// E-Mail address or internal ID of the Eliona user
 	User string `json:"user"`
-	// ID of the project the notification should appear
-	ProjectId NullableString      `json:"projectId,omitempty"`
-	Message   NullableTranslation `json:"message"`
+	// ID of the site the notification should appear
+	SiteId  NullableString      `json:"siteId,omitempty"`
+	Message NullableTranslation `json:"message"`
+	// ID of the project the notification should appear. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. For notifications this ID is no longer necessary.
+	// Deprecated
+	ProjectId NullableString `json:"projectId,omitempty"`
 }
 
 type _Notification Notification
@@ -74,47 +77,47 @@ func (o *Notification) SetUser(v string) {
 	o.User = v
 }
 
-// GetProjectId returns the ProjectId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Notification) GetProjectId() string {
-	if o == nil || IsNil(o.ProjectId.Get()) {
+// GetSiteId returns the SiteId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Notification) GetSiteId() string {
+	if o == nil || IsNil(o.SiteId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ProjectId.Get()
+	return *o.SiteId.Get()
 }
 
-// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// GetSiteIdOk returns a tuple with the SiteId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Notification) GetProjectIdOk() (*string, bool) {
+func (o *Notification) GetSiteIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ProjectId.Get(), o.ProjectId.IsSet()
+	return o.SiteId.Get(), o.SiteId.IsSet()
 }
 
-// HasProjectId returns a boolean if a field has been set.
-func (o *Notification) HasProjectId() bool {
-	if o != nil && o.ProjectId.IsSet() {
+// HasSiteId returns a boolean if a field has been set.
+func (o *Notification) HasSiteId() bool {
+	if o != nil && o.SiteId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProjectId gets a reference to the given NullableString and assigns it to the ProjectId field.
-func (o *Notification) SetProjectId(v string) {
-	o.ProjectId.Set(&v)
+// SetSiteId gets a reference to the given NullableString and assigns it to the SiteId field.
+func (o *Notification) SetSiteId(v string) {
+	o.SiteId.Set(&v)
 }
 
-// SetProjectIdNil sets the value for ProjectId to be an explicit nil
-func (o *Notification) SetProjectIdNil() {
-	o.ProjectId.Set(nil)
+// SetSiteIdNil sets the value for SiteId to be an explicit nil
+func (o *Notification) SetSiteIdNil() {
+	o.SiteId.Set(nil)
 }
 
-// UnsetProjectId ensures that no value is present for ProjectId, not even an explicit nil
-func (o *Notification) UnsetProjectId() {
-	o.ProjectId.Unset()
+// UnsetSiteId ensures that no value is present for SiteId, not even an explicit nil
+func (o *Notification) UnsetSiteId() {
+	o.SiteId.Unset()
 }
 
 // GetMessage returns the Message field value
@@ -143,6 +146,52 @@ func (o *Notification) SetMessage(v Translation) {
 	o.Message.Set(&v)
 }
 
+// GetProjectId returns the ProjectId field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
+func (o *Notification) GetProjectId() string {
+	if o == nil || IsNil(o.ProjectId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProjectId.Get()
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
+func (o *Notification) GetProjectIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProjectId.Get(), o.ProjectId.IsSet()
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *Notification) HasProjectId() bool {
+	if o != nil && o.ProjectId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given NullableString and assigns it to the ProjectId field.
+// Deprecated
+func (o *Notification) SetProjectId(v string) {
+	o.ProjectId.Set(&v)
+}
+
+// SetProjectIdNil sets the value for ProjectId to be an explicit nil
+func (o *Notification) SetProjectIdNil() {
+	o.ProjectId.Set(nil)
+}
+
+// UnsetProjectId ensures that no value is present for ProjectId, not even an explicit nil
+func (o *Notification) UnsetProjectId() {
+	o.ProjectId.Unset()
+}
+
 func (o Notification) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -154,10 +203,13 @@ func (o Notification) MarshalJSON() ([]byte, error) {
 func (o Notification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["user"] = o.User
+	if o.SiteId.IsSet() {
+		toSerialize["siteId"] = o.SiteId.Get()
+	}
+	toSerialize["message"] = o.Message.Get()
 	if o.ProjectId.IsSet() {
 		toSerialize["projectId"] = o.ProjectId.Get()
 	}
-	toSerialize["message"] = o.Message.Get()
 	return toSerialize, nil
 }
 

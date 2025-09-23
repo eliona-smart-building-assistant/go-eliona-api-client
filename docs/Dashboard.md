@@ -6,17 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **NullableInt32** | The internal Id of dashboard | [optional] [readonly] 
 **Name** | **string** | The name for this dashboard | 
-**ProjectId** | **string** | ID of the project to which the dashboard belongs | 
 **UserId** | **string** | ID of the user who owns the dashboard | 
 **Sequence** | Pointer to **NullableInt32** | The sequence of the dashboard | [optional] [default to 0]
 **Widgets** | Pointer to [**[]Widget**](Widget.md) | List of widgets on this dashboard (order matches the order of widgets on the dashboard) | [optional] 
 **Public** | Pointer to **NullableBool** | Is the dashboard public and not bound to a dedicated user | [optional] [default to false]
+**ProjectId** | Pointer to **NullableString** | ID of the project to which the dashboard belongs. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID. | [optional] 
 
 ## Methods
 
 ### NewDashboard
 
-`func NewDashboard(name string, projectId string, userId string, ) *Dashboard`
+`func NewDashboard(name string, userId string, ) *Dashboard`
 
 NewDashboard instantiates a new Dashboard object
 This constructor will assign default values to properties that have it defined,
@@ -84,26 +84,6 @@ and a boolean to check if the value has been set.
 `func (o *Dashboard) SetName(v string)`
 
 SetName sets Name field to given value.
-
-
-### GetProjectId
-
-`func (o *Dashboard) GetProjectId() string`
-
-GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
-
-### GetProjectIdOk
-
-`func (o *Dashboard) GetProjectIdOk() (*string, bool)`
-
-GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProjectId
-
-`func (o *Dashboard) SetProjectId(v string)`
-
-SetProjectId sets ProjectId field to given value.
 
 
 ### GetUserId
@@ -231,6 +211,41 @@ HasPublic returns a boolean if a field has been set.
 `func (o *Dashboard) UnsetPublic()`
 
 UnsetPublic ensures that no value is present for Public, not even an explicit nil
+### GetProjectId
+
+`func (o *Dashboard) GetProjectId() string`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *Dashboard) GetProjectIdOk() (*string, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *Dashboard) SetProjectId(v string)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *Dashboard) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
+
+### SetProjectIdNil
+
+`func (o *Dashboard) SetProjectIdNil(b bool)`
+
+ SetProjectIdNil sets the value for ProjectId to be an explicit nil
+
+### UnsetProjectId
+`func (o *Dashboard) UnsetProjectId()`
+
+UnsetProjectId ensures that no value is present for ProjectId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

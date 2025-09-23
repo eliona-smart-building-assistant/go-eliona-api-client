@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -839,6 +839,7 @@ type ApiGetAssetsRequest struct {
 	ctx           context.Context
 	ApiService    *AssetsAPIService
 	assetTypeName *string
+	siteId        *string
 	projectId     *string
 	offset        *int64
 	size          *int64
@@ -851,7 +852,14 @@ func (r ApiGetAssetsRequest) AssetTypeName(assetTypeName string) ApiGetAssetsReq
 	return r
 }
 
-// Filter for a specific project
+// Filter for a specific site
+func (r ApiGetAssetsRequest) SiteId(siteId string) ApiGetAssetsRequest {
+	r.siteId = &siteId
+	return r
+}
+
+// Filter for a specific project. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID.
+// Deprecated
 func (r ApiGetAssetsRequest) ProjectId(projectId string) ApiGetAssetsRequest {
 	r.projectId = &projectId
 	return r
@@ -918,6 +926,9 @@ func (a *AssetsAPIService) GetAssetsExecute(r ApiGetAssetsRequest) ([]Asset, *ht
 
 	if r.assetTypeName != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "assetTypeName", r.assetTypeName, "form", "")
+	}
+	if r.siteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "siteId", r.siteId, "form", "")
 	}
 	if r.projectId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")

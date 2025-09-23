@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -26,8 +26,6 @@ type Dashboard struct {
 	Id NullableInt32 `json:"id,omitempty"`
 	// The name for this dashboard
 	Name string `json:"name"`
-	// ID of the project to which the dashboard belongs
-	ProjectId string `json:"projectId"`
 	// ID of the user who owns the dashboard
 	UserId string `json:"userId"`
 	// The sequence of the dashboard
@@ -37,6 +35,9 @@ type Dashboard struct {
 	Widgets []Widget `json:"widgets,omitempty"`
 	// Is the dashboard public and not bound to a dedicated user
 	Public NullableBool `json:"public,omitempty"`
+	// ID of the project to which the dashboard belongs. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID.
+	// Deprecated
+	ProjectId NullableString `json:"projectId,omitempty"`
 }
 
 type _Dashboard Dashboard
@@ -45,10 +46,9 @@ type _Dashboard Dashboard
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDashboard(name string, projectId string, userId string) *Dashboard {
+func NewDashboard(name string, userId string) *Dashboard {
 	this := Dashboard{}
 	this.Name = name
-	this.ProjectId = projectId
 	this.UserId = userId
 	var sequence int32 = 0
 	this.Sequence = *NewNullableInt32(&sequence)
@@ -134,30 +134,6 @@ func (o *Dashboard) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *Dashboard) SetName(v string) {
 	o.Name = v
-}
-
-// GetProjectId returns the ProjectId field value
-func (o *Dashboard) GetProjectId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ProjectId
-}
-
-// GetProjectIdOk returns a tuple with the ProjectId field value
-// and a boolean to check if the value has been set.
-func (o *Dashboard) GetProjectIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ProjectId, true
-}
-
-// SetProjectId sets field value
-func (o *Dashboard) SetProjectId(v string) {
-	o.ProjectId = v
 }
 
 // GetUserId returns the UserId field value
@@ -306,6 +282,52 @@ func (o *Dashboard) UnsetPublic() {
 	o.Public.Unset()
 }
 
+// GetProjectId returns the ProjectId field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
+func (o *Dashboard) GetProjectId() string {
+	if o == nil || IsNil(o.ProjectId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProjectId.Get()
+}
+
+// GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
+func (o *Dashboard) GetProjectIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProjectId.Get(), o.ProjectId.IsSet()
+}
+
+// HasProjectId returns a boolean if a field has been set.
+func (o *Dashboard) HasProjectId() bool {
+	if o != nil && o.ProjectId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectId gets a reference to the given NullableString and assigns it to the ProjectId field.
+// Deprecated
+func (o *Dashboard) SetProjectId(v string) {
+	o.ProjectId.Set(&v)
+}
+
+// SetProjectIdNil sets the value for ProjectId to be an explicit nil
+func (o *Dashboard) SetProjectIdNil() {
+	o.ProjectId.Set(nil)
+}
+
+// UnsetProjectId ensures that no value is present for ProjectId, not even an explicit nil
+func (o *Dashboard) UnsetProjectId() {
+	o.ProjectId.Unset()
+}
+
 func (o Dashboard) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -320,7 +342,6 @@ func (o Dashboard) ToMap() (map[string]interface{}, error) {
 		toSerialize["id"] = o.Id.Get()
 	}
 	toSerialize["name"] = o.Name
-	toSerialize["projectId"] = o.ProjectId
 	toSerialize["userId"] = o.UserId
 	if o.Sequence.IsSet() {
 		toSerialize["sequence"] = o.Sequence.Get()
@@ -331,6 +352,9 @@ func (o Dashboard) ToMap() (map[string]interface{}, error) {
 	if o.Public.IsSet() {
 		toSerialize["public"] = o.Public.Get()
 	}
+	if o.ProjectId.IsSet() {
+		toSerialize["projectId"] = o.ProjectId.Get()
+	}
 	return toSerialize, nil
 }
 
@@ -340,7 +364,6 @@ func (o *Dashboard) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"projectId",
 		"userId",
 	}
 

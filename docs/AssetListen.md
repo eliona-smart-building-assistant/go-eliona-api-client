@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ResourceId** | Pointer to **NullableString** | A custom identifier for the resource, which can be utilized to identify it for various operations such as updates, deletions, and other related tasks. If this identifier is not provided, the application will generate a new value for it automatically | [optional] 
 **Id** | Pointer to **NullableInt32** | The internal Id of asset | [optional] [readonly] 
 **DeviceIds** | Pointer to **[]string** | A list of unique device ids | [optional] 
-**ProjectId** | **string** | ID of the project to which the asset belongs | 
+**SiteId** | Pointer to **NullableString** | ID of the site to which the asset belongs | [optional] 
 **GlobalAssetIdentifier** | **string** | Unique identifier for the asset | 
 **Name** | Pointer to **NullableString** | Alternate text for the asset to display in frontend | [optional] 
 **AssetType** | **string** | Reference to asset type by name | 
@@ -26,13 +26,14 @@ Name | Type | Description | Notes
 **AllowedInactivity** | Pointer to **NullableString** |  | [optional] 
 **ChildrenInfo** | Pointer to [**[]Asset**](Asset.md) | List of children for this asset. | [optional] [readonly] 
 **Attachments** | Pointer to [**[]Attachment**](Attachment.md) | A list of files attached to the asset | [optional] 
+**ProjectId** | Pointer to **NullableString** | ID of the project to which the asset belongs. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID. | [optional] 
 **StatusCode** | Pointer to **int32** | The status code expecting when actually perform the operation. Some values are - 200: updated (ok)  - 201: created - 204: deleted (no content) - 304: unchanged (not modified) - 400: problem (bad request) - 404: not found - 409: duplicated (conflict) - 422: unprocessable  | [optional] 
 
 ## Methods
 
 ### NewAssetListen
 
-`func NewAssetListen(projectId string, globalAssetIdentifier string, assetType string, ) *AssetListen`
+`func NewAssetListen(globalAssetIdentifier string, assetType string, ) *AssetListen`
 
 NewAssetListen instantiates a new AssetListen object
 This constructor will assign default values to properties that have it defined,
@@ -152,26 +153,41 @@ HasDeviceIds returns a boolean if a field has been set.
 `func (o *AssetListen) UnsetDeviceIds()`
 
 UnsetDeviceIds ensures that no value is present for DeviceIds, not even an explicit nil
-### GetProjectId
+### GetSiteId
 
-`func (o *AssetListen) GetProjectId() string`
+`func (o *AssetListen) GetSiteId() string`
 
-GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+GetSiteId returns the SiteId field if non-nil, zero value otherwise.
 
-### GetProjectIdOk
+### GetSiteIdOk
 
-`func (o *AssetListen) GetProjectIdOk() (*string, bool)`
+`func (o *AssetListen) GetSiteIdOk() (*string, bool)`
 
-GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+GetSiteIdOk returns a tuple with the SiteId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetProjectId
+### SetSiteId
 
-`func (o *AssetListen) SetProjectId(v string)`
+`func (o *AssetListen) SetSiteId(v string)`
 
-SetProjectId sets ProjectId field to given value.
+SetSiteId sets SiteId field to given value.
 
+### HasSiteId
 
+`func (o *AssetListen) HasSiteId() bool`
+
+HasSiteId returns a boolean if a field has been set.
+
+### SetSiteIdNil
+
+`func (o *AssetListen) SetSiteIdNil(b bool)`
+
+ SetSiteIdNil sets the value for SiteId to be an explicit nil
+
+### UnsetSiteId
+`func (o *AssetListen) UnsetSiteId()`
+
+UnsetSiteId ensures that no value is present for SiteId, not even an explicit nil
 ### GetGlobalAssetIdentifier
 
 `func (o *AssetListen) GetGlobalAssetIdentifier() string`
@@ -772,6 +788,41 @@ HasAttachments returns a boolean if a field has been set.
 `func (o *AssetListen) UnsetAttachments()`
 
 UnsetAttachments ensures that no value is present for Attachments, not even an explicit nil
+### GetProjectId
+
+`func (o *AssetListen) GetProjectId() string`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *AssetListen) GetProjectIdOk() (*string, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *AssetListen) SetProjectId(v string)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *AssetListen) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
+
+### SetProjectIdNil
+
+`func (o *AssetListen) SetProjectIdNil(b bool)`
+
+ SetProjectIdNil sets the value for ProjectId to be an explicit nil
+
+### UnsetProjectId
+`func (o *AssetListen) UnsetProjectId()`
+
+UnsetProjectId ensures that no value is present for ProjectId, not even an explicit nil
 ### GetStatusCode
 
 `func (o *AssetListen) GetStatusCode() int32`

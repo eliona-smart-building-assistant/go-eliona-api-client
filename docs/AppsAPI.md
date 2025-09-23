@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## PatchAppByName
 
-> PatchAppByName(ctx, appName).Registered(registered).Execute()
+> PatchAppByName(ctx, appName).Registered(registered).Version(version).Execute()
 
 Update an app
 
@@ -177,10 +177,11 @@ import (
 func main() {
 	appName := "weather" // string | The name of the app
 	registered := true // bool | Marks that the app is now initialized and installed. Further request to get app information returns { \"registered\": true } (optional)
+	version := "version_example" // string | Sets the current version that is running and initialized (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.AppsAPI.PatchAppByName(context.Background(), appName).Registered(registered).Execute()
+	r, err := apiClient.AppsAPI.PatchAppByName(context.Background(), appName).Registered(registered).Version(version).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.PatchAppByName``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -205,6 +206,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **registered** | **bool** | Marks that the app is now initialized and installed. Further request to get app information returns { \&quot;registered\&quot;: true } | 
+ **version** | **string** | Sets the current version that is running and initialized | 
 
 ### Return type
 

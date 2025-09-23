@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-	nodeIdent := "4711" // string | The UUID identifier of the node
+	nodeIdent := "69133767-7de1-4134-9130-5f5403e1ee98" // string | The UUID identifier of the node
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -303,7 +303,7 @@ import (
 )
 
 func main() {
-	nodeIdent := "4711" // string | The UUID identifier of the node
+	nodeIdent := "69133767-7de1-4134-9130-5f5403e1ee98" // string | The UUID identifier of the node
 	node := *openapiclient.NewNode() // Node | 
 
 	configuration := openapiclient.NewConfiguration()

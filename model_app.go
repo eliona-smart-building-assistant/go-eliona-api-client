@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -24,14 +24,16 @@ var _ MappedNullable = &App{}
 type App struct {
 	// Name of the app
 	Name string `json:"name"`
-	// Is the app active or inactive
-	Active NullableBool `json:"active,omitempty"`
 	// Is the app already registered or not
 	Registered NullableBool `json:"registered,omitempty"`
-	// Delivers the apps metadata to handle it in the app store
-	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	// the apps version
+	// The current installed version of the app
 	Version NullableString `json:"version,omitempty"`
+	// Is the app active or inactive
+	// Deprecated
+	Active NullableBool `json:"active,omitempty"`
+	// Delivers the apps metadata to handle it in the app store
+	// Deprecated
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
 }
 
 type _App App
@@ -78,49 +80,6 @@ func (o *App) SetName(v string) {
 	o.Name = v
 }
 
-// GetActive returns the Active field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *App) GetActive() bool {
-	if o == nil || IsNil(o.Active.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.Active.Get()
-}
-
-// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *App) GetActiveOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Active.Get(), o.Active.IsSet()
-}
-
-// HasActive returns a boolean if a field has been set.
-func (o *App) HasActive() bool {
-	if o != nil && o.Active.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetActive gets a reference to the given NullableBool and assigns it to the Active field.
-func (o *App) SetActive(v bool) {
-	o.Active.Set(&v)
-}
-
-// SetActiveNil sets the value for Active to be an explicit nil
-func (o *App) SetActiveNil() {
-	o.Active.Set(nil)
-}
-
-// UnsetActive ensures that no value is present for Active, not even an explicit nil
-func (o *App) UnsetActive() {
-	o.Active.Unset()
-}
-
 // GetRegistered returns the Registered field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *App) GetRegistered() bool {
 	if o == nil || IsNil(o.Registered.Get()) {
@@ -162,39 +121,6 @@ func (o *App) SetRegisteredNil() {
 // UnsetRegistered ensures that no value is present for Registered, not even an explicit nil
 func (o *App) UnsetRegistered() {
 	o.Registered.Unset()
-}
-
-// GetMetadata returns the Metadata field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *App) GetMetadata() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Metadata
-}
-
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *App) GetMetadataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Metadata) {
-		return map[string]interface{}{}, false
-	}
-	return o.Metadata, true
-}
-
-// HasMetadata returns a boolean if a field has been set.
-func (o *App) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
-func (o *App) SetMetadata(v map[string]interface{}) {
-	o.Metadata = v
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -240,6 +166,88 @@ func (o *App) UnsetVersion() {
 	o.Version.Unset()
 }
 
+// GetActive returns the Active field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
+func (o *App) GetActive() bool {
+	if o == nil || IsNil(o.Active.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.Active.Get()
+}
+
+// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
+func (o *App) GetActiveOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Active.Get(), o.Active.IsSet()
+}
+
+// HasActive returns a boolean if a field has been set.
+func (o *App) HasActive() bool {
+	if o != nil && o.Active.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetActive gets a reference to the given NullableBool and assigns it to the Active field.
+// Deprecated
+func (o *App) SetActive(v bool) {
+	o.Active.Set(&v)
+}
+
+// SetActiveNil sets the value for Active to be an explicit nil
+func (o *App) SetActiveNil() {
+	o.Active.Set(nil)
+}
+
+// UnsetActive ensures that no value is present for Active, not even an explicit nil
+func (o *App) UnsetActive() {
+	o.Active.Unset()
+}
+
+// GetMetadata returns the Metadata field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
+func (o *App) GetMetadata() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
+func (o *App) GetMetadataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Metadata) {
+		return map[string]interface{}{}, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *App) HasMetadata() bool {
+	if o != nil && !IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
+// Deprecated
+func (o *App) SetMetadata(v map[string]interface{}) {
+	o.Metadata = v
+}
+
 func (o App) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -251,17 +259,17 @@ func (o App) MarshalJSON() ([]byte, error) {
 func (o App) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	if o.Active.IsSet() {
-		toSerialize["active"] = o.Active.Get()
-	}
 	if o.Registered.IsSet() {
 		toSerialize["registered"] = o.Registered.Get()
 	}
-	if o.Metadata != nil {
-		toSerialize["metadata"] = o.Metadata
-	}
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
+	}
+	if o.Active.IsSet() {
+		toSerialize["active"] = o.Active.Get()
+	}
+	if o.Metadata != nil {
+		toSerialize["metadata"] = o.Metadata
 	}
 	return toSerialize, nil
 }

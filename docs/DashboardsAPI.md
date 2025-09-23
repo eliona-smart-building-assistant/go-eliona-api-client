@@ -173,7 +173,7 @@ import (
 )
 
 func main() {
-	dashboard := *openapiclient.NewDashboard("Weather info", "99", "42") // Dashboard | 
+	dashboard := *openapiclient.NewDashboard("Weather info", "42") // Dashboard | 
 	expansions := []string{"Inner_example"} // []string | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
 
 	configuration := openapiclient.NewConfiguration()

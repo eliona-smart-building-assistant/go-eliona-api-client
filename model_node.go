@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -23,6 +23,7 @@ type Node struct {
 	// Unique id for the edge node
 	Id NullableString `json:"id,omitempty"`
 	// UUID to identify the edge node
+	// Deprecated
 	Ident NullableString `json:"ident,omitempty"`
 	// Password with which the node identifies itself
 	// Deprecated
@@ -104,6 +105,7 @@ func (o *Node) UnsetId() {
 }
 
 // GetIdent returns the Ident field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *Node) GetIdent() string {
 	if o == nil || IsNil(o.Ident.Get()) {
 		var ret string
@@ -115,6 +117,7 @@ func (o *Node) GetIdent() string {
 // GetIdentOk returns a tuple with the Ident field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *Node) GetIdentOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -132,6 +135,7 @@ func (o *Node) HasIdent() bool {
 }
 
 // SetIdent gets a reference to the given NullableString and assigns it to the Ident field.
+// Deprecated
 func (o *Node) SetIdent(v string) {
 	o.Ident.Set(&v)
 }

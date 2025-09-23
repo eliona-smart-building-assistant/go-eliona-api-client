@@ -1,9 +1,9 @@
 /*
 Eliona REST API
 
-The Eliona REST API enables unified access to the resources and data of an Eliona environment.
+The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.9.6
+API version: 2.10.0
 Contact: hello@eliona.io
 */
 
@@ -418,18 +418,19 @@ func (a *AlarmsAPIService) GetAlarmHistoryByIdExecute(r ApiGetAlarmHistoryByIdRe
 type ApiGetAlarmsRequest struct {
 	ctx        context.Context
 	ApiService *AlarmsAPIService
-	projectId  *string
+	siteId     *string
 	fromDate   *string
 	toDate     *string
 	tags       *[]string
+	projectId  *string
 	offset     *int64
 	size       *int64
 	expansions *[]string
 }
 
-// Filter for a specific project
-func (r ApiGetAlarmsRequest) ProjectId(projectId string) ApiGetAlarmsRequest {
-	r.projectId = &projectId
+// Filter for a specific site
+func (r ApiGetAlarmsRequest) SiteId(siteId string) ApiGetAlarmsRequest {
+	r.siteId = &siteId
 	return r
 }
 
@@ -448,6 +449,13 @@ func (r ApiGetAlarmsRequest) ToDate(toDate string) ApiGetAlarmsRequest {
 // A list of defined tags. Result must include all of these tags, not just some.
 func (r ApiGetAlarmsRequest) Tags(tags []string) ApiGetAlarmsRequest {
 	r.tags = &tags
+	return r
+}
+
+// Filter for a specific project. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID.
+// Deprecated
+func (r ApiGetAlarmsRequest) ProjectId(projectId string) ApiGetAlarmsRequest {
+	r.projectId = &projectId
 	return r
 }
 
@@ -510,8 +518,8 @@ func (a *AlarmsAPIService) GetAlarmsExecute(r ApiGetAlarmsRequest) ([]Alarm, *ht
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.projectId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
+	if r.siteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "siteId", r.siteId, "form", "")
 	}
 	if r.fromDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
@@ -521,6 +529,9 @@ func (a *AlarmsAPIService) GetAlarmsExecute(r ApiGetAlarmsRequest) ([]Alarm, *ht
 	}
 	if r.tags != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
+	if r.projectId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
 	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
@@ -602,18 +613,19 @@ func (a *AlarmsAPIService) GetAlarmsExecute(r ApiGetAlarmsRequest) ([]Alarm, *ht
 type ApiGetAlarmsHistoryRequest struct {
 	ctx        context.Context
 	ApiService *AlarmsAPIService
-	projectId  *string
+	siteId     *string
 	fromDate   *string
 	toDate     *string
 	tags       *[]string
+	projectId  *string
 	offset     *int64
 	size       *int64
 	expansions *[]string
 }
 
-// Filter for a specific project
-func (r ApiGetAlarmsHistoryRequest) ProjectId(projectId string) ApiGetAlarmsHistoryRequest {
-	r.projectId = &projectId
+// Filter for a specific site
+func (r ApiGetAlarmsHistoryRequest) SiteId(siteId string) ApiGetAlarmsHistoryRequest {
+	r.siteId = &siteId
 	return r
 }
 
@@ -632,6 +644,13 @@ func (r ApiGetAlarmsHistoryRequest) ToDate(toDate string) ApiGetAlarmsHistoryReq
 // A list of defined tags. Result must include all of these tags, not just some.
 func (r ApiGetAlarmsHistoryRequest) Tags(tags []string) ApiGetAlarmsHistoryRequest {
 	r.tags = &tags
+	return r
+}
+
+// Filter for a specific project. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID.
+// Deprecated
+func (r ApiGetAlarmsHistoryRequest) ProjectId(projectId string) ApiGetAlarmsHistoryRequest {
+	r.projectId = &projectId
 	return r
 }
 
@@ -694,8 +713,8 @@ func (a *AlarmsAPIService) GetAlarmsHistoryExecute(r ApiGetAlarmsHistoryRequest)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.projectId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
+	if r.siteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "siteId", r.siteId, "form", "")
 	}
 	if r.fromDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
@@ -705,6 +724,9 @@ func (a *AlarmsAPIService) GetAlarmsHistoryExecute(r ApiGetAlarmsHistoryRequest)
 	}
 	if r.tags != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
+	if r.projectId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
 	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
@@ -786,18 +808,19 @@ func (a *AlarmsAPIService) GetAlarmsHistoryExecute(r ApiGetAlarmsHistoryRequest)
 type ApiGetHighestAlarmsRequest struct {
 	ctx        context.Context
 	ApiService *AlarmsAPIService
-	projectId  *string
+	siteId     *string
 	fromDate   *string
 	toDate     *string
 	tags       *[]string
+	projectId  *string
 	offset     *int64
 	size       *int64
 	expansions *[]string
 }
 
-// Filter for a specific project
-func (r ApiGetHighestAlarmsRequest) ProjectId(projectId string) ApiGetHighestAlarmsRequest {
-	r.projectId = &projectId
+// Filter for a specific site
+func (r ApiGetHighestAlarmsRequest) SiteId(siteId string) ApiGetHighestAlarmsRequest {
+	r.siteId = &siteId
 	return r
 }
 
@@ -816,6 +839,13 @@ func (r ApiGetHighestAlarmsRequest) ToDate(toDate string) ApiGetHighestAlarmsReq
 // A list of defined tags. Result must include all of these tags, not just some.
 func (r ApiGetHighestAlarmsRequest) Tags(tags []string) ApiGetHighestAlarmsRequest {
 	r.tags = &tags
+	return r
+}
+
+// Filter for a specific project. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. This filter now uses siteId, which is internally represented as a UUID.
+// Deprecated
+func (r ApiGetHighestAlarmsRequest) ProjectId(projectId string) ApiGetHighestAlarmsRequest {
+	r.projectId = &projectId
 	return r
 }
 
@@ -878,8 +908,8 @@ func (a *AlarmsAPIService) GetHighestAlarmsExecute(r ApiGetHighestAlarmsRequest)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.projectId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
+	if r.siteId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "siteId", r.siteId, "form", "")
 	}
 	if r.fromDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
@@ -889,6 +919,9 @@ func (a *AlarmsAPIService) GetHighestAlarmsExecute(r ApiGetHighestAlarmsRequest)
 	}
 	if r.tags != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "csv")
+	}
+	if r.projectId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
 	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
