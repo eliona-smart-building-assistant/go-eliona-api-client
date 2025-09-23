@@ -27,7 +27,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
 )
 
 func main() {
@@ -97,7 +97,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
 )
 
 func main() {
@@ -163,7 +163,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
 )
 
 func main() {
