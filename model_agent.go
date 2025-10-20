@@ -23,16 +23,17 @@ type Agent struct {
 	// Unique id for the agent
 	Id NullableInt32 `json:"id,omitempty"`
 	// Id of the node where the agent is installed
-	NodeId NullableString `json:"nodeId,omitempty"`
-	// ID of the corresponding asset
-	AssetId NullableInt32      `json:"assetId,omitempty"`
-	Class   NullableAgentClass `json:"class,omitempty"`
+	NodeId NullableString     `json:"nodeId,omitempty"`
+	Class  NullableAgentClass `json:"class,omitempty"`
 	// Descriptive text for the agent
 	Description NullableString `json:"description,omitempty"`
 	// Is the agent enabled or not
 	Enable *bool `json:"enable,omitempty"`
 	// Individual configuration depending on agent class
 	Config map[string]interface{} `json:"config,omitempty"`
+	// ID of the corresponding asset
+	// Deprecated
+	AssetId NullableInt32 `json:"assetId,omitempty"`
 }
 
 // NewAgent instantiates a new Agent object
@@ -140,49 +141,6 @@ func (o *Agent) SetNodeIdNil() {
 // UnsetNodeId ensures that no value is present for NodeId, not even an explicit nil
 func (o *Agent) UnsetNodeId() {
 	o.NodeId.Unset()
-}
-
-// GetAssetId returns the AssetId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Agent) GetAssetId() int32 {
-	if o == nil || IsNil(o.AssetId.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.AssetId.Get()
-}
-
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Agent) GetAssetIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AssetId.Get(), o.AssetId.IsSet()
-}
-
-// HasAssetId returns a boolean if a field has been set.
-func (o *Agent) HasAssetId() bool {
-	if o != nil && o.AssetId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given NullableInt32 and assigns it to the AssetId field.
-func (o *Agent) SetAssetId(v int32) {
-	o.AssetId.Set(&v)
-}
-
-// SetAssetIdNil sets the value for AssetId to be an explicit nil
-func (o *Agent) SetAssetIdNil() {
-	o.AssetId.Set(nil)
-}
-
-// UnsetAssetId ensures that no value is present for AssetId, not even an explicit nil
-func (o *Agent) UnsetAssetId() {
-	o.AssetId.Unset()
 }
 
 // GetClass returns the Class field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -336,6 +294,52 @@ func (o *Agent) SetConfig(v map[string]interface{}) {
 	o.Config = v
 }
 
+// GetAssetId returns the AssetId field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
+func (o *Agent) GetAssetId() int32 {
+	if o == nil || IsNil(o.AssetId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.AssetId.Get()
+}
+
+// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
+func (o *Agent) GetAssetIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AssetId.Get(), o.AssetId.IsSet()
+}
+
+// HasAssetId returns a boolean if a field has been set.
+func (o *Agent) HasAssetId() bool {
+	if o != nil && o.AssetId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetId gets a reference to the given NullableInt32 and assigns it to the AssetId field.
+// Deprecated
+func (o *Agent) SetAssetId(v int32) {
+	o.AssetId.Set(&v)
+}
+
+// SetAssetIdNil sets the value for AssetId to be an explicit nil
+func (o *Agent) SetAssetIdNil() {
+	o.AssetId.Set(nil)
+}
+
+// UnsetAssetId ensures that no value is present for AssetId, not even an explicit nil
+func (o *Agent) UnsetAssetId() {
+	o.AssetId.Unset()
+}
+
 func (o Agent) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -352,9 +356,6 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	if o.NodeId.IsSet() {
 		toSerialize["nodeId"] = o.NodeId.Get()
 	}
-	if o.AssetId.IsSet() {
-		toSerialize["assetId"] = o.AssetId.Get()
-	}
 	if o.Class.IsSet() {
 		toSerialize["class"] = o.Class.Get()
 	}
@@ -366,6 +367,9 @@ func (o Agent) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Config != nil {
 		toSerialize["config"] = o.Config
+	}
+	if o.AssetId.IsSet() {
+		toSerialize["assetId"] = o.AssetId.Get()
 	}
 	return toSerialize, nil
 }

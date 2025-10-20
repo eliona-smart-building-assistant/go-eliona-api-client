@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **NullableInt32** | Unique id for the agent | [optional] [readonly] 
 **NodeId** | Pointer to **NullableString** | Id of the node where the agent is installed | [optional] 
-**AssetId** | Pointer to **NullableInt32** | ID of the corresponding asset | [optional] 
 **Class** | Pointer to [**NullableAgentClass**](AgentClass.md) |  | [optional] 
 **Description** | Pointer to **NullableString** | Descriptive text for the agent | [optional] 
 **Enable** | Pointer to **bool** | Is the agent enabled or not | [optional] [default to false]
 **Config** | Pointer to **map[string]interface{}** | Individual configuration depending on agent class | [optional] 
+**AssetId** | Pointer to **NullableInt32** | ID of the corresponding asset | [optional] 
 
 ## Methods
 
@@ -101,41 +101,6 @@ HasNodeId returns a boolean if a field has been set.
 `func (o *Agent) UnsetNodeId()`
 
 UnsetNodeId ensures that no value is present for NodeId, not even an explicit nil
-### GetAssetId
-
-`func (o *Agent) GetAssetId() int32`
-
-GetAssetId returns the AssetId field if non-nil, zero value otherwise.
-
-### GetAssetIdOk
-
-`func (o *Agent) GetAssetIdOk() (*int32, bool)`
-
-GetAssetIdOk returns a tuple with the AssetId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAssetId
-
-`func (o *Agent) SetAssetId(v int32)`
-
-SetAssetId sets AssetId field to given value.
-
-### HasAssetId
-
-`func (o *Agent) HasAssetId() bool`
-
-HasAssetId returns a boolean if a field has been set.
-
-### SetAssetIdNil
-
-`func (o *Agent) SetAssetIdNil(b bool)`
-
- SetAssetIdNil sets the value for AssetId to be an explicit nil
-
-### UnsetAssetId
-`func (o *Agent) UnsetAssetId()`
-
-UnsetAssetId ensures that no value is present for AssetId, not even an explicit nil
 ### GetClass
 
 `func (o *Agent) GetClass() AgentClass`
@@ -266,6 +231,41 @@ HasConfig returns a boolean if a field has been set.
 `func (o *Agent) UnsetConfig()`
 
 UnsetConfig ensures that no value is present for Config, not even an explicit nil
+### GetAssetId
+
+`func (o *Agent) GetAssetId() int32`
+
+GetAssetId returns the AssetId field if non-nil, zero value otherwise.
+
+### GetAssetIdOk
+
+`func (o *Agent) GetAssetIdOk() (*int32, bool)`
+
+GetAssetIdOk returns a tuple with the AssetId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssetId
+
+`func (o *Agent) SetAssetId(v int32)`
+
+SetAssetId sets AssetId field to given value.
+
+### HasAssetId
+
+`func (o *Agent) HasAssetId() bool`
+
+HasAssetId returns a boolean if a field has been set.
+
+### SetAssetIdNil
+
+`func (o *Agent) SetAssetIdNil(b bool)`
+
+ SetAssetIdNil sets the value for AssetId to be an explicit nil
+
+### UnsetAssetId
+`func (o *Agent) UnsetAssetId()`
+
+UnsetAssetId ensures that no value is present for AssetId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

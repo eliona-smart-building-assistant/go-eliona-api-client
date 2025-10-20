@@ -62,6 +62,7 @@ type AssetTypeAttribute struct {
 	// list of mapping between value and custom text
 	Map []map[string]interface{} `json:"map,omitempty"`
 	// source path for attribute value
+	// Deprecated
 	SourcePath []string `json:"sourcePath,omitempty"`
 	// is attribute digital
 	IsDigital NullableBool `json:"isDigital,omitempty"`
@@ -901,6 +902,7 @@ func (o *AssetTypeAttribute) SetMap(v []map[string]interface{}) {
 }
 
 // GetSourcePath returns the SourcePath field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *AssetTypeAttribute) GetSourcePath() []string {
 	if o == nil {
 		var ret []string
@@ -912,6 +914,7 @@ func (o *AssetTypeAttribute) GetSourcePath() []string {
 // GetSourcePathOk returns a tuple with the SourcePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *AssetTypeAttribute) GetSourcePathOk() ([]string, bool) {
 	if o == nil || IsNil(o.SourcePath) {
 		return nil, false
@@ -929,6 +932,7 @@ func (o *AssetTypeAttribute) HasSourcePath() bool {
 }
 
 // SetSourcePath gets a reference to the given []string and assigns it to the SourcePath field.
+// Deprecated
 func (o *AssetTypeAttribute) SetSourcePath(v []string) {
 	o.SourcePath = v
 }
