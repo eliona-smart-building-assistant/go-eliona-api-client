@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**GetDataTrends**](DataAPI.md#GetDataTrends) | **Get** /data-trends | Get trend of historical data
 [**ListenData**](DataAPI.md#ListenData) | **Get** /data-listener | WebSocket connection for asset data changes
 [**PutBulkData**](DataAPI.md#PutBulkData) | **Put** /data-bulk | Create or update multiple asset data
+[**PutBulkDataTrend**](DataAPI.md#PutBulkDataTrend) | **Put** /data-trend-bulk | Create or update multiple historical data
 [**PutData**](DataAPI.md#PutData) | **Put** /data | Create or update asset data
 [**PutDataTrend**](DataAPI.md#PutDataTrend) | **Put** /data-trend | Create or update historical data
 
@@ -33,7 +34,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
 )
 
 func main() {
@@ -109,7 +110,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
 )
 
 func main() {
@@ -187,7 +188,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
 )
 
 func main() {
@@ -273,7 +274,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
 )
 
 func main() {
@@ -355,7 +356,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
 )
 
 func main() {
@@ -429,7 +430,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
 )
 
 func main() {
@@ -497,7 +498,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
 )
 
 func main() {
@@ -546,6 +547,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PutBulkDataTrend
+
+> Data PutBulkDataTrend(ctx).Data(data).Execute()
+
+Create or update multiple historical data
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
+)
+
+func main() {
+	data := []openapiclient.Data{*openapiclient.NewData(int32(4711), openapiclient.DataSubtype("input"), map[string]interface{}({"temperature":42}))} // []Data | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DataAPI.PutBulkDataTrend(context.Background()).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DataAPI.PutBulkDataTrend``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PutBulkDataTrend`: Data
+	fmt.Fprintf(os.Stdout, "Response from `DataAPI.PutBulkDataTrend`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPutBulkDataTrendRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**[]Data**](Data.md) |  | 
+
+### Return type
+
+[**Data**](Data.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PutData
 
 > PutData(ctx).Data(data).DirectMode(directMode).Execute()
@@ -563,7 +630,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
 )
 
 func main() {
@@ -629,7 +696,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v2"
 )
 
 func main() {

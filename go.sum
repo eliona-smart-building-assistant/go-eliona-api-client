@@ -1,5 +1,7 @@
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/eliona-smart-building-assistant/go-eliona-api-client/v3 v3.0.2 h1:iZmTMHvP8FnwqoV/yqGgGfCc6LjV5YhXTLemqxgr5sc=
+github.com/eliona-smart-building-assistant/go-eliona-api-client/v3 v3.0.2/go.mod h1:cuQPKOz8FtkCmgvrT2dgyO6cdzSU8cavM0XjFPTTU6Q=
 github.com/eliona-smart-building-assistant/go-utils v1.1.10 h1:wCzsbsDK+ynNA34JtxFo7z4M6rZOdUb+Z0o6Zpn+l5s=
 github.com/eliona-smart-building-assistant/go-utils v1.1.10/go.mod h1:fPXlXum9X8EO9Bl5pcTQEpXrD0RZZL8AijwfW/Y5twU=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
