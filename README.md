@@ -116,10 +116,10 @@ Class | Method | HTTP request | Description
 *AlarmsAPI* | [**ListenAlarm**](docs/AlarmsAPI.md#listenalarm) | **Get** /alarm-listener | WebSocket connection for alarm changes
 *AlarmsAPI* | [**PatchAlarmById**](docs/AlarmsAPI.md#patchalarmbyid) | **Patch** /alarms/{alarm-rule-id} | Update alarm
 *AlarmsAPI* | [**PutAlarm**](docs/AlarmsAPI.md#putalarm) | **Put** /alarms | Create or update an alarm
-*AppsAPI* | [**GetAppByName**](docs/AppsAPI.md#getappbyname) | **Get** /apps/{app-name} | Information about an app
-*AppsAPI* | [**GetPatchByName**](docs/AppsAPI.md#getpatchbyname) | **Get** /apps/{app-name}/patches/{patch-name} | Information about a patch for an app
-*AppsAPI* | [**PatchAppByName**](docs/AppsAPI.md#patchappbyname) | **Patch** /apps/{app-name} | Update an app
-*AppsAPI* | [**PatchPatchByName**](docs/AppsAPI.md#patchpatchbyname) | **Patch** /apps/{app-name}/patches/{patch-name} | Updates a patch
+*AppsAPI* | [**GetAppByName**](docs/AppsAPI.md#getappbyname) | **Get** /apps/{app-name} | Deprecated: No longer necessary due to new internal app initialization.
+*AppsAPI* | [**GetPatchByName**](docs/AppsAPI.md#getpatchbyname) | **Get** /apps/{app-name}/patches/{patch-name} | Deprecated: No longer necessary due to new internal app initialization.
+*AppsAPI* | [**PatchAppByName**](docs/AppsAPI.md#patchappbyname) | **Patch** /apps/{app-name} | Deprecated: No longer necessary due to new internal app initialization.
+*AppsAPI* | [**PatchPatchByName**](docs/AppsAPI.md#patchpatchbyname) | **Patch** /apps/{app-name}/patches/{patch-name} | Deprecated: No longer necessary due to new internal app initialization.
 *AssetTypesAPI* | [**DeleteAssetTypeByName**](docs/AssetTypesAPI.md#deleteassettypebyname) | **Delete** /asset-types/{asset-type-name} | Delete an asset type
 *AssetTypesAPI* | [**DeleteAssetTypeCategoryByName**](docs/AssetTypesAPI.md#deleteassettypecategorybyname) | **Delete** /asset-type-categories/{asset-type-category-name} | Delete an asset type category
 *AssetTypesAPI* | [**GetAssetTypeByName**](docs/AssetTypesAPI.md#getassettypebyname) | **Get** /asset-types/{asset-type-name} | Information about an asset type
@@ -170,11 +170,11 @@ Class | Method | HTTP request | Description
 *ElionaAPI* | [**DeleteTenant**](docs/ElionaAPI.md#deletetenant) | **Delete** /tenants | Delete the current tenant
 *ElionaAPI* | [**GetApiKeys**](docs/ElionaAPI.md#getapikeys) | **Get** /api-keys | Information about API keys
 *ElionaAPI* | [**PutTenant**](docs/ElionaAPI.md#puttenant) | **Put** /tenants | Setup or update a tenant
-*NodesAPI* | [**GetNodeByIdent**](docs/NodesAPI.md#getnodebyident) | **Get** /nodes/{node-ident} | Information about a node
+*NodesAPI* | [**GetNodeById**](docs/NodesAPI.md#getnodebyid) | **Get** /nodes/{node-id} | Information about a node
 *NodesAPI* | [**GetNodes**](docs/NodesAPI.md#getnodes) | **Get** /nodes | Information about nodes
 *NodesAPI* | [**PostNode**](docs/NodesAPI.md#postnode) | **Post** /nodes | Create a node
 *NodesAPI* | [**PutNode**](docs/NodesAPI.md#putnode) | **Put** /nodes | Create or update a node
-*NodesAPI* | [**PutNodeByIdent**](docs/NodesAPI.md#putnodebyident) | **Put** /nodes/{node-ident} | Update a node
+*NodesAPI* | [**PutNodeById**](docs/NodesAPI.md#putnodebyid) | **Put** /nodes/{node-id} | Update a node
 *ProjectsAPI* | [**GetProjectById**](docs/ProjectsAPI.md#getprojectbyid) | **Get** /projects/{project-id} | Information about a project
 *ProjectsAPI* | [**GetProjectRoleByName**](docs/ProjectsAPI.md#getprojectrolebyname) | **Get** /project-roles/{role-name} | Information about a project role
 *ProjectsAPI* | [**GetProjectRoles**](docs/ProjectsAPI.md#getprojectroles) | **Get** /project-roles | Information about project roles

@@ -34,13 +34,15 @@ func (r ApiGetAppByNameRequest) Execute() (*App, *http.Response, error) {
 }
 
 /*
-GetAppByName Information about an app
+GetAppByName Deprecated: No longer necessary due to new internal app initialization.
 
 Gets information about an app.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param appName The name of the app
 	@return ApiGetAppByNameRequest
+
+Deprecated
 */
 func (a *AppsAPIService) GetAppByName(ctx context.Context, appName string) ApiGetAppByNameRequest {
 	return ApiGetAppByNameRequest{
@@ -53,6 +55,8 @@ func (a *AppsAPIService) GetAppByName(ctx context.Context, appName string) ApiGe
 // Execute executes the request
 //
 //	@return App
+//
+// Deprecated
 func (a *AppsAPIService) GetAppByNameExecute(r ApiGetAppByNameRequest) (*App, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -153,7 +157,7 @@ func (r ApiGetPatchByNameRequest) Execute() (*Patch, *http.Response, error) {
 }
 
 /*
-GetPatchByName Information about a patch for an app
+GetPatchByName Deprecated: No longer necessary due to new internal app initialization.
 
 Gets information about a patch for an app.
 
@@ -161,6 +165,8 @@ Gets information about a patch for an app.
 	@param appName The name of the app
 	@param patchName The name of the patch
 	@return ApiGetPatchByNameRequest
+
+Deprecated
 */
 func (a *AppsAPIService) GetPatchByName(ctx context.Context, appName string, patchName string) ApiGetPatchByNameRequest {
 	return ApiGetPatchByNameRequest{
@@ -174,6 +180,8 @@ func (a *AppsAPIService) GetPatchByName(ctx context.Context, appName string, pat
 // Execute executes the request
 //
 //	@return Patch
+//
+// Deprecated
 func (a *AppsAPIService) GetPatchByNameExecute(r ApiGetPatchByNameRequest) (*Patch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -288,13 +296,15 @@ func (r ApiPatchAppByNameRequest) Execute() (*http.Response, error) {
 }
 
 /*
-PatchAppByName Update an app
+PatchAppByName Deprecated: No longer necessary due to new internal app initialization.
 
 Update properties of an app.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param appName The name of the app
 	@return ApiPatchAppByNameRequest
+
+Deprecated
 */
 func (a *AppsAPIService) PatchAppByName(ctx context.Context, appName string) ApiPatchAppByNameRequest {
 	return ApiPatchAppByNameRequest{
@@ -305,6 +315,7 @@ func (a *AppsAPIService) PatchAppByName(ctx context.Context, appName string) Api
 }
 
 // Execute executes the request
+// Deprecated
 func (a *AppsAPIService) PatchAppByNameExecute(r ApiPatchAppByNameRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodPatch
@@ -408,7 +419,7 @@ func (r ApiPatchPatchByNameRequest) Execute() (*http.Response, error) {
 }
 
 /*
-PatchPatchByName Updates a patch
+PatchPatchByName Deprecated: No longer necessary due to new internal app initialization.
 
 Updates properties of a patch for an app.
 
@@ -416,6 +427,8 @@ Updates properties of a patch for an app.
 	@param appName The name of the app
 	@param patchName The name of the patch
 	@return ApiPatchPatchByNameRequest
+
+Deprecated
 */
 func (a *AppsAPIService) PatchPatchByName(ctx context.Context, appName string, patchName string) ApiPatchPatchByNameRequest {
 	return ApiPatchPatchByNameRequest{
@@ -427,6 +440,7 @@ func (a *AppsAPIService) PatchPatchByName(ctx context.Context, appName string, p
 }
 
 // Execute executes the request
+// Deprecated
 func (a *AppsAPIService) PatchPatchByNameExecute(r ApiPatchPatchByNameRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodPatch

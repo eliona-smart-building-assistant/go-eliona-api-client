@@ -23,37 +23,37 @@ import (
 // NodesAPIService NodesAPI service
 type NodesAPIService service
 
-type ApiGetNodeByIdentRequest struct {
+type ApiGetNodeByIdRequest struct {
 	ctx        context.Context
 	ApiService *NodesAPIService
-	nodeIdent  string
+	nodeId     string
 }
 
-func (r ApiGetNodeByIdentRequest) Execute() (*Node, *http.Response, error) {
-	return r.ApiService.GetNodeByIdentExecute(r)
+func (r ApiGetNodeByIdRequest) Execute() (*Node, *http.Response, error) {
+	return r.ApiService.GetNodeByIdExecute(r)
 }
 
 /*
-GetNodeByIdent Information about a node
+GetNodeById Information about a node
 
 Gets information about a node.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param nodeIdent The UUID identifier of the node
-	@return ApiGetNodeByIdentRequest
+	@param nodeId The UUID identifier of the node
+	@return ApiGetNodeByIdRequest
 */
-func (a *NodesAPIService) GetNodeByIdent(ctx context.Context, nodeIdent string) ApiGetNodeByIdentRequest {
-	return ApiGetNodeByIdentRequest{
+func (a *NodesAPIService) GetNodeById(ctx context.Context, nodeId string) ApiGetNodeByIdRequest {
+	return ApiGetNodeByIdRequest{
 		ApiService: a,
 		ctx:        ctx,
-		nodeIdent:  nodeIdent,
+		nodeId:     nodeId,
 	}
 }
 
 // Execute executes the request
 //
 //	@return Node
-func (a *NodesAPIService) GetNodeByIdentExecute(r ApiGetNodeByIdentRequest) (*Node, *http.Response, error) {
+func (a *NodesAPIService) GetNodeByIdExecute(r ApiGetNodeByIdRequest) (*Node, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -61,13 +61,13 @@ func (a *NodesAPIService) GetNodeByIdentExecute(r ApiGetNodeByIdentRequest) (*No
 		localVarReturnValue *Node
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodesAPIService.GetNodeByIdent")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodesAPIService.GetNodeById")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/nodes/{node-ident}"
-	localVarPath = strings.Replace(localVarPath, "{"+"node-ident"+"}", url.PathEscape(parameterValueToString(r.nodeIdent, "nodeIdent")), -1)
+	localVarPath := localBasePath + "/nodes/{node-id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"node-id"+"}", url.PathEscape(parameterValueToString(r.nodeId, "nodeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -418,12 +418,10 @@ func (r ApiPutNodeRequest) Execute() (*Node, *http.Response, error) {
 /*
 PutNode Create or update a node
 
-Deprecated - Use POST /nodes to create PUT /nodes/{node-ident} to update.
+Create or update a node
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiPutNodeRequest
-
-Deprecated
 */
 func (a *NodesAPIService) PutNode(ctx context.Context) ApiPutNodeRequest {
 	return ApiPutNodeRequest{
@@ -435,8 +433,6 @@ func (a *NodesAPIService) PutNode(ctx context.Context) ApiPutNodeRequest {
 // Execute executes the request
 //
 //	@return Node
-//
-// Deprecated
 func (a *NodesAPIService) PutNodeExecute(r ApiPutNodeRequest) (*Node, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -529,43 +525,43 @@ func (a *NodesAPIService) PutNodeExecute(r ApiPutNodeRequest) (*Node, *http.Resp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPutNodeByIdentRequest struct {
+type ApiPutNodeByIdRequest struct {
 	ctx        context.Context
 	ApiService *NodesAPIService
-	nodeIdent  string
+	nodeId     string
 	node       *Node
 }
 
-func (r ApiPutNodeByIdentRequest) Node(node Node) ApiPutNodeByIdentRequest {
+func (r ApiPutNodeByIdRequest) Node(node Node) ApiPutNodeByIdRequest {
 	r.node = &node
 	return r
 }
 
-func (r ApiPutNodeByIdentRequest) Execute() (*Node, *http.Response, error) {
-	return r.ApiService.PutNodeByIdentExecute(r)
+func (r ApiPutNodeByIdRequest) Execute() (*Node, *http.Response, error) {
+	return r.ApiService.PutNodeByIdExecute(r)
 }
 
 /*
-PutNodeByIdent Update a node
+PutNodeById Update a node
 
 Update a node.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param nodeIdent The UUID identifier of the node
-	@return ApiPutNodeByIdentRequest
+	@param nodeId The UUID identifier of the node
+	@return ApiPutNodeByIdRequest
 */
-func (a *NodesAPIService) PutNodeByIdent(ctx context.Context, nodeIdent string) ApiPutNodeByIdentRequest {
-	return ApiPutNodeByIdentRequest{
+func (a *NodesAPIService) PutNodeById(ctx context.Context, nodeId string) ApiPutNodeByIdRequest {
+	return ApiPutNodeByIdRequest{
 		ApiService: a,
 		ctx:        ctx,
-		nodeIdent:  nodeIdent,
+		nodeId:     nodeId,
 	}
 }
 
 // Execute executes the request
 //
 //	@return Node
-func (a *NodesAPIService) PutNodeByIdentExecute(r ApiPutNodeByIdentRequest) (*Node, *http.Response, error) {
+func (a *NodesAPIService) PutNodeByIdExecute(r ApiPutNodeByIdRequest) (*Node, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -573,13 +569,13 @@ func (a *NodesAPIService) PutNodeByIdentExecute(r ApiPutNodeByIdentRequest) (*No
 		localVarReturnValue *Node
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodesAPIService.PutNodeByIdent")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodesAPIService.PutNodeById")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/nodes/{node-ident}"
-	localVarPath = strings.Replace(localVarPath, "{"+"node-ident"+"}", url.PathEscape(parameterValueToString(r.nodeIdent, "nodeIdent")), -1)
+	localVarPath := localBasePath + "/nodes/{node-id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"node-id"+"}", url.PathEscape(parameterValueToString(r.nodeId, "nodeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

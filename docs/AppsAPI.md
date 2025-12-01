@@ -4,10 +4,10 @@ All URIs are relative to *https://name.eliona.io/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAppByName**](AppsAPI.md#GetAppByName) | **Get** /apps/{app-name} | Information about an app
-[**GetPatchByName**](AppsAPI.md#GetPatchByName) | **Get** /apps/{app-name}/patches/{patch-name} | Information about a patch for an app
-[**PatchAppByName**](AppsAPI.md#PatchAppByName) | **Patch** /apps/{app-name} | Update an app
-[**PatchPatchByName**](AppsAPI.md#PatchPatchByName) | **Patch** /apps/{app-name}/patches/{patch-name} | Updates a patch
+[**GetAppByName**](AppsAPI.md#GetAppByName) | **Get** /apps/{app-name} | Deprecated: No longer necessary due to new internal app initialization.
+[**GetPatchByName**](AppsAPI.md#GetPatchByName) | **Get** /apps/{app-name}/patches/{patch-name} | Deprecated: No longer necessary due to new internal app initialization.
+[**PatchAppByName**](AppsAPI.md#PatchAppByName) | **Patch** /apps/{app-name} | Deprecated: No longer necessary due to new internal app initialization.
+[**PatchPatchByName**](AppsAPI.md#PatchPatchByName) | **Patch** /apps/{app-name}/patches/{patch-name} | Deprecated: No longer necessary due to new internal app initialization.
 
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 > App GetAppByName(ctx, appName).Execute()
 
-Information about an app
+Deprecated: No longer necessary due to new internal app initialization.
 
 
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 > Patch GetPatchByName(ctx, appName, patchName).Execute()
 
-Information about a patch for an app
+Deprecated: No longer necessary due to new internal app initialization.
 
 
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 > PatchAppByName(ctx, appName).Registered(registered).Version(version).Execute()
 
-Update an app
+Deprecated: No longer necessary due to new internal app initialization.
 
 
 
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 > PatchPatchByName(ctx, appName, patchName).Apply(apply).Execute()
 
-Updates a patch
+Deprecated: No longer necessary due to new internal app initialization.
 
 
 

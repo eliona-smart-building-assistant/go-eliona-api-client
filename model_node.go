@@ -22,14 +22,8 @@ var _ MappedNullable = &Node{}
 type Node struct {
 	// Unique id for the edge node
 	Id NullableString `json:"id,omitempty"`
-	// UUID to identify the edge node
-	// Deprecated
-	Ident NullableString `json:"ident,omitempty"`
-	// Password with which the node identifies itself
-	// Deprecated
-	Password NullableString `json:"password,omitempty"`
-	// ID of the corresponding asset
-	AssetId NullableInt32 `json:"assetId,omitempty"`
+	// ID of the site to which the node belongs
+	SiteId NullableString `json:"siteId,omitempty"`
 	// Vendor name
 	Vendor NullableString `json:"vendor,omitempty"`
 	// Model name
@@ -38,6 +32,15 @@ type Node struct {
 	Description NullableString `json:"description,omitempty"`
 	// Is the node enabled or not
 	Enable *bool `json:"enable,omitempty"`
+	// ID of the corresponding asset
+	// Deprecated
+	AssetId NullableInt32 `json:"assetId,omitempty"`
+	// UUID to identify the edge node
+	// Deprecated
+	Ident NullableString `json:"ident,omitempty"`
+	// Password with which the node identifies itself
+	// Deprecated
+	Password NullableString `json:"password,omitempty"`
 }
 
 // NewNode instantiates a new Node object
@@ -104,139 +107,47 @@ func (o *Node) UnsetId() {
 	o.Id.Unset()
 }
 
-// GetIdent returns the Ident field value if set, zero value otherwise (both if not set or set to explicit null).
-// Deprecated
-func (o *Node) GetIdent() string {
-	if o == nil || IsNil(o.Ident.Get()) {
+// GetSiteId returns the SiteId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Node) GetSiteId() string {
+	if o == nil || IsNil(o.SiteId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Ident.Get()
+	return *o.SiteId.Get()
 }
 
-// GetIdentOk returns a tuple with the Ident field value if set, nil otherwise
+// GetSiteIdOk returns a tuple with the SiteId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-// Deprecated
-func (o *Node) GetIdentOk() (*string, bool) {
+func (o *Node) GetSiteIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Ident.Get(), o.Ident.IsSet()
+	return o.SiteId.Get(), o.SiteId.IsSet()
 }
 
-// HasIdent returns a boolean if a field has been set.
-func (o *Node) HasIdent() bool {
-	if o != nil && o.Ident.IsSet() {
+// HasSiteId returns a boolean if a field has been set.
+func (o *Node) HasSiteId() bool {
+	if o != nil && o.SiteId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdent gets a reference to the given NullableString and assigns it to the Ident field.
-// Deprecated
-func (o *Node) SetIdent(v string) {
-	o.Ident.Set(&v)
+// SetSiteId gets a reference to the given NullableString and assigns it to the SiteId field.
+func (o *Node) SetSiteId(v string) {
+	o.SiteId.Set(&v)
 }
 
-// SetIdentNil sets the value for Ident to be an explicit nil
-func (o *Node) SetIdentNil() {
-	o.Ident.Set(nil)
+// SetSiteIdNil sets the value for SiteId to be an explicit nil
+func (o *Node) SetSiteIdNil() {
+	o.SiteId.Set(nil)
 }
 
-// UnsetIdent ensures that no value is present for Ident, not even an explicit nil
-func (o *Node) UnsetIdent() {
-	o.Ident.Unset()
-}
-
-// GetPassword returns the Password field value if set, zero value otherwise (both if not set or set to explicit null).
-// Deprecated
-func (o *Node) GetPassword() string {
-	if o == nil || IsNil(o.Password.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Password.Get()
-}
-
-// GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-// Deprecated
-func (o *Node) GetPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Password.Get(), o.Password.IsSet()
-}
-
-// HasPassword returns a boolean if a field has been set.
-func (o *Node) HasPassword() bool {
-	if o != nil && o.Password.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPassword gets a reference to the given NullableString and assigns it to the Password field.
-// Deprecated
-func (o *Node) SetPassword(v string) {
-	o.Password.Set(&v)
-}
-
-// SetPasswordNil sets the value for Password to be an explicit nil
-func (o *Node) SetPasswordNil() {
-	o.Password.Set(nil)
-}
-
-// UnsetPassword ensures that no value is present for Password, not even an explicit nil
-func (o *Node) UnsetPassword() {
-	o.Password.Unset()
-}
-
-// GetAssetId returns the AssetId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Node) GetAssetId() int32 {
-	if o == nil || IsNil(o.AssetId.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.AssetId.Get()
-}
-
-// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Node) GetAssetIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AssetId.Get(), o.AssetId.IsSet()
-}
-
-// HasAssetId returns a boolean if a field has been set.
-func (o *Node) HasAssetId() bool {
-	if o != nil && o.AssetId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAssetId gets a reference to the given NullableInt32 and assigns it to the AssetId field.
-func (o *Node) SetAssetId(v int32) {
-	o.AssetId.Set(&v)
-}
-
-// SetAssetIdNil sets the value for AssetId to be an explicit nil
-func (o *Node) SetAssetIdNil() {
-	o.AssetId.Set(nil)
-}
-
-// UnsetAssetId ensures that no value is present for AssetId, not even an explicit nil
-func (o *Node) UnsetAssetId() {
-	o.AssetId.Unset()
+// UnsetSiteId ensures that no value is present for SiteId, not even an explicit nil
+func (o *Node) UnsetSiteId() {
+	o.SiteId.Unset()
 }
 
 // GetVendor returns the Vendor field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -400,6 +311,144 @@ func (o *Node) SetEnable(v bool) {
 	o.Enable = &v
 }
 
+// GetAssetId returns the AssetId field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
+func (o *Node) GetAssetId() int32 {
+	if o == nil || IsNil(o.AssetId.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.AssetId.Get()
+}
+
+// GetAssetIdOk returns a tuple with the AssetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
+func (o *Node) GetAssetIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AssetId.Get(), o.AssetId.IsSet()
+}
+
+// HasAssetId returns a boolean if a field has been set.
+func (o *Node) HasAssetId() bool {
+	if o != nil && o.AssetId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAssetId gets a reference to the given NullableInt32 and assigns it to the AssetId field.
+// Deprecated
+func (o *Node) SetAssetId(v int32) {
+	o.AssetId.Set(&v)
+}
+
+// SetAssetIdNil sets the value for AssetId to be an explicit nil
+func (o *Node) SetAssetIdNil() {
+	o.AssetId.Set(nil)
+}
+
+// UnsetAssetId ensures that no value is present for AssetId, not even an explicit nil
+func (o *Node) UnsetAssetId() {
+	o.AssetId.Unset()
+}
+
+// GetIdent returns the Ident field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
+func (o *Node) GetIdent() string {
+	if o == nil || IsNil(o.Ident.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Ident.Get()
+}
+
+// GetIdentOk returns a tuple with the Ident field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
+func (o *Node) GetIdentOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Ident.Get(), o.Ident.IsSet()
+}
+
+// HasIdent returns a boolean if a field has been set.
+func (o *Node) HasIdent() bool {
+	if o != nil && o.Ident.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIdent gets a reference to the given NullableString and assigns it to the Ident field.
+// Deprecated
+func (o *Node) SetIdent(v string) {
+	o.Ident.Set(&v)
+}
+
+// SetIdentNil sets the value for Ident to be an explicit nil
+func (o *Node) SetIdentNil() {
+	o.Ident.Set(nil)
+}
+
+// UnsetIdent ensures that no value is present for Ident, not even an explicit nil
+func (o *Node) UnsetIdent() {
+	o.Ident.Unset()
+}
+
+// GetPassword returns the Password field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
+func (o *Node) GetPassword() string {
+	if o == nil || IsNil(o.Password.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Password.Get()
+}
+
+// GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
+func (o *Node) GetPasswordOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Password.Get(), o.Password.IsSet()
+}
+
+// HasPassword returns a boolean if a field has been set.
+func (o *Node) HasPassword() bool {
+	if o != nil && o.Password.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPassword gets a reference to the given NullableString and assigns it to the Password field.
+// Deprecated
+func (o *Node) SetPassword(v string) {
+	o.Password.Set(&v)
+}
+
+// SetPasswordNil sets the value for Password to be an explicit nil
+func (o *Node) SetPasswordNil() {
+	o.Password.Set(nil)
+}
+
+// UnsetPassword ensures that no value is present for Password, not even an explicit nil
+func (o *Node) UnsetPassword() {
+	o.Password.Unset()
+}
+
 func (o Node) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -413,14 +462,8 @@ func (o Node) ToMap() (map[string]interface{}, error) {
 	if o.Id.IsSet() {
 		toSerialize["id"] = o.Id.Get()
 	}
-	if o.Ident.IsSet() {
-		toSerialize["ident"] = o.Ident.Get()
-	}
-	if o.Password.IsSet() {
-		toSerialize["password"] = o.Password.Get()
-	}
-	if o.AssetId.IsSet() {
-		toSerialize["assetId"] = o.AssetId.Get()
+	if o.SiteId.IsSet() {
+		toSerialize["siteId"] = o.SiteId.Get()
 	}
 	if o.Vendor.IsSet() {
 		toSerialize["vendor"] = o.Vendor.Get()
@@ -433,6 +476,15 @@ func (o Node) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Enable) {
 		toSerialize["enable"] = o.Enable
+	}
+	if o.AssetId.IsSet() {
+		toSerialize["assetId"] = o.AssetId.Get()
+	}
+	if o.Ident.IsSet() {
+		toSerialize["ident"] = o.Ident.Get()
+	}
+	if o.Password.IsSet() {
+		toSerialize["password"] = o.Password.Get()
 	}
 	return toSerialize, nil
 }

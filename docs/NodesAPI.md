@@ -4,17 +4,17 @@ All URIs are relative to *https://name.eliona.io/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetNodeByIdent**](NodesAPI.md#GetNodeByIdent) | **Get** /nodes/{node-ident} | Information about a node
+[**GetNodeById**](NodesAPI.md#GetNodeById) | **Get** /nodes/{node-id} | Information about a node
 [**GetNodes**](NodesAPI.md#GetNodes) | **Get** /nodes | Information about nodes
 [**PostNode**](NodesAPI.md#PostNode) | **Post** /nodes | Create a node
 [**PutNode**](NodesAPI.md#PutNode) | **Put** /nodes | Create or update a node
-[**PutNodeByIdent**](NodesAPI.md#PutNodeByIdent) | **Put** /nodes/{node-ident} | Update a node
+[**PutNodeById**](NodesAPI.md#PutNodeById) | **Put** /nodes/{node-id} | Update a node
 
 
 
-## GetNodeByIdent
+## GetNodeById
 
-> Node GetNodeByIdent(ctx, nodeIdent).Execute()
+> Node GetNodeById(ctx, nodeId).Execute()
 
 Information about a node
 
@@ -33,17 +33,17 @@ import (
 )
 
 func main() {
-	nodeIdent := "69133767-7de1-4134-9130-5f5403e1ee98" // string | The UUID identifier of the node
+	nodeId := "69133767-7de1-4134-9130-5f5403e1ee98" // string | The UUID identifier of the node
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NodesAPI.GetNodeByIdent(context.Background(), nodeIdent).Execute()
+	resp, r, err := apiClient.NodesAPI.GetNodeById(context.Background(), nodeId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NodesAPI.GetNodeByIdent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `NodesAPI.GetNodeById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNodeByIdent`: Node
-	fmt.Fprintf(os.Stdout, "Response from `NodesAPI.GetNodeByIdent`: %v\n", resp)
+	// response from `GetNodeById`: Node
+	fmt.Fprintf(os.Stdout, "Response from `NodesAPI.GetNodeById`: %v\n", resp)
 }
 ```
 
@@ -53,11 +53,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**nodeIdent** | **string** | The UUID identifier of the node | 
+**nodeId** | **string** | The UUID identifier of the node | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetNodeByIdentRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetNodeByIdRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -282,9 +282,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PutNodeByIdent
+## PutNodeById
 
-> Node PutNodeByIdent(ctx, nodeIdent).Node(node).Execute()
+> Node PutNodeById(ctx, nodeId).Node(node).Execute()
 
 Update a node
 
@@ -303,18 +303,18 @@ import (
 )
 
 func main() {
-	nodeIdent := "69133767-7de1-4134-9130-5f5403e1ee98" // string | The UUID identifier of the node
+	nodeId := "69133767-7de1-4134-9130-5f5403e1ee98" // string | The UUID identifier of the node
 	node := *openapiclient.NewNode() // Node | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.NodesAPI.PutNodeByIdent(context.Background(), nodeIdent).Node(node).Execute()
+	resp, r, err := apiClient.NodesAPI.PutNodeById(context.Background(), nodeId).Node(node).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `NodesAPI.PutNodeByIdent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `NodesAPI.PutNodeById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PutNodeByIdent`: Node
-	fmt.Fprintf(os.Stdout, "Response from `NodesAPI.PutNodeByIdent`: %v\n", resp)
+	// response from `PutNodeById`: Node
+	fmt.Fprintf(os.Stdout, "Response from `NodesAPI.PutNodeById`: %v\n", resp)
 }
 ```
 
@@ -324,11 +324,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**nodeIdent** | **string** | The UUID identifier of the node | 
+**nodeId** | **string** | The UUID identifier of the node | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPutNodeByIdentRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPutNodeByIdRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
