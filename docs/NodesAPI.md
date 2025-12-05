@@ -4,12 +4,81 @@ All URIs are relative to *https://name.eliona.io/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**DeleteNodeById**](NodesAPI.md#DeleteNodeById) | **Delete** /nodes/{node-id} | Delete a node
 [**GetNodeById**](NodesAPI.md#GetNodeById) | **Get** /nodes/{node-id} | Information about a node
 [**GetNodes**](NodesAPI.md#GetNodes) | **Get** /nodes | Information about nodes
 [**PostNode**](NodesAPI.md#PostNode) | **Post** /nodes | Create a node
 [**PutNode**](NodesAPI.md#PutNode) | **Put** /nodes | Create or update a node
 [**PutNodeById**](NodesAPI.md#PutNodeById) | **Put** /nodes/{node-id} | Update a node
 
+
+
+## DeleteNodeById
+
+> DeleteNodeById(ctx, nodeId).Execute()
+
+Delete a node
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/eliona-smart-building-assistant/go-eliona-api-client/v3"
+)
+
+func main() {
+	nodeId := "69133767-7de1-4134-9130-5f5403e1ee98" // string | The UUID identifier of the node
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.NodesAPI.DeleteNodeById(context.Background(), nodeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NodesAPI.DeleteNodeById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**nodeId** | **string** | The UUID identifier of the node | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteNodeByIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetNodeById

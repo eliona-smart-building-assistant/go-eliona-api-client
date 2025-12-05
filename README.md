@@ -170,6 +170,7 @@ Class | Method | HTTP request | Description
 *ElionaAPI* | [**DeleteTenant**](docs/ElionaAPI.md#deletetenant) | **Delete** /tenants | Delete the current tenant
 *ElionaAPI* | [**GetApiKeys**](docs/ElionaAPI.md#getapikeys) | **Get** /api-keys | Information about API keys
 *ElionaAPI* | [**PutTenant**](docs/ElionaAPI.md#puttenant) | **Put** /tenants | Setup or update a tenant
+*NodesAPI* | [**DeleteNodeById**](docs/NodesAPI.md#deletenodebyid) | **Delete** /nodes/{node-id} | Delete a node
 *NodesAPI* | [**GetNodeById**](docs/NodesAPI.md#getnodebyid) | **Get** /nodes/{node-id} | Information about a node
 *NodesAPI* | [**GetNodes**](docs/NodesAPI.md#getnodes) | **Get** /nodes | Information about nodes
 *NodesAPI* | [**PostNode**](docs/NodesAPI.md#postnode) | **Post** /nodes | Create a node
