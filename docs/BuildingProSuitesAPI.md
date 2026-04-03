@@ -1,20 +1,20 @@
-# \TagsAPI
+# \BuildingProSuitesAPI
 
 All URIs are relative to *https://name.eliona.io/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetTagByName**](TagsAPI.md#GetTagByName) | **Get** /tags/{tag-name} | Information about a tag
-[**GetTags**](TagsAPI.md#GetTags) | **Get** /tags | Information about tags
-[**PutTag**](TagsAPI.md#PutTag) | **Put** /tags | Create or update a tag
+[**DeleteTenant**](BuildingProSuitesAPI.md#DeleteTenant) | **Delete** /tenants | Delete the current tenant
+[**GetApiKeys**](BuildingProSuitesAPI.md#GetApiKeys) | **Get** /api-keys | Information about API keys
+[**PutTenant**](BuildingProSuitesAPI.md#PutTenant) | **Put** /tenants | Setup or update a tenant
 
 
 
-## GetTagByName
+## DeleteTenant
 
-> Tag GetTagByName(ctx, tagName).Execute()
+> DeleteTenant(ctx).Execute()
 
-Information about a tag
+Delete the current tenant
 
 
 
@@ -31,40 +31,29 @@ import (
 )
 
 func main() {
-	tagName := "Support" // string | The name of the tag
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TagsAPI.GetTagByName(context.Background(), tagName).Execute()
+	r, err := apiClient.BuildingProSuitesAPI.DeleteTenant(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.GetTagByName``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `BuildingProSuitesAPI.DeleteTenant``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTagByName`: Tag
-	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.GetTagByName`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**tagName** | **string** | The name of the tag | 
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetTagByNameRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
+Other parameters are passed through a pointer to a apiDeleteTenantRequest struct via the builder pattern
 
 
 ### Return type
 
-[**Tag**](Tag.md)
+ (empty response body)
 
 ### Authorization
 
@@ -73,18 +62,18 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## GetTags
+## GetApiKeys
 
-> []Tag GetTags(ctx).Offset(offset).Size(size).Execute()
+> []ApiKey GetApiKeys(ctx).Offset(offset).Size(size).Execute()
 
-Information about tags
+Information about API keys
 
 
 
@@ -106,13 +95,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TagsAPI.GetTags(context.Background()).Offset(offset).Size(size).Execute()
+	resp, r, err := apiClient.BuildingProSuitesAPI.GetApiKeys(context.Background()).Offset(offset).Size(size).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.GetTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `BuildingProSuitesAPI.GetApiKeys``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetTags`: []Tag
-	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.GetTags`: %v\n", resp)
+	// response from `GetApiKeys`: []ApiKey
+	fmt.Fprintf(os.Stdout, "Response from `BuildingProSuitesAPI.GetApiKeys`: %v\n", resp)
 }
 ```
 
@@ -122,7 +111,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetTagsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetApiKeysRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -132,7 +121,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Tag**](Tag.md)
+[**[]ApiKey**](ApiKey.md)
 
 ### Authorization
 
@@ -148,11 +137,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PutTag
+## PutTenant
 
-> Tag PutTag(ctx).Tag(tag).Execute()
+> Tenant PutTenant(ctx).SignatureInput(signatureInput).ContentDigest(contentDigest).Tenant(tenant).Execute()
 
-Create or update a tag
+Setup or update a tenant
 
 
 
@@ -169,17 +158,19 @@ import (
 )
 
 func main() {
-	tag := *openapiclient.NewTag("Support") // Tag | 
+	signatureInput := "sig1=("@method" "@path" "content-digest");created=1618884473;keyid="client-key-1"" // string | Defines what was signed (e.g. method, path, `content-digest`) and metadata like creation time and key ID; must match the `Signature`.
+	contentDigest := "sha-256=:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=:" // string | Hash of the request body; server recomputes and compares. Must be included in `Signature-Input`.
+	tenant := *openapiclient.NewTenant("Main") // Tenant | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TagsAPI.PutTag(context.Background()).Tag(tag).Execute()
+	resp, r, err := apiClient.BuildingProSuitesAPI.PutTenant(context.Background()).SignatureInput(signatureInput).ContentDigest(contentDigest).Tenant(tenant).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.PutTag``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `BuildingProSuitesAPI.PutTenant``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PutTag`: Tag
-	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.PutTag`: %v\n", resp)
+	// response from `PutTenant`: Tenant
+	fmt.Fprintf(os.Stdout, "Response from `BuildingProSuitesAPI.PutTenant`: %v\n", resp)
 }
 ```
 
@@ -189,20 +180,22 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPutTagRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPutTenantRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tag** | [**Tag**](Tag.md) |  | 
+ **signatureInput** | **string** | Defines what was signed (e.g. method, path, &#x60;content-digest&#x60;) and metadata like creation time and key ID; must match the &#x60;Signature&#x60;. | 
+ **contentDigest** | **string** | Hash of the request body; server recomputes and compares. Must be included in &#x60;Signature-Input&#x60;. | 
+ **tenant** | [**Tenant**](Tenant.md) |  | 
 
 ### Return type
 
-[**Tag**](Tag.md)
+[**Tenant**](Tenant.md)
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+[HttpSig](../README.md#HttpSig)
 
 ### HTTP request headers
 

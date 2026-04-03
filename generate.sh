@@ -12,5 +12,5 @@ docker run --rm \
     --additional-properties="packageName=api"
 
 go mod tidy
-find . -type f -name '*.go' -exec goimports -w {} +
+find . -type f -name '*.go' -exec ~/go/bin/goimports -w {} +
 go vet ./...

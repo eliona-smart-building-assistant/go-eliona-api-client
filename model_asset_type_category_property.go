@@ -1,9 +1,9 @@
 /*
-Eliona REST API
+BuildingPro Suites REST API
 
-The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
+The BuildingPro Suites REST API provides unified access to the resources and data within a BuildingPro Suites environment.<br> <br> This documentation corresponds to the next BuildingPro Suites release. For previous BuildingPro Suites releases, please refer to the matching REST API version below:<br><br>   BuildingPro Suites v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> BuildingPro Suites v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> BuildingPro Suites v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> BuildingPro Suites v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.10.1
+API version: 2.10.4
 Contact: hello@eliona.io
 */
 
@@ -25,8 +25,8 @@ type AssetTypeCategoryProperty struct {
 	// The unique name for this asset type category property
 	Name        string              `json:"name"`
 	Translation NullableTranslation `json:"translation,omitempty"`
-	// Unit of data
-	Unit NullableString `json:"unit,omitempty"`
+	// ID of measurement unit
+	UnitId NullableInt32 `json:"unitId,omitempty"`
 }
 
 type _AssetTypeCategoryProperty AssetTypeCategoryProperty
@@ -116,47 +116,47 @@ func (o *AssetTypeCategoryProperty) UnsetTranslation() {
 	o.Translation.Unset()
 }
 
-// GetUnit returns the Unit field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AssetTypeCategoryProperty) GetUnit() string {
-	if o == nil || IsNil(o.Unit.Get()) {
-		var ret string
+// GetUnitId returns the UnitId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AssetTypeCategoryProperty) GetUnitId() int32 {
+	if o == nil || IsNil(o.UnitId.Get()) {
+		var ret int32
 		return ret
 	}
-	return *o.Unit.Get()
+	return *o.UnitId.Get()
 }
 
-// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// GetUnitIdOk returns a tuple with the UnitId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AssetTypeCategoryProperty) GetUnitOk() (*string, bool) {
+func (o *AssetTypeCategoryProperty) GetUnitIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Unit.Get(), o.Unit.IsSet()
+	return o.UnitId.Get(), o.UnitId.IsSet()
 }
 
-// HasUnit returns a boolean if a field has been set.
-func (o *AssetTypeCategoryProperty) HasUnit() bool {
-	if o != nil && o.Unit.IsSet() {
+// HasUnitId returns a boolean if a field has been set.
+func (o *AssetTypeCategoryProperty) HasUnitId() bool {
+	if o != nil && o.UnitId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUnit gets a reference to the given NullableString and assigns it to the Unit field.
-func (o *AssetTypeCategoryProperty) SetUnit(v string) {
-	o.Unit.Set(&v)
+// SetUnitId gets a reference to the given NullableInt32 and assigns it to the UnitId field.
+func (o *AssetTypeCategoryProperty) SetUnitId(v int32) {
+	o.UnitId.Set(&v)
 }
 
-// SetUnitNil sets the value for Unit to be an explicit nil
-func (o *AssetTypeCategoryProperty) SetUnitNil() {
-	o.Unit.Set(nil)
+// SetUnitIdNil sets the value for UnitId to be an explicit nil
+func (o *AssetTypeCategoryProperty) SetUnitIdNil() {
+	o.UnitId.Set(nil)
 }
 
-// UnsetUnit ensures that no value is present for Unit, not even an explicit nil
-func (o *AssetTypeCategoryProperty) UnsetUnit() {
-	o.Unit.Unset()
+// UnsetUnitId ensures that no value is present for UnitId, not even an explicit nil
+func (o *AssetTypeCategoryProperty) UnsetUnitId() {
+	o.UnitId.Unset()
 }
 
 func (o AssetTypeCategoryProperty) MarshalJSON() ([]byte, error) {
@@ -173,8 +173,8 @@ func (o AssetTypeCategoryProperty) ToMap() (map[string]interface{}, error) {
 	if o.Translation.IsSet() {
 		toSerialize["translation"] = o.Translation.Get()
 	}
-	if o.Unit.IsSet() {
-		toSerialize["unit"] = o.Unit.Get()
+	if o.UnitId.IsSet() {
+		toSerialize["unitId"] = o.UnitId.Get()
 	}
 	return toSerialize, nil
 }

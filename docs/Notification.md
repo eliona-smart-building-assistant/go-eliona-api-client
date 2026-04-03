@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**User** | **string** | E-Mail address or internal ID of the Eliona user | 
+**User** | **string** | E-Mail address or internal ID of the BuildingPro Suites user | 
 **SiteId** | Pointer to **NullableString** | ID of the site the notification should appear | [optional] 
 **Message** | [**NullableTranslation**](Translation.md) |  | 
 **ProjectId** | Pointer to **NullableString** | ID of the project the notification should appear. The project ID is deprecated due to the removal of projects and is broadly replaced by sites. For notifications this ID is no longer necessary. | [optional] 

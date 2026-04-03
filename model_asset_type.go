@@ -1,9 +1,9 @@
 /*
-Eliona REST API
+BuildingPro Suites REST API
 
-The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
+The BuildingPro Suites REST API provides unified access to the resources and data within a BuildingPro Suites environment.<br> <br> This documentation corresponds to the next BuildingPro Suites release. For previous BuildingPro Suites releases, please refer to the matching REST API version below:<br><br>   BuildingPro Suites v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> BuildingPro Suites v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> BuildingPro Suites v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> BuildingPro Suites v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.10.1
+API version: 2.10.4
 Contact: hello@eliona.io
 */
 
@@ -39,8 +39,6 @@ type AssetType struct {
 	// Asset types payload function
 	PayloadFunction   NullableString `json:"payloadFunction,omitempty"`
 	AllowedInactivity NullableString `json:"allowedInactivity,omitempty"`
-	// Function as a tracker
-	IsTracker NullableBool `json:"isTracker,omitempty"`
 	// List of named attributes
 	Attributes []AssetTypeAttribute `json:"attributes,omitempty"`
 }
@@ -56,8 +54,6 @@ func NewAssetType(name string) *AssetType {
 	this.Name = name
 	var custom bool = true
 	this.Custom = &custom
-	var isTracker bool = false
-	this.IsTracker = *NewNullableBool(&isTracker)
 	return &this
 }
 
@@ -68,8 +64,6 @@ func NewAssetTypeWithDefaults() *AssetType {
 	this := AssetType{}
 	var custom bool = true
 	this.Custom = &custom
-	var isTracker bool = false
-	this.IsTracker = *NewNullableBool(&isTracker)
 	return &this
 }
 
@@ -433,49 +427,6 @@ func (o *AssetType) UnsetAllowedInactivity() {
 	o.AllowedInactivity.Unset()
 }
 
-// GetIsTracker returns the IsTracker field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AssetType) GetIsTracker() bool {
-	if o == nil || IsNil(o.IsTracker.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.IsTracker.Get()
-}
-
-// GetIsTrackerOk returns a tuple with the IsTracker field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AssetType) GetIsTrackerOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.IsTracker.Get(), o.IsTracker.IsSet()
-}
-
-// HasIsTracker returns a boolean if a field has been set.
-func (o *AssetType) HasIsTracker() bool {
-	if o != nil && o.IsTracker.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetIsTracker gets a reference to the given NullableBool and assigns it to the IsTracker field.
-func (o *AssetType) SetIsTracker(v bool) {
-	o.IsTracker.Set(&v)
-}
-
-// SetIsTrackerNil sets the value for IsTracker to be an explicit nil
-func (o *AssetType) SetIsTrackerNil() {
-	o.IsTracker.Set(nil)
-}
-
-// UnsetIsTracker ensures that no value is present for IsTracker, not even an explicit nil
-func (o *AssetType) UnsetIsTracker() {
-	o.IsTracker.Unset()
-}
-
 // GetAttributes returns the Attributes field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetType) GetAttributes() []AssetTypeAttribute {
 	if o == nil {
@@ -543,9 +494,6 @@ func (o AssetType) ToMap() (map[string]interface{}, error) {
 	}
 	if o.AllowedInactivity.IsSet() {
 		toSerialize["allowedInactivity"] = o.AllowedInactivity.Get()
-	}
-	if o.IsTracker.IsSet() {
-		toSerialize["isTracker"] = o.IsTracker.Get()
 	}
 	if o.Attributes != nil {
 		toSerialize["attributes"] = o.Attributes

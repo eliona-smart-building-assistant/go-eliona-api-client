@@ -17,57 +17,49 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
-// CommunicationAPIService CommunicationAPI service
-type CommunicationAPIService service
+// BuildingProSuitesAPIService BuildingProSuitesAPI service
+type BuildingProSuitesAPIService service
 
-type ApiGetMessageReceiptByIdRequest struct {
+type ApiDeleteTenantRequest struct {
 	ctx        context.Context
-	ApiService *CommunicationAPIService
-	messageId  string
+	ApiService *BuildingProSuitesAPIService
 }
 
-func (r ApiGetMessageReceiptByIdRequest) Execute() (*MessageReceipt, *http.Response, error) {
-	return r.ApiService.GetMessageReceiptByIdExecute(r)
+func (r ApiDeleteTenantRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteTenantExecute(r)
 }
 
 /*
-GetMessageReceiptById Information about a message
+DeleteTenant Delete the current tenant
 
-Gets receipt information for a message.
+Deletes the current tenant
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param messageId The id of the message
-	@return ApiGetMessageReceiptByIdRequest
+	@return ApiDeleteTenantRequest
 */
-func (a *CommunicationAPIService) GetMessageReceiptById(ctx context.Context, messageId string) ApiGetMessageReceiptByIdRequest {
-	return ApiGetMessageReceiptByIdRequest{
+func (a *BuildingProSuitesAPIService) DeleteTenant(ctx context.Context) ApiDeleteTenantRequest {
+	return ApiDeleteTenantRequest{
 		ApiService: a,
 		ctx:        ctx,
-		messageId:  messageId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return MessageReceipt
-func (a *CommunicationAPIService) GetMessageReceiptByIdExecute(r ApiGetMessageReceiptByIdRequest) (*MessageReceipt, *http.Response, error) {
+func (a *BuildingProSuitesAPIService) DeleteTenantExecute(r ApiDeleteTenantRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *MessageReceipt
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommunicationAPIService.GetMessageReceiptById")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuildingProSuitesAPIService.DeleteTenant")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/message-receipts/{message-id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"message-id"+"}", url.PathEscape(parameterValueToString(r.messageId, "messageId")), -1)
+	localVarPath := localBasePath + "/tenants"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -83,7 +75,7 @@ func (a *CommunicationAPIService) GetMessageReceiptByIdExecute(r ApiGetMessageRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -106,19 +98,19 @@ func (a *CommunicationAPIService) GetMessageReceiptByIdExecute(r ApiGetMessageRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -126,46 +118,45 @@ func (a *CommunicationAPIService) GetMessageReceiptByIdExecute(r ApiGetMessageRe
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
-type ApiPostMailRequest struct {
+type ApiGetApiKeysRequest struct {
 	ctx        context.Context
-	ApiService *CommunicationAPIService
-	message    *Message
+	ApiService *BuildingProSuitesAPIService
+	offset     *int64
+	size       *int64
 }
 
-func (r ApiPostMailRequest) Message(message Message) ApiPostMailRequest {
-	r.message = &message
+// Specifies the starting point for pagination by indicating the number of items to skip.
+func (r ApiGetApiKeysRequest) Offset(offset int64) ApiGetApiKeysRequest {
+	r.offset = &offset
 	return r
 }
 
-func (r ApiPostMailRequest) Execute() (*MessageReceipt, *http.Response, error) {
-	return r.ApiService.PostMailExecute(r)
+// Specifies the number of items per page for pagination.
+func (r ApiGetApiKeysRequest) Size(size int64) ApiGetApiKeysRequest {
+	r.size = &size
+	return r
+}
+
+func (r ApiGetApiKeysRequest) Execute() ([]ApiKey, *http.Response, error) {
+	return r.ApiService.GetApiKeysExecute(r)
 }
 
 /*
-PostMail Send e-mail
+GetApiKeys Information about API keys
 
-Sends an e-mail to recipients
+Gets a list of API keys
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiPostMailRequest
+	@return ApiGetApiKeysRequest
 */
-func (a *CommunicationAPIService) PostMail(ctx context.Context) ApiPostMailRequest {
-	return ApiPostMailRequest{
+func (a *BuildingProSuitesAPIService) GetApiKeys(ctx context.Context) ApiGetApiKeysRequest {
+	return ApiGetApiKeysRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -173,31 +164,34 @@ func (a *CommunicationAPIService) PostMail(ctx context.Context) ApiPostMailReque
 
 // Execute executes the request
 //
-//	@return MessageReceipt
-func (a *CommunicationAPIService) PostMailExecute(r ApiPostMailRequest) (*MessageReceipt, *http.Response, error) {
+//	@return []ApiKey
+func (a *BuildingProSuitesAPIService) GetApiKeysExecute(r ApiGetApiKeysRequest) ([]ApiKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
+		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *MessageReceipt
+		localVarReturnValue []ApiKey
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommunicationAPIService.PostMail")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuildingProSuitesAPIService.GetApiKeys")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/send-mail"
+	localVarPath := localBasePath + "/api-keys"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.message == nil {
-		return localVarReturnValue, nil, reportError("message is required and must be specified")
-	}
 
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -206,15 +200,13 @@ func (a *CommunicationAPIService) PostMailExecute(r ApiPostMailRequest) (*Messag
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/json", "application/x-ndjson"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.message
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -266,31 +258,45 @@ func (a *CommunicationAPIService) PostMailExecute(r ApiPostMailRequest) (*Messag
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPostNotificationRequest struct {
-	ctx          context.Context
-	ApiService   *CommunicationAPIService
-	notification *Notification
+type ApiPutTenantRequest struct {
+	ctx            context.Context
+	ApiService     *BuildingProSuitesAPIService
+	signatureInput *string
+	contentDigest  *string
+	tenant         *Tenant
 }
 
-func (r ApiPostNotificationRequest) Notification(notification Notification) ApiPostNotificationRequest {
-	r.notification = &notification
+// Defines what was signed (e.g. method, path, &#x60;content-digest&#x60;) and metadata like creation time and key ID; must match the &#x60;Signature&#x60;.
+func (r ApiPutTenantRequest) SignatureInput(signatureInput string) ApiPutTenantRequest {
+	r.signatureInput = &signatureInput
 	return r
 }
 
-func (r ApiPostNotificationRequest) Execute() (*MessageReceipt, *http.Response, error) {
-	return r.ApiService.PostNotificationExecute(r)
+// Hash of the request body; server recomputes and compares. Must be included in &#x60;Signature-Input&#x60;.
+func (r ApiPutTenantRequest) ContentDigest(contentDigest string) ApiPutTenantRequest {
+	r.contentDigest = &contentDigest
+	return r
+}
+
+func (r ApiPutTenantRequest) Tenant(tenant Tenant) ApiPutTenantRequest {
+	r.tenant = &tenant
+	return r
+}
+
+func (r ApiPutTenantRequest) Execute() (*Tenant, *http.Response, error) {
+	return r.ApiService.PutTenantExecute(r)
 }
 
 /*
-PostNotification Send notification
+PutTenant Setup or update a tenant
 
-Sends a notification to BuildingPro Suites users
+Create or update a tenant
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiPostNotificationRequest
+	@return ApiPutTenantRequest
 */
-func (a *CommunicationAPIService) PostNotification(ctx context.Context) ApiPostNotificationRequest {
-	return ApiPostNotificationRequest{
+func (a *BuildingProSuitesAPIService) PutTenant(ctx context.Context) ApiPutTenantRequest {
+	return ApiPutTenantRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -298,27 +304,33 @@ func (a *CommunicationAPIService) PostNotification(ctx context.Context) ApiPostN
 
 // Execute executes the request
 //
-//	@return MessageReceipt
-func (a *CommunicationAPIService) PostNotificationExecute(r ApiPostNotificationRequest) (*MessageReceipt, *http.Response, error) {
+//	@return Tenant
+func (a *BuildingProSuitesAPIService) PutTenantExecute(r ApiPutTenantRequest) (*Tenant, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
+		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *MessageReceipt
+		localVarReturnValue *Tenant
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommunicationAPIService.PostNotification")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuildingProSuitesAPIService.PutTenant")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/send-notification"
+	localVarPath := localBasePath + "/tenants"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.notification == nil {
-		return localVarReturnValue, nil, reportError("notification is required and must be specified")
+	if r.signatureInput == nil {
+		return localVarReturnValue, nil, reportError("signatureInput is required and must be specified")
+	}
+	if r.contentDigest == nil {
+		return localVarReturnValue, nil, reportError("contentDigest is required and must be specified")
+	}
+	if r.tenant == nil {
+		return localVarReturnValue, nil, reportError("tenant is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -338,19 +350,21 @@ func (a *CommunicationAPIService) PostNotificationExecute(r ApiPostNotificationR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "Signature-Input", r.signatureInput, "simple", "")
+	parameterAddToHeaderOrQuery(localVarHeaderParams, "Content-Digest", r.contentDigest, "simple", "")
 	// body params
-	localVarPostBody = r.notification
+	localVarPostBody = r.tenant
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["HttpSig"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["X-API-Key"] = key
+				localVarHeaderParams["Signature"] = key
 			}
 		}
 	}

@@ -11,396 +11,396 @@ Contact: hello@eliona.io
 
 package api
 
-import (
-	"bytes"
-	"context"
-	"io"
-	"net/http"
-	"net/url"
-)
+// import (
+// 	"bytes"
+// 	"context"
+// 	"io"
+// 	"net/http"
+// 	"net/url"
+// )
 
-// ElionaAPIService ElionaAPI service
-type ElionaAPIService service
+// // ElionaAPIService ElionaAPI service
+// type ElionaAPIService service
 
-type ApiDeleteTenantRequest struct {
-	ctx        context.Context
-	ApiService *ElionaAPIService
-}
+// type ApiDeleteTenantRequest struct {
+// 	ctx        context.Context
+// 	ApiService *ElionaAPIService
+// }
 
-func (r ApiDeleteTenantRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteTenantExecute(r)
-}
+// func (r ApiDeleteTenantRequest) Execute() (*http.Response, error) {
+// 	return r.ApiService.DeleteTenantExecute(r)
+// }
 
-/*
-DeleteTenant Delete the current tenant
+// /*
+// DeleteTenant Delete the current tenant
 
-Deletes the current tenant
+// Deletes the current tenant
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDeleteTenantRequest
-*/
-func (a *ElionaAPIService) DeleteTenant(ctx context.Context) ApiDeleteTenantRequest {
-	return ApiDeleteTenantRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
+// 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+// 	@return ApiDeleteTenantRequest
+// */
+// func (a *ElionaAPIService) DeleteTenant(ctx context.Context) ApiDeleteTenantRequest {
+// 	return ApiDeleteTenantRequest{
+// 		ApiService: a,
+// 		ctx:        ctx,
+// 	}
+// }
 
-// Execute executes the request
-func (a *ElionaAPIService) DeleteTenantExecute(r ApiDeleteTenantRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
+// // Execute executes the request
+// func (a *ElionaAPIService) DeleteTenantExecute(r ApiDeleteTenantRequest) (*http.Response, error) {
+// 	var (
+// 		localVarHTTPMethod = http.MethodDelete
+// 		localVarPostBody   interface{}
+// 		formFiles          []formFile
+// 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ElionaAPIService.DeleteTenant")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
+// 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ElionaAPIService.DeleteTenant")
+// 	if err != nil {
+// 		return nil, &GenericOpenAPIError{error: err.Error()}
+// 	}
 
-	localVarPath := localBasePath + "/tenants"
+// 	localVarPath := localBasePath + "/tenants"
 
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
+// 	localVarHeaderParams := make(map[string]string)
+// 	localVarQueryParams := url.Values{}
+// 	localVarFormParams := url.Values{}
 
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+// 	// to determine the Content-Type header
+// 	localVarHTTPContentTypes := []string{}
 
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
+// 	// set Content-Type header
+// 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+// 	if localVarHTTPContentType != "" {
+// 		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+// 	}
 
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+// 	// to determine the Accept header
+// 	localVarHTTPHeaderAccepts := []string{}
 
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
+// 	// set Accept header
+// 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+// 	if localVarHTTPHeaderAccept != "" {
+// 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+// 	}
+// 	if r.ctx != nil {
+// 		// API Key Authentication
+// 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+// 			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+// 				var key string
+// 				if apiKey.Prefix != "" {
+// 					key = apiKey.Prefix + " " + apiKey.Key
+// 				} else {
+// 					key = apiKey.Key
+// 				}
+// 				localVarHeaderParams["X-API-Key"] = key
+// 			}
+// 		}
+// 	}
+// 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+// 	if err != nil {
+// 		return nil, err
+// 	}
 
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
+// 	localVarHTTPResponse, err := a.client.callAPI(req)
+// 	if err != nil || localVarHTTPResponse == nil {
+// 		return localVarHTTPResponse, err
+// 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
+// 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+// 	localVarHTTPResponse.Body.Close()
+// 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+// 	if err != nil {
+// 		return localVarHTTPResponse, err
+// 	}
 
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarHTTPResponse, newErr
-	}
+// 	if localVarHTTPResponse.StatusCode >= 300 {
+// 		newErr := &GenericOpenAPIError{
+// 			body:  localVarBody,
+// 			error: localVarHTTPResponse.Status,
+// 		}
+// 		return localVarHTTPResponse, newErr
+// 	}
 
-	return localVarHTTPResponse, nil
-}
+// 	return localVarHTTPResponse, nil
+// }
 
-type ApiGetApiKeysRequest struct {
-	ctx        context.Context
-	ApiService *ElionaAPIService
-	offset     *int64
-	size       *int64
-}
+// type ApiGetApiKeysRequest struct {
+// 	ctx        context.Context
+// 	ApiService *ElionaAPIService
+// 	offset     *int64
+// 	size       *int64
+// }
 
-// Specifies the starting point for pagination by indicating the number of items to skip.
-func (r ApiGetApiKeysRequest) Offset(offset int64) ApiGetApiKeysRequest {
-	r.offset = &offset
-	return r
-}
+// // Specifies the starting point for pagination by indicating the number of items to skip.
+// func (r ApiGetApiKeysRequest) Offset(offset int64) ApiGetApiKeysRequest {
+// 	r.offset = &offset
+// 	return r
+// }
 
-// Specifies the number of items per page for pagination.
-func (r ApiGetApiKeysRequest) Size(size int64) ApiGetApiKeysRequest {
-	r.size = &size
-	return r
-}
+// // Specifies the number of items per page for pagination.
+// func (r ApiGetApiKeysRequest) Size(size int64) ApiGetApiKeysRequest {
+// 	r.size = &size
+// 	return r
+// }
 
-func (r ApiGetApiKeysRequest) Execute() ([]ApiKey, *http.Response, error) {
-	return r.ApiService.GetApiKeysExecute(r)
-}
+// func (r ApiGetApiKeysRequest) Execute() ([]ApiKey, *http.Response, error) {
+// 	return r.ApiService.GetApiKeysExecute(r)
+// }
 
-/*
-GetApiKeys Information about API keys
+// /*
+// GetApiKeys Information about API keys
 
-Gets a list of API keys
+// Gets a list of API keys
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetApiKeysRequest
-*/
-func (a *ElionaAPIService) GetApiKeys(ctx context.Context) ApiGetApiKeysRequest {
-	return ApiGetApiKeysRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
+// 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+// 	@return ApiGetApiKeysRequest
+// */
+// func (a *ElionaAPIService) GetApiKeys(ctx context.Context) ApiGetApiKeysRequest {
+// 	return ApiGetApiKeysRequest{
+// 		ApiService: a,
+// 		ctx:        ctx,
+// 	}
+// }
 
-// Execute executes the request
-//
-//	@return []ApiKey
-func (a *ElionaAPIService) GetApiKeysExecute(r ApiGetApiKeysRequest) ([]ApiKey, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []ApiKey
-	)
+// // Execute executes the request
+// //
+// //	@return []ApiKey
+// func (a *ElionaAPIService) GetApiKeysExecute(r ApiGetApiKeysRequest) ([]ApiKey, *http.Response, error) {
+// 	var (
+// 		localVarHTTPMethod  = http.MethodGet
+// 		localVarPostBody    interface{}
+// 		formFiles           []formFile
+// 		localVarReturnValue []ApiKey
+// 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ElionaAPIService.GetApiKeys")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+// 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ElionaAPIService.GetApiKeys")
+// 	if err != nil {
+// 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+// 	}
 
-	localVarPath := localBasePath + "/api-keys"
+// 	localVarPath := localBasePath + "/api-keys"
 
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
+// 	localVarHeaderParams := make(map[string]string)
+// 	localVarQueryParams := url.Values{}
+// 	localVarFormParams := url.Values{}
 
-	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
-	}
-	if r.size != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+// 	if r.offset != nil {
+// 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+// 	}
+// 	if r.size != nil {
+// 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+// 	}
+// 	// to determine the Content-Type header
+// 	localVarHTTPContentTypes := []string{}
 
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
+// 	// set Content-Type header
+// 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+// 	if localVarHTTPContentType != "" {
+// 		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+// 	}
 
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/x-ndjson"}
+// 	// to determine the Accept header
+// 	localVarHTTPHeaderAccepts := []string{"application/json", "application/x-ndjson"}
 
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
+// 	// set Accept header
+// 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+// 	if localVarHTTPHeaderAccept != "" {
+// 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+// 	}
+// 	if r.ctx != nil {
+// 		// API Key Authentication
+// 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+// 			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+// 				var key string
+// 				if apiKey.Prefix != "" {
+// 					key = apiKey.Prefix + " " + apiKey.Key
+// 				} else {
+// 					key = apiKey.Key
+// 				}
+// 				localVarHeaderParams["X-API-Key"] = key
+// 			}
+// 		}
+// 	}
+// 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+// 	if err != nil {
+// 		return localVarReturnValue, nil, err
+// 	}
 
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
+// 	localVarHTTPResponse, err := a.client.callAPI(req)
+// 	if err != nil || localVarHTTPResponse == nil {
+// 		return localVarReturnValue, localVarHTTPResponse, err
+// 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
+// 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+// 	localVarHTTPResponse.Body.Close()
+// 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+// 	if err != nil {
+// 		return localVarReturnValue, localVarHTTPResponse, err
+// 	}
 
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
+// 	if localVarHTTPResponse.StatusCode >= 300 {
+// 		newErr := &GenericOpenAPIError{
+// 			body:  localVarBody,
+// 			error: localVarHTTPResponse.Status,
+// 		}
+// 		return localVarReturnValue, localVarHTTPResponse, newErr
+// 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
+// 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+// 	if err != nil {
+// 		newErr := &GenericOpenAPIError{
+// 			body:  localVarBody,
+// 			error: err.Error(),
+// 		}
+// 		return localVarReturnValue, localVarHTTPResponse, newErr
+// 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
+// 	return localVarReturnValue, localVarHTTPResponse, nil
+// }
 
-type ApiPutTenantRequest struct {
-	ctx            context.Context
-	ApiService     *ElionaAPIService
-	signatureInput *string
-	contentDigest  *string
-	tenant         *Tenant
-}
+// type ApiPutTenantRequest struct {
+// 	ctx            context.Context
+// 	ApiService     *ElionaAPIService
+// 	signatureInput *string
+// 	contentDigest  *string
+// 	tenant         *Tenant
+// }
 
-// Defines what was signed (e.g. method, path, &#x60;content-digest&#x60;) and metadata like creation time and key ID; must match the &#x60;Signature&#x60;.
-func (r ApiPutTenantRequest) SignatureInput(signatureInput string) ApiPutTenantRequest {
-	r.signatureInput = &signatureInput
-	return r
-}
+// // Defines what was signed (e.g. method, path, &#x60;content-digest&#x60;) and metadata like creation time and key ID; must match the &#x60;Signature&#x60;.
+// func (r ApiPutTenantRequest) SignatureInput(signatureInput string) ApiPutTenantRequest {
+// 	r.signatureInput = &signatureInput
+// 	return r
+// }
 
-// Hash of the request body; server recomputes and compares. Must be included in &#x60;Signature-Input&#x60;.
-func (r ApiPutTenantRequest) ContentDigest(contentDigest string) ApiPutTenantRequest {
-	r.contentDigest = &contentDigest
-	return r
-}
+// // Hash of the request body; server recomputes and compares. Must be included in &#x60;Signature-Input&#x60;.
+// func (r ApiPutTenantRequest) ContentDigest(contentDigest string) ApiPutTenantRequest {
+// 	r.contentDigest = &contentDigest
+// 	return r
+// }
 
-func (r ApiPutTenantRequest) Tenant(tenant Tenant) ApiPutTenantRequest {
-	r.tenant = &tenant
-	return r
-}
+// func (r ApiPutTenantRequest) Tenant(tenant Tenant) ApiPutTenantRequest {
+// 	r.tenant = &tenant
+// 	return r
+// }
 
-func (r ApiPutTenantRequest) Execute() (*Tenant, *http.Response, error) {
-	return r.ApiService.PutTenantExecute(r)
-}
+// func (r ApiPutTenantRequest) Execute() (*Tenant, *http.Response, error) {
+// 	return r.ApiService.PutTenantExecute(r)
+// }
 
-/*
-PutTenant Setup or update a tenant
+// /*
+// PutTenant Setup or update a tenant
 
-Create or update a tenant
+// Create or update a tenant
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiPutTenantRequest
-*/
-func (a *ElionaAPIService) PutTenant(ctx context.Context) ApiPutTenantRequest {
-	return ApiPutTenantRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
+// 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+// 	@return ApiPutTenantRequest
+// */
+// func (a *ElionaAPIService) PutTenant(ctx context.Context) ApiPutTenantRequest {
+// 	return ApiPutTenantRequest{
+// 		ApiService: a,
+// 		ctx:        ctx,
+// 	}
+// }
 
-// Execute executes the request
-//
-//	@return Tenant
-func (a *ElionaAPIService) PutTenantExecute(r ApiPutTenantRequest) (*Tenant, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *Tenant
-	)
+// // Execute executes the request
+// //
+// //	@return Tenant
+// func (a *ElionaAPIService) PutTenantExecute(r ApiPutTenantRequest) (*Tenant, *http.Response, error) {
+// 	var (
+// 		localVarHTTPMethod  = http.MethodPut
+// 		localVarPostBody    interface{}
+// 		formFiles           []formFile
+// 		localVarReturnValue *Tenant
+// 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ElionaAPIService.PutTenant")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+// 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ElionaAPIService.PutTenant")
+// 	if err != nil {
+// 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+// 	}
 
-	localVarPath := localBasePath + "/tenants"
+// 	localVarPath := localBasePath + "/tenants"
 
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.signatureInput == nil {
-		return localVarReturnValue, nil, reportError("signatureInput is required and must be specified")
-	}
-	if r.contentDigest == nil {
-		return localVarReturnValue, nil, reportError("contentDigest is required and must be specified")
-	}
-	if r.tenant == nil {
-		return localVarReturnValue, nil, reportError("tenant is required and must be specified")
-	}
+// 	localVarHeaderParams := make(map[string]string)
+// 	localVarQueryParams := url.Values{}
+// 	localVarFormParams := url.Values{}
+// 	if r.signatureInput == nil {
+// 		return localVarReturnValue, nil, reportError("signatureInput is required and must be specified")
+// 	}
+// 	if r.contentDigest == nil {
+// 		return localVarReturnValue, nil, reportError("contentDigest is required and must be specified")
+// 	}
+// 	if r.tenant == nil {
+// 		return localVarReturnValue, nil, reportError("tenant is required and must be specified")
+// 	}
 
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+// 	// to determine the Content-Type header
+// 	localVarHTTPContentTypes := []string{"application/json"}
 
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
+// 	// set Content-Type header
+// 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+// 	if localVarHTTPContentType != "" {
+// 		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+// 	}
 
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+// 	// to determine the Accept header
+// 	localVarHTTPHeaderAccepts := []string{"application/json"}
 
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "Signature-Input", r.signatureInput, "simple", "")
-	parameterAddToHeaderOrQuery(localVarHeaderParams, "Content-Digest", r.contentDigest, "simple", "")
-	// body params
-	localVarPostBody = r.tenant
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["HttpSig"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Signature"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
+// 	// set Accept header
+// 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+// 	if localVarHTTPHeaderAccept != "" {
+// 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+// 	}
+// 	parameterAddToHeaderOrQuery(localVarHeaderParams, "Signature-Input", r.signatureInput, "simple", "")
+// 	parameterAddToHeaderOrQuery(localVarHeaderParams, "Content-Digest", r.contentDigest, "simple", "")
+// 	// body params
+// 	localVarPostBody = r.tenant
+// 	if r.ctx != nil {
+// 		// API Key Authentication
+// 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+// 			if apiKey, ok := auth["HttpSig"]; ok {
+// 				var key string
+// 				if apiKey.Prefix != "" {
+// 					key = apiKey.Prefix + " " + apiKey.Key
+// 				} else {
+// 					key = apiKey.Key
+// 				}
+// 				localVarHeaderParams["Signature"] = key
+// 			}
+// 		}
+// 	}
+// 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+// 	if err != nil {
+// 		return localVarReturnValue, nil, err
+// 	}
 
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
+// 	localVarHTTPResponse, err := a.client.callAPI(req)
+// 	if err != nil || localVarHTTPResponse == nil {
+// 		return localVarReturnValue, localVarHTTPResponse, err
+// 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
+// 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+// 	localVarHTTPResponse.Body.Close()
+// 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+// 	if err != nil {
+// 		return localVarReturnValue, localVarHTTPResponse, err
+// 	}
 
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
+// 	if localVarHTTPResponse.StatusCode >= 300 {
+// 		newErr := &GenericOpenAPIError{
+// 			body:  localVarBody,
+// 			error: localVarHTTPResponse.Status,
+// 		}
+// 		return localVarReturnValue, localVarHTTPResponse, newErr
+// 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
+// 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+// 	if err != nil {
+// 		newErr := &GenericOpenAPIError{
+// 			body:  localVarBody,
+// 			error: err.Error(),
+// 		}
+// 		return localVarReturnValue, localVarHTTPResponse, newErr
+// 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
+// 	return localVarReturnValue, localVarHTTPResponse, nil
+// }

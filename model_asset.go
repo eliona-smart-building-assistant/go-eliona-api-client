@@ -1,9 +1,9 @@
 /*
-Eliona REST API
+BuildingPro Suites REST API
 
-The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
+The BuildingPro Suites REST API provides unified access to the resources and data within a BuildingPro Suites environment.<br> <br> This documentation corresponds to the next BuildingPro Suites release. For previous BuildingPro Suites releases, please refer to the matching REST API version below:<br><br>   BuildingPro Suites v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> BuildingPro Suites v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> BuildingPro Suites v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> BuildingPro Suites v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.10.1
+API version: 2.10.4
 Contact: hello@eliona.io
 */
 
@@ -40,11 +40,6 @@ type Asset struct {
 	Latitude NullableFloat64 `json:"latitude,omitempty"`
 	// Longitude coordinate (GPS) of the asset
 	Longitude NullableFloat64 `json:"longitude,omitempty"`
-	// Does the asset function as a tracker and capture its position by itself
-	// Deprecated
-	IsTracker NullableBool `json:"isTracker,omitempty"`
-	// Tracker Asset Id
-	TrackerId NullableInt32 `json:"trackerId,omitempty"`
 	// Textual description for this asset
 	Description NullableString `json:"description,omitempty"`
 	// The id of an asset which groups this asset as a functional child
@@ -81,8 +76,6 @@ func NewAsset(globalAssetIdentifier string, assetType string) *Asset {
 	this := Asset{}
 	this.GlobalAssetIdentifier = globalAssetIdentifier
 	this.AssetType = assetType
-	var isTracker bool = false
-	this.IsTracker = *NewNullableBool(&isTracker)
 	return &this
 }
 
@@ -91,8 +84,6 @@ func NewAsset(globalAssetIdentifier string, assetType string) *Asset {
 // but it doesn't guarantee that properties required by API are set
 func NewAssetWithDefaults() *Asset {
 	this := Asset{}
-	var isTracker bool = false
-	this.IsTracker = *NewNullableBool(&isTracker)
 	return &this
 }
 
@@ -433,95 +424,6 @@ func (o *Asset) SetLongitudeNil() {
 // UnsetLongitude ensures that no value is present for Longitude, not even an explicit nil
 func (o *Asset) UnsetLongitude() {
 	o.Longitude.Unset()
-}
-
-// GetIsTracker returns the IsTracker field value if set, zero value otherwise (both if not set or set to explicit null).
-// Deprecated
-func (o *Asset) GetIsTracker() bool {
-	if o == nil || IsNil(o.IsTracker.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.IsTracker.Get()
-}
-
-// GetIsTrackerOk returns a tuple with the IsTracker field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-// Deprecated
-func (o *Asset) GetIsTrackerOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.IsTracker.Get(), o.IsTracker.IsSet()
-}
-
-// HasIsTracker returns a boolean if a field has been set.
-func (o *Asset) HasIsTracker() bool {
-	if o != nil && o.IsTracker.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetIsTracker gets a reference to the given NullableBool and assigns it to the IsTracker field.
-// Deprecated
-func (o *Asset) SetIsTracker(v bool) {
-	o.IsTracker.Set(&v)
-}
-
-// SetIsTrackerNil sets the value for IsTracker to be an explicit nil
-func (o *Asset) SetIsTrackerNil() {
-	o.IsTracker.Set(nil)
-}
-
-// UnsetIsTracker ensures that no value is present for IsTracker, not even an explicit nil
-func (o *Asset) UnsetIsTracker() {
-	o.IsTracker.Unset()
-}
-
-// GetTrackerId returns the TrackerId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Asset) GetTrackerId() int32 {
-	if o == nil || IsNil(o.TrackerId.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.TrackerId.Get()
-}
-
-// GetTrackerIdOk returns a tuple with the TrackerId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Asset) GetTrackerIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.TrackerId.Get(), o.TrackerId.IsSet()
-}
-
-// HasTrackerId returns a boolean if a field has been set.
-func (o *Asset) HasTrackerId() bool {
-	if o != nil && o.TrackerId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTrackerId gets a reference to the given NullableInt32 and assigns it to the TrackerId field.
-func (o *Asset) SetTrackerId(v int32) {
-	o.TrackerId.Set(&v)
-}
-
-// SetTrackerIdNil sets the value for TrackerId to be an explicit nil
-func (o *Asset) SetTrackerIdNil() {
-	o.TrackerId.Set(nil)
-}
-
-// UnsetTrackerId ensures that no value is present for TrackerId, not even an explicit nil
-func (o *Asset) UnsetTrackerId() {
-	o.TrackerId.Unset()
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1025,12 +927,6 @@ func (o Asset) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Longitude.IsSet() {
 		toSerialize["longitude"] = o.Longitude.Get()
-	}
-	if o.IsTracker.IsSet() {
-		toSerialize["isTracker"] = o.IsTracker.Get()
-	}
-	if o.TrackerId.IsSet() {
-		toSerialize["trackerId"] = o.TrackerId.Get()
 	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
