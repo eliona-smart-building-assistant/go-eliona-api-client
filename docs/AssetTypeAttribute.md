@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **NullableString** | Name of the type for this attribute: air_quality, battery-voltage, brightness, co2, current, device-info, device-status, energy, flow, frequency, humidity, inputs-and-switches, level, motion, operating-status, people-count, power, presence, pressure, temperature, vehicle-detector, voltage, weather, voc | [optional] 
 **Enable** | Pointer to **bool** | Is data active or not | [optional] [default to false]
 **Translation** | Pointer to [**NullableTranslation**](Translation.md) |  | [optional] 
-**Unit** | Pointer to **NullableString** | Physical unit of numeric data | [optional] 
+**UnitId** | Pointer to **NullableInt32** | ID of measurement unit | [optional] 
 **Precision** | Pointer to **NullableInt64** | Number of decimal places | [optional] 
 **Min** | Pointer to **NullableFloat64** | Lower limit | [optional] 
 **Max** | Pointer to **NullableFloat64** | Upper limit | [optional] 
@@ -217,41 +217,41 @@ HasTranslation returns a boolean if a field has been set.
 `func (o *AssetTypeAttribute) UnsetTranslation()`
 
 UnsetTranslation ensures that no value is present for Translation, not even an explicit nil
-### GetUnit
+### GetUnitId
 
-`func (o *AssetTypeAttribute) GetUnit() string`
+`func (o *AssetTypeAttribute) GetUnitId() int32`
 
-GetUnit returns the Unit field if non-nil, zero value otherwise.
+GetUnitId returns the UnitId field if non-nil, zero value otherwise.
 
-### GetUnitOk
+### GetUnitIdOk
 
-`func (o *AssetTypeAttribute) GetUnitOk() (*string, bool)`
+`func (o *AssetTypeAttribute) GetUnitIdOk() (*int32, bool)`
 
-GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
+GetUnitIdOk returns a tuple with the UnitId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUnit
+### SetUnitId
 
-`func (o *AssetTypeAttribute) SetUnit(v string)`
+`func (o *AssetTypeAttribute) SetUnitId(v int32)`
 
-SetUnit sets Unit field to given value.
+SetUnitId sets UnitId field to given value.
 
-### HasUnit
+### HasUnitId
 
-`func (o *AssetTypeAttribute) HasUnit() bool`
+`func (o *AssetTypeAttribute) HasUnitId() bool`
 
-HasUnit returns a boolean if a field has been set.
+HasUnitId returns a boolean if a field has been set.
 
-### SetUnitNil
+### SetUnitIdNil
 
-`func (o *AssetTypeAttribute) SetUnitNil(b bool)`
+`func (o *AssetTypeAttribute) SetUnitIdNil(b bool)`
 
- SetUnitNil sets the value for Unit to be an explicit nil
+ SetUnitIdNil sets the value for UnitId to be an explicit nil
 
-### UnsetUnit
-`func (o *AssetTypeAttribute) UnsetUnit()`
+### UnsetUnitId
+`func (o *AssetTypeAttribute) UnsetUnitId()`
 
-UnsetUnit ensures that no value is present for Unit, not even an explicit nil
+UnsetUnitId ensures that no value is present for UnitId, not even an explicit nil
 ### GetPrecision
 
 `func (o *AssetTypeAttribute) GetPrecision() int64`

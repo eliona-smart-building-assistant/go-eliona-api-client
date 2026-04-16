@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | The unique name for this asset type category property | 
 **Translation** | Pointer to [**NullableTranslation**](Translation.md) |  | [optional] 
-**Unit** | Pointer to **NullableString** | Unit of data | [optional] 
+**UnitId** | Pointer to **NullableInt32** | ID of measurement unit | [optional] 
 
 ## Methods
 
@@ -82,41 +82,41 @@ HasTranslation returns a boolean if a field has been set.
 `func (o *AssetTypeCategoryProperty) UnsetTranslation()`
 
 UnsetTranslation ensures that no value is present for Translation, not even an explicit nil
-### GetUnit
+### GetUnitId
 
-`func (o *AssetTypeCategoryProperty) GetUnit() string`
+`func (o *AssetTypeCategoryProperty) GetUnitId() int32`
 
-GetUnit returns the Unit field if non-nil, zero value otherwise.
+GetUnitId returns the UnitId field if non-nil, zero value otherwise.
 
-### GetUnitOk
+### GetUnitIdOk
 
-`func (o *AssetTypeCategoryProperty) GetUnitOk() (*string, bool)`
+`func (o *AssetTypeCategoryProperty) GetUnitIdOk() (*int32, bool)`
 
-GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
+GetUnitIdOk returns a tuple with the UnitId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUnit
+### SetUnitId
 
-`func (o *AssetTypeCategoryProperty) SetUnit(v string)`
+`func (o *AssetTypeCategoryProperty) SetUnitId(v int32)`
 
-SetUnit sets Unit field to given value.
+SetUnitId sets UnitId field to given value.
 
-### HasUnit
+### HasUnitId
 
-`func (o *AssetTypeCategoryProperty) HasUnit() bool`
+`func (o *AssetTypeCategoryProperty) HasUnitId() bool`
 
-HasUnit returns a boolean if a field has been set.
+HasUnitId returns a boolean if a field has been set.
 
-### SetUnitNil
+### SetUnitIdNil
 
-`func (o *AssetTypeCategoryProperty) SetUnitNil(b bool)`
+`func (o *AssetTypeCategoryProperty) SetUnitIdNil(b bool)`
 
- SetUnitNil sets the value for Unit to be an explicit nil
+ SetUnitIdNil sets the value for UnitId to be an explicit nil
 
-### UnsetUnit
-`func (o *AssetTypeCategoryProperty) UnsetUnit()`
+### UnsetUnitId
+`func (o *AssetTypeCategoryProperty) UnsetUnitId()`
 
-UnsetUnit ensures that no value is present for Unit, not even an explicit nil
+UnsetUnitId ensures that no value is present for UnitId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

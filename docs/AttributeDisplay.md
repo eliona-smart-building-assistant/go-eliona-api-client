@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **AssetId** | **int32** | ID of the corresponding asset | 
 **Subtype** | [**DataSubtype**](DataSubtype.md) |  | [default to INPUT]
 **Attribute** | **string** | Name of the attribute of the asset type | 
-**Unit** | Pointer to **NullableString** | Physical unit of numeric data | [optional] 
+**UnitId** | Pointer to **NullableInt32** | ID of measurement unit | [optional] 
 **Precision** | Pointer to **NullableInt64** | Number of decimal places | [optional] 
 **Min** | Pointer to **NullableFloat64** | Lower limit | [optional] 
 **Max** | Pointer to **NullableFloat64** | Upper limit | [optional] 
@@ -95,41 +95,41 @@ and a boolean to check if the value has been set.
 SetAttribute sets Attribute field to given value.
 
 
-### GetUnit
+### GetUnitId
 
-`func (o *AttributeDisplay) GetUnit() string`
+`func (o *AttributeDisplay) GetUnitId() int32`
 
-GetUnit returns the Unit field if non-nil, zero value otherwise.
+GetUnitId returns the UnitId field if non-nil, zero value otherwise.
 
-### GetUnitOk
+### GetUnitIdOk
 
-`func (o *AttributeDisplay) GetUnitOk() (*string, bool)`
+`func (o *AttributeDisplay) GetUnitIdOk() (*int32, bool)`
 
-GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
+GetUnitIdOk returns a tuple with the UnitId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUnit
+### SetUnitId
 
-`func (o *AttributeDisplay) SetUnit(v string)`
+`func (o *AttributeDisplay) SetUnitId(v int32)`
 
-SetUnit sets Unit field to given value.
+SetUnitId sets UnitId field to given value.
 
-### HasUnit
+### HasUnitId
 
-`func (o *AttributeDisplay) HasUnit() bool`
+`func (o *AttributeDisplay) HasUnitId() bool`
 
-HasUnit returns a boolean if a field has been set.
+HasUnitId returns a boolean if a field has been set.
 
-### SetUnitNil
+### SetUnitIdNil
 
-`func (o *AttributeDisplay) SetUnitNil(b bool)`
+`func (o *AttributeDisplay) SetUnitIdNil(b bool)`
 
- SetUnitNil sets the value for Unit to be an explicit nil
+ SetUnitIdNil sets the value for UnitId to be an explicit nil
 
-### UnsetUnit
-`func (o *AttributeDisplay) UnsetUnit()`
+### UnsetUnitId
+`func (o *AttributeDisplay) UnsetUnitId()`
 
-UnsetUnit ensures that no value is present for Unit, not even an explicit nil
+UnsetUnitId ensures that no value is present for UnitId, not even an explicit nil
 ### GetPrecision
 
 `func (o *AttributeDisplay) GetPrecision() int64`

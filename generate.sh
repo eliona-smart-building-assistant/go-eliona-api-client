@@ -6,11 +6,11 @@ docker run --rm \
     openapitools/openapi-generator-cli:v7.15.0 generate \
     -g go \
     --git-user-id eliona-smart-building-assistant \
-    --git-repo-id go-eliona-api-client/v2 \
+    --git-repo-id go-eliona-api-client/v3 \
     -i https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/develop/openapi.yaml \
     -o /local \
     --additional-properties="packageName=api"
 
 go mod tidy
-find . -type f -name '*.go' -exec goimports -w {} +
+find . -type f -name '*.go' -exec ~/go/bin/goimports -w {} +
 go vet ./...

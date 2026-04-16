@@ -1,9 +1,9 @@
 /*
-Eliona REST API
+BuildingPro Suites REST API
 
-The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
+The BuildingPro Suites REST API provides unified access to the resources and data within a BuildingPro Suites environment.<br> <br> This documentation corresponds to the next BuildingPro Suites release. For previous BuildingPro Suites releases, please refer to the matching REST API version below:<br><br>   BuildingPro Suites v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> BuildingPro Suites v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> BuildingPro Suites v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> BuildingPro Suites v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.10.1
+API version: 2.10.4
 Contact: hello@eliona.io
 */
 
@@ -41,7 +41,7 @@ var (
 	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
-// APIClient manages communication with the Eliona REST API API v2.10.1
+// APIClient manages communication with the BuildingPro Suites REST API API v2.10.4
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -63,6 +63,8 @@ type APIClient struct {
 
 	AssetsAPI *AssetsAPIService
 
+	BuildingProSuitesAPI *BuildingProSuitesAPIService
+
 	CalculationRulesAPI *CalculationRulesAPIService
 
 	CommunicationAPI *CommunicationAPIService
@@ -70,8 +72,6 @@ type APIClient struct {
 	DashboardsAPI *DashboardsAPIService
 
 	DataAPI *DataAPIService
-
-	ElionaAPI *ElionaAPIService
 
 	NodesAPI *NodesAPIService
 
@@ -115,11 +115,11 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AppsAPI = (*AppsAPIService)(&c.common)
 	c.AssetTypesAPI = (*AssetTypesAPIService)(&c.common)
 	c.AssetsAPI = (*AssetsAPIService)(&c.common)
+	c.BuildingProSuitesAPI = (*BuildingProSuitesAPIService)(&c.common)
 	c.CalculationRulesAPI = (*CalculationRulesAPIService)(&c.common)
 	c.CommunicationAPI = (*CommunicationAPIService)(&c.common)
 	c.DashboardsAPI = (*DashboardsAPIService)(&c.common)
 	c.DataAPI = (*DataAPIService)(&c.common)
-	c.ElionaAPI = (*ElionaAPIService)(&c.common)
 	c.NodesAPI = (*NodesAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
 	c.QRCodesAPI = (*QRCodesAPIService)(&c.common)

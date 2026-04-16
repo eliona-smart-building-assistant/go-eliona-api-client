@@ -1,9 +1,9 @@
 /*
-Eliona REST API
+BuildingPro Suites REST API
 
-The Eliona REST API provides unified access to the resources and data within an Eliona environment.<br> <br> This documentation corresponds to the next Eliona release. For previous Eliona releases, please refer to the matching REST API version below:<br><br>   Eliona v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> Eliona v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> Eliona v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> Eliona v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> Eliona v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> Eliona v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
+The BuildingPro Suites REST API provides unified access to the resources and data within a BuildingPro Suites environment.<br> <br> This documentation corresponds to the next BuildingPro Suites release. For previous BuildingPro Suites releases, please refer to the matching REST API version below:<br><br>   BuildingPro Suites v14.2: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.1: [2.9.4](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.9.4/openapi.yaml)<br> BuildingPro Suites v14.0: [2.8.7](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.8.7/openapi.yaml)<br> BuildingPro Suites v13.2: [2.7.0](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.7.0/openapi.yaml)<br> BuildingPro Suites v13.1: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v13.0: [2.6.12](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.12/openapi.yaml)<br> BuildingPro Suites v12.1: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> BuildingPro Suites v12.0: [2.6.1](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/tags/v2.6.1/openapi.yaml)<br> [Preview Beta](https://api.eliona.io/?https://raw.githubusercontent.com/eliona-smart-building-assistant/eliona-api/refs/heads/develop/openapi.yaml)<br>
 
-API version: 2.10.1
+API version: 2.10.4
 Contact: hello@eliona.io
 */
 
@@ -403,7 +403,7 @@ func (r ApiGetAgentDeviceMappingsByDeviceIdRequest) Execute() ([]IosysAgentDevic
 /*
 GetAgentDeviceMappingsByDeviceId Information about agent device mappings
 
-Gets information about mappings between agent and eliona.
+Gets information about mappings between agent and BuildingPro Suites.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param agentClass The class of an agent

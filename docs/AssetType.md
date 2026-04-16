@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **Icon** | Pointer to **NullableString** | Icon name corresponding to assets of this type: blind, building, button, closable, elevator, environment, fallback, filling, gateway, light, mailbox, parking, people, power, rack, storey, trash, ventilation, vibration, water, weather | [optional] 
 **PayloadFunction** | Pointer to **NullableString** | Asset types payload function | [optional] 
 **AllowedInactivity** | Pointer to **NullableString** |  | [optional] 
-**IsTracker** | Pointer to **NullableBool** | Function as a tracker | [optional] [default to false]
 **Attributes** | Pointer to [**[]AssetTypeAttribute**](AssetTypeAttribute.md) | List of named attributes | [optional] 
 
 ## Methods
@@ -325,41 +324,6 @@ HasAllowedInactivity returns a boolean if a field has been set.
 `func (o *AssetType) UnsetAllowedInactivity()`
 
 UnsetAllowedInactivity ensures that no value is present for AllowedInactivity, not even an explicit nil
-### GetIsTracker
-
-`func (o *AssetType) GetIsTracker() bool`
-
-GetIsTracker returns the IsTracker field if non-nil, zero value otherwise.
-
-### GetIsTrackerOk
-
-`func (o *AssetType) GetIsTrackerOk() (*bool, bool)`
-
-GetIsTrackerOk returns a tuple with the IsTracker field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsTracker
-
-`func (o *AssetType) SetIsTracker(v bool)`
-
-SetIsTracker sets IsTracker field to given value.
-
-### HasIsTracker
-
-`func (o *AssetType) HasIsTracker() bool`
-
-HasIsTracker returns a boolean if a field has been set.
-
-### SetIsTrackerNil
-
-`func (o *AssetType) SetIsTrackerNil(b bool)`
-
- SetIsTrackerNil sets the value for IsTracker to be an explicit nil
-
-### UnsetIsTracker
-`func (o *AssetType) UnsetIsTracker()`
-
-UnsetIsTracker ensures that no value is present for IsTracker, not even an explicit nil
 ### GetAttributes
 
 `func (o *AssetType) GetAttributes() []AssetTypeAttribute`

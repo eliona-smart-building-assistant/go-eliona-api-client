@@ -13,8 +13,6 @@ Name | Type | Description | Notes
 **AssetType** | **string** | Reference to asset type by name | 
 **Latitude** | Pointer to **NullableFloat64** | Latitude coordinate (GPS) of the asset | [optional] 
 **Longitude** | Pointer to **NullableFloat64** | Longitude coordinate (GPS) of the asset | [optional] 
-**IsTracker** | Pointer to **NullableBool** | Does the asset function as a tracker and capture its position by itself | [optional] [default to false]
-**TrackerId** | Pointer to **NullableInt32** | Tracker Asset Id | [optional] 
 **Description** | Pointer to **NullableString** | Textual description for this asset | [optional] 
 **ParentFunctionalAssetId** | Pointer to **NullableInt32** | The id of an asset which groups this asset as a functional child | [optional] 
 **FunctionalAssetIdPath** | Pointer to **[]int32** | The hierarchical path of functional ids of the asset | [optional] [readonly] 
@@ -333,76 +331,6 @@ HasLongitude returns a boolean if a field has been set.
 `func (o *AssetListen) UnsetLongitude()`
 
 UnsetLongitude ensures that no value is present for Longitude, not even an explicit nil
-### GetIsTracker
-
-`func (o *AssetListen) GetIsTracker() bool`
-
-GetIsTracker returns the IsTracker field if non-nil, zero value otherwise.
-
-### GetIsTrackerOk
-
-`func (o *AssetListen) GetIsTrackerOk() (*bool, bool)`
-
-GetIsTrackerOk returns a tuple with the IsTracker field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsTracker
-
-`func (o *AssetListen) SetIsTracker(v bool)`
-
-SetIsTracker sets IsTracker field to given value.
-
-### HasIsTracker
-
-`func (o *AssetListen) HasIsTracker() bool`
-
-HasIsTracker returns a boolean if a field has been set.
-
-### SetIsTrackerNil
-
-`func (o *AssetListen) SetIsTrackerNil(b bool)`
-
- SetIsTrackerNil sets the value for IsTracker to be an explicit nil
-
-### UnsetIsTracker
-`func (o *AssetListen) UnsetIsTracker()`
-
-UnsetIsTracker ensures that no value is present for IsTracker, not even an explicit nil
-### GetTrackerId
-
-`func (o *AssetListen) GetTrackerId() int32`
-
-GetTrackerId returns the TrackerId field if non-nil, zero value otherwise.
-
-### GetTrackerIdOk
-
-`func (o *AssetListen) GetTrackerIdOk() (*int32, bool)`
-
-GetTrackerIdOk returns a tuple with the TrackerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTrackerId
-
-`func (o *AssetListen) SetTrackerId(v int32)`
-
-SetTrackerId sets TrackerId field to given value.
-
-### HasTrackerId
-
-`func (o *AssetListen) HasTrackerId() bool`
-
-HasTrackerId returns a boolean if a field has been set.
-
-### SetTrackerIdNil
-
-`func (o *AssetListen) SetTrackerIdNil(b bool)`
-
- SetTrackerIdNil sets the value for TrackerId to be an explicit nil
-
-### UnsetTrackerId
-`func (o *AssetListen) UnsetTrackerId()`
-
-UnsetTrackerId ensures that no value is present for TrackerId, not even an explicit nil
 ### GetDescription
 
 `func (o *AssetListen) GetDescription() string`
